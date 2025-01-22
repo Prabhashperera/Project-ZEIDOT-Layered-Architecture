@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public interface FoodBatchBO {
+public interface FoodBatchBO extends SuperBO {
     public String getCurrentBatchID() throws SQLException;
     public String getNextBatchId() throws SQLException;
     public String setBatchValues(FoodBatchDto foodBatchDto) throws SQLException;

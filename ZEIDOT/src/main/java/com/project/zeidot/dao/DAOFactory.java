@@ -1,5 +1,6 @@
 package com.project.zeidot.dao;
 
+import com.project.zeidot.dao.custom.impl.FoodBatchDAOImpl;
 import com.project.zeidot.dao.custom.impl.FoodManageDAOImpl;
 
 public class DAOFactory {
@@ -21,7 +22,7 @@ public class DAOFactory {
             case FOOD:
                 return new FoodManageDAOImpl();
                 case FOODBATCH:
-                    return new FoodManageDAOImpl();
+                    return new FoodBatchDAOImpl();
                     default:
                         return null;
         }

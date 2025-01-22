@@ -2,10 +2,10 @@ package com.project.zeidot.bo.custom;
 
 import com.project.zeidot.bo.custom.impl.FoodBatchBOImpl;
 import com.project.zeidot.bo.custom.impl.FoodManageBOImpl;
-import com.project.zeidot.dao.DAOFactory;
 
 public class BOFactory {
     private static BOFactory instance;
+
     private BOFactory() {}
 
     public static BOFactory getInstance() {
@@ -16,17 +16,13 @@ public class BOFactory {
     }
 
     public enum BOType {
-        FOOD , FOODBATCH;
-    }
-    public Object getBO(BOType type) {
-        switch (type) {
-            case FOOD:
-                return new FoodManageBOImpl();
-                case FOODBATCH:
-                    return new FoodBatchBOImpl();
-                    default:
-                        return null;
-        }
+        FOOD, FOODBATCH;
     }
 
+    public SuperBO getBOType(BOType type) {
+        return switch (type) {
+            case FOOD -> new FoodManageBOImpl();
+            case FOODBATCH -> new FoodBatchBOImpl();
+        };
+    }
 }

@@ -77,8 +77,8 @@ public class FoodManageController implements Initializable {
     // Batch Table End
 
     //LA Factory Design Patter Applied
-    private final FoodManageBO foodManageBO = (FoodManageBO) BOFactory.getInstance().getBO(BOFactory.BOType.FOOD);
-    private final FoodBatchBO foodBatchBO = (FoodBatchBO) BOFactory.getInstance().getBO(BOFactory.BOType.FOODBATCH);
+    private final FoodManageBO foodManageBO = (FoodManageBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOOD);
+    private final FoodBatchBO foodBatchBO = (FoodBatchBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH);
     // Food Batch Model Instance LA
 
     @Override
@@ -124,41 +124,28 @@ public class FoodManageController implements Initializable {
         foodIDTF.setText(nextFoodId);
     } //Generating NextFoodID & set FoodID Text
 
-    public void saveBtnOnAction(ActionEvent event) {
-        try {
-            // Input validation Start
-            String foodID = foodIDTF.getText();
-            String foodName = foodNameTF.getText();
-            if (!foodName.matches("^[A-Za-z ]+$")) {
-                new Alert(Alert.AlertType.ERROR, "Invalid Food Name! Must contain only letters and spaces.", ButtonType.OK).show();
-                return;
-            }
-            String foodWeight = foodWeightTF.getText();
-            if (!foodWeight.matches("^\\d+(\\.\\d+)?$")) {
-                new Alert(Alert.AlertType.ERROR, "Invalid Food Weight! Must be a valid number.", ButtonType.OK).show();
-                return;
-            }
-            // Input validation END
-            // Parse and calculate new time (with plus Hours)
-            LocalDateTime newDateTime = currentDateTime.plusHours(Long.parseLong(menuButton.getText()));
-            String foodDuration = newDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+    public void saveBtnOnAction(ActionEvent event) throws SQLException {
+        String foodID = foodIDTF.getText();
+        String foodName = foodNameTF.getText();
+        if (!foodName.matches("^[A-Za-z ]+$")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Food Name! Must contain only letters and spaces.", ButtonType.OK).show();
+            return;
+        }
+        String foodWeight = foodWeightTF.getText();
+        if (!foodWeight.matches("^\\d+(\\.\\d+)?$")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Food Weight! Must be a valid number.", ButtonType.OK).show();
+            return;
+        }
+        // Input validation END
+        // Parse and calculate new time (with plus Hours)
+        LocalDateTime newDateTime = currentDateTime.plusHours(Long.parseLong(menuButton.getText()));
+        String foodDuration = newDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 
-            // Initialize DTOs
-            FoodDto dto = new FoodDto(foodID, foodName, foodWeight, foodDuration); //F001 , Rice , 20.4 , CurrentTime + PlusHours
-            BatchDetailsDto detailsDto = new BatchDetailsDto(foodID , batchID.getText());
-            // Begin transaction
-            conn = DBConnection.getInstance().getConnection();
-            conn.setAutoCommit(false); // Disable auto-commit to manage transactions
-
-            // Save batch details
-            boolean isSaved = foodManageBO.saveFood(dto); //LA INJECTED
-            if (!isSaved) {
-                conn.rollback(); //if Fails RollBack
-                new Alert(Alert.AlertType.ERROR, "Cannot Saved!!", ButtonType.OK).show();
-                return;
-            }
-
-            //Now this is Going to Model that Adding Values to Associate Entity in Database (FoodBatchDetails Table)
+        // Initialize DTOs
+        FoodDto dto = new FoodDto(foodID, foodName, foodWeight, foodDuration); //F001 , Rice , 20.4 , CurrentTime + PlusHours
+        BatchDetailsDto detailsDto = new BatchDetailsDto(foodID , batchID.getText());
+        boolean isSaved = foodManageBO.saveFood(dto);
+        if (isSaved) {
             boolean isAdded = foodBatchBO.setBatchDetailsValues(detailsDto);
             if (!isAdded) {
                 conn.rollback();
@@ -168,29 +155,18 @@ public class FoodManageController implements Initializable {
             // Update batch time
             LocalTime newTime = foodBatchBO.checkTime(LocalTime.parse(foodDuration), batchID.getText());
             boolean isTimeUpdated = foodBatchBO.updateFoodBatchTime(newTime, batchID.getText());
-                if (!isTimeUpdated) {
-                    conn.rollback();
-                    new Alert(Alert.AlertType.ERROR, "Cannot Updated!!", ButtonType.OK).show();
-                    return;
-                }
+            if (!isTimeUpdated) {
+                conn.rollback();
+                new Alert(Alert.AlertType.ERROR, "Cannot Updated!!", ButtonType.OK).show();
+                return;
+            }
             amountUpdate(foodWeight);//If Food & Batch Detail Added Successfully, Must be Increase the Amount
             conn.commit(); //If all are Passed , Commit
             //Transaction END
             new Alert(Alert.AlertType.INFORMATION, "Successfully Saved!!", ButtonType.OK).show();
             refreshPage();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if (conn != null) {
-                    conn.setAutoCommit(true); // Restore default auto-commit behavior
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error resetting auto-commit: " + ex.getMessage());
-            }
         }
+
     }
     public void deleteOnAction(ActionEvent event) {
         try {
@@ -408,3 +384,40 @@ public class FoodManageController implements Initializable {
     } //Deleting Expired Batch Sets
 
 }
+
+//
+//
+//        try {
+//// Input validation Start
+//String foodID = foodIDTF.getText();
+//String foodName = foodNameTF.getText();
+//            if (!foodName.matches("^[A-Za-z ]+$")) {
+//        new Alert(Alert.AlertType.ERROR, "Invalid Food Name! Must contain only letters and spaces.", ButtonType.OK).show();
+//                return;
+//                        }
+//String foodWeight = foodWeightTF.getText();
+//            if (!foodWeight.matches("^\\d+(\\.\\d+)?$")) {
+//        new Alert(Alert.AlertType.ERROR, "Invalid Food Weight! Must be a valid number.", ButtonType.OK).show();
+//                return;
+//                        }
+//// Input validation END
+//// Parse and calculate new time (with plus Hours)
+//LocalDateTime newDateTime = currentDateTime.plusHours(Long.parseLong(menuButton.getText()));
+//String foodDuration = newDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+//
+//// Initialize DTOs
+//FoodDto dto = new FoodDto(foodID, foodName, foodWeight, foodDuration); //F001 , Rice , 20.4 , CurrentTime + PlusHours
+//BatchDetailsDto detailsDto = new BatchDetailsDto(foodID , batchID.getText());
+//// Begin transaction
+//conn = DBConnection.getInstance().getConnection();
+//            conn.setAutoCommit(false); // Disable auto-commit to manage transactions
+//
+//// Save batch details
+//boolean isSaved = foodManageBO.saveFood(dto); //LA INJECTED
+//            if (!isSaved) {
+//        conn.rollback(); //if Fails RollBack
+//                new Alert(Alert.AlertType.ERROR, "Cannot Saved!!", ButtonType.OK).show();
+//                return;
+//                        }
+//
+////Now this is Going to Model that Adding Values to Associate Entity in Database (FoodBatchDetails Table)

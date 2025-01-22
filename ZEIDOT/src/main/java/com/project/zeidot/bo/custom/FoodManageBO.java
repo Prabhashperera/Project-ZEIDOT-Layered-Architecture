@@ -6,7 +6,7 @@ import com.project.zeidot.dto.FoodDto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface FoodManageBO{
+public interface FoodManageBO extends SuperBO{
     boolean updateFood(FoodDto food) throws SQLException;
     boolean deleteFood(String name) throws SQLException;
     boolean saveFood(FoodDto dto) throws SQLException;
