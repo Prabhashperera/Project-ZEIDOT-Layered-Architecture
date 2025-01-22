@@ -1,0 +1,69 @@
+package com.project.zeidot.bo.custom.impl;
+
+import com.project.zeidot.bo.custom.FoodBatchBO;
+import com.project.zeidot.dao.custom.FoodBatchDAO;
+import com.project.zeidot.dao.custom.impl.FoodBatchDAOImpl;
+import com.project.zeidot.dto.BatchDetailsDto;
+import com.project.zeidot.dto.FoodBatchDto;
+
+import java.sql.SQLException;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+public class FoodBatchBOImpl implements FoodBatchBO {
+    private final FoodBatchDAO foodBatchDAO = new FoodBatchDAOImpl();
+    @Override
+    public String getCurrentBatchID() throws SQLException {
+        return foodBatchDAO.getCurrentBatchID();
+    }
+
+    @Override
+    public String getNextBatchId() throws SQLException {
+        return foodBatchDAO.getNextBatchId();
+    }
+
+    @Override
+    public String setBatchValues(FoodBatchDto foodBatchDto) throws SQLException {
+        return foodBatchDAO.setBatchValues(foodBatchDto);
+    }
+
+    @Override
+    public boolean setBatchDetailsValues(BatchDetailsDto dto) throws SQLException {
+        return foodBatchDAO.setBatchDetailsValues(dto);
+    }
+
+    @Override
+    public ArrayList<FoodBatchDto> getAllBatchDetails() throws SQLException {
+        return foodBatchDAO.getAllBatchDetails();
+    }
+
+    @Override
+    public boolean updateFoodBatchTime(LocalTime newTime, String batchID) throws SQLException {
+        return foodBatchDAO.updateFoodBatchTime(newTime, batchID);
+    }
+
+    @Override
+    public LocalTime checkTime(LocalTime time, String batchID) throws SQLException {
+        return foodBatchDAO.checkTime(time, batchID);
+    }
+
+    @Override
+    public LocalTime checkTimeWhenDeleting(String batchID) throws SQLException {
+        return foodBatchDAO.checkTimeWhenDeleting(batchID);
+    }
+
+    @Override
+    public boolean deleteBatch(String batchID) throws SQLException {
+        return foodBatchDAO.deleteBatch(batchID);
+    }
+
+    @Override
+    public void deleteFoodsOfDeletedBatch(String batchID) throws SQLException {
+        foodBatchDAO.deleteFoodsOfDeletedBatch(batchID);
+    }
+
+    @Override
+    public void deleteFoodOnebyOne(String foodID) throws SQLException {
+        foodBatchDAO.deleteFoodOnebyOne(foodID);
+    }
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1046.0" styleClass="mainPane" stylesheets="@../../Css/mainCss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.zeidot.controller.foodBank.FoodBankController">
+   <children>
+      <ImageView fitHeight="137.0" fitWidth="146.0" layoutX="452.0" layoutY="137.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_133998.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="392.0" layoutY="30.0" text="FOOD BANKS">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="156.0" layoutY="156.0" text="Food Bank ID" />
+      <TextField fx:id="FBName" layoutX="293.0" layoutY="178.0" prefHeight="27.0" prefWidth="285.0" promptText="Veins Echos" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TextField>
+      <Label layoutX="156.0" layoutY="191.0" text="FoodBank Name" />
+      <Label layoutX="156.0" layoutY="223.0" text="FoodBank Address" />
+      <TextField fx:id="FBAddressTF" layoutX="293.0" layoutY="210.0" prefHeight="27.0" prefWidth="285.0" promptText="11/6 Vesly Road" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TextField>
+      <Label fx:id="FBDonationID" layoutX="293.0" layoutY="155.0" text="Donation ID" />
+      <TableView fx:id="tableView" layoutX="30.0" layoutY="311.0" onMouseClicked="#tableOnMouseClickedAction" prefHeight="394.0" prefWidth="750.0">
+         <columns>
+            <TableColumn fx:id="donationID" prefWidth="103.2" text="FoodBankID" />
+            <TableColumn fx:id="FBKName" prefWidth="197.6" text="Food Bank Name" />
+            <TableColumn fx:id="FBKAddress" prefWidth="222.4" text="Food Bank Address" />
+            <TableColumn fx:id="FBKEmail" prefWidth="222.4" text="Email Address" />
+         </columns>
+      </TableView>
+
+      <Button layoutX="654.0" layoutY="242.0" mnemonicParsing="false" onAction="#saveBtnOnAction" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #006161; -fx-font-weight: bold; -fx-text-fill: white;" text="Save" />
+      <Button layoutX="654.0" layoutY="202.0" mnemonicParsing="false" onAction="#editOnAction" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #001861; -fx-font-weight: bold; -fx-text-fill: white;" text="Edit" />
+      <Button layoutX="654.0" layoutY="162.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #E60000; -fx-font-weight: bold; -fx-text-fill: white;" text="Delete" />
+      <Label layoutX="156.0" layoutY="255.0" text="Email Address" />
+      <TextField fx:id="FBEmailTF" layoutX="293.0" layoutY="242.0" prefHeight="27.0" prefWidth="285.0" promptText="example@gmail.com" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TextField>
+      <ImageView fitHeight="322.0" fitWidth="302.0" layoutX="747.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_83960.png" />
+         </image>
+         <effect>
+            <DropShadow height="13.98" radius="5.905" width="11.64" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="86.0" layoutX="64.0" layoutY="20.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="86.0" layoutX="242.0" layoutY="40.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="86.0" layoutX="677.0" layoutY="70.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="86.0" layoutX="828.0" layoutY="202.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="86.0" layoutX="908.0" layoutY="60.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="86.0" layoutX="48.0" layoutY="151.0" opacity="0.24" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

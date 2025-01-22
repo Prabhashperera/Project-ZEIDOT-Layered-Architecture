@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1046.0" styleClass="mainPane" stylesheets="@../../Css/mainCss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.zeidot.controller.mail.SendMailController">
+   <children>
+      <ImageView fitHeight="177.0" fitWidth="246.0" layoutX="472.0" layoutY="300.0" opacity="0.18" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="428.0" layoutY="41.0" text="SEND MAILS">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="452.0" layoutY="88.0" text="Send mails to foodBanks">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="170.0" layoutY="167.0" text="Select Email">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="mailBtn" layoutX="254.0" layoutY="161.0" mnemonicParsing="false" onAction="#selectMailOnAction" prefHeight="32.0" prefWidth="218.0" style="-fx-background-color: #003049; -fx-text-fill: white; -fx-font-weight: bold;" text="Select Email" />
+      <TextArea fx:id="mailContent" layoutX="252.0" layoutY="269.0" prefHeight="230.0" prefWidth="502.0" style="-fx-background-color: transparent; -fx-border-color: black;" stylesheets="@../../Css/mainCss.css" text="I hope this message finds you well. &#10;My name is Prabash, and I am Manager at ZEIDOT. &#10;We are reaching out to inquire about the possibility of donating leftover food to your organization.&#10;At the end of each day, we have surplus food that is still safe for consumption but &#10;can no longer be served to our guests. &#10;We would love to contribute these leftovers to support those in need. &#10;Our team is committed to ensuring the food is packaged and delivered in accordance &#10;with all food safety standards.&#10;&#10;Please let us know if this is something you would be interested in, &#10;and we would be happy to discuss the logistics and frequency of the donations. &#10;We hope this can be a meaningful way to give back to our community.&#10;Thank you for considering our offer. We look forward to your response." />
+      <Button layoutX="252.0" layoutY="529.0" mnemonicParsing="false" onAction="#sendMailOnAction" prefHeight="47.0" prefWidth="502.0" style="-fx-background-color: #003049; -fx-text-fill: white; -fx-font-weight: bold;" text="Send Mail" />
+      <Label layoutX="191.0" layoutY="218.0" text="Subject">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="mailSubject" layoutX="253.0" layoutY="213.0" prefHeight="32.0" prefWidth="502.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;" />
+      <ImageView fitHeight="106.0" fitWidth="142.0" layoutX="91.0" layoutY="45.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="127.0" fitWidth="142.0" layoutX="529.0" layoutY="144.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="279.0" fitWidth="218.0" layoutX="789.0" layoutY="279.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_83960.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="127.0" fitWidth="142.0" layoutX="94.0" layoutY="359.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_133998.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="95.0" fitWidth="76.0" layoutX="94.0" layoutY="585.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_176257.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="127.0" fitWidth="142.0" layoutX="795.0" layoutY="65.0" opacity="0.36" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/rb_10422.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

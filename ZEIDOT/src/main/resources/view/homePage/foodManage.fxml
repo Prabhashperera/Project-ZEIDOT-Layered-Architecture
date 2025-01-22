@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainPane" fx:id="mainAnchor" prefHeight="750.0" prefWidth="1046.0" scaleShape="false" styleClass="mainPane" stylesheets="@../Css/mainCss.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.zeidot.controller.FoodManageController">
+   <children>
+      <VBox fx:id="menuButtons" layoutX="59.0" layoutY="140.0" prefHeight="152.0" prefWidth="144.0" style="-fx-spacing: 10;">
+            <Button fx:id="detailsBtn" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="142.0" style="-fx-background-color: #003049; -fx-text-fill: white; -fx-font-weight: bold;" text="Foods" />
+         <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#batchDetailsOnAction" prefHeight="44.0" prefWidth="142.0" style="-fx-background-color: #003049; -fx-text-fill: white; -fx-font-weight: bold;" text="Batch Details" />
+         <Button fx:id="detailsBtn11" layoutX="10.0" layoutY="59.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="142.0" style="-fx-background-color: #003049; -fx-text-fill: white; -fx-font-weight: bold;" text="Details" />
+
+      </VBox>
+       <TableView fx:id="tableView" layoutX="55.0" layoutY="321.0" onMouseClicked="#tableOnAction" prefHeight="354.0" prefWidth="480.0" stylesheets="@../Css/mainCss.css">
+           <columns>
+               <TableColumn id="idColumn" fx:id="idColumn" prefWidth="75.0" text="ID" />
+               <TableColumn id="nameColumn" fx:id="nameColumn" prefWidth="158.4000701904297" text="Name" />
+               <TableColumn id="weightColumn" fx:id="weightColumn" prefWidth="87.99993896484375" text="Weight" />
+               <TableColumn id="expireDateColumn" fx:id="expireDateColumn" prefWidth="127.20001220703125" text="ExpireTime" />
+           </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+       </TableView>
+      <ImageView fitHeight="135.0" fitWidth="101.0" layoutX="470.0" layoutY="132.0" opacity="0.32" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rb_133998.png" />
+         </image>
+      </ImageView>
+
+      <TextField fx:id="foodNameTF" layoutX="338.0" layoutY="184.0" prefHeight="27.0" prefWidth="285.0" promptText="Rice" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></TextField>
+      <TextField fx:id="foodWeightTF" layoutX="338.0" layoutY="218.0" prefHeight="27.0" prefWidth="285.0" promptText="20 put in (in KG)" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-width: 0 0 1px 0;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></TextField>
+      <Label layoutX="255.0" layoutY="159.0" style="-fx-text-fill: black;" text="Food ID" />
+      <Label fx:id="foodIDTF" layoutX="339.0" layoutY="159.0" style="-fx-text-fill: blac;" text="F001" />
+      <Label layoutX="254.0" layoutY="189.0" style="-fx-text-fill: black;" text="Name" />
+      <Label layoutX="254.0" layoutY="225.0" style="-fx-text-fill: black;" text="Weight (Kg)" />
+      <Label layoutX="255.0" layoutY="262.0" style="-fx-text-fill: black;" text="Duration" />
+      <Button layoutX="650.0" layoutY="241.0" mnemonicParsing="false" onAction="#saveBtnOnAction" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #006161; -fx-font-weight: bold; -fx-text-fill: white;" text="Save" />
+      <Button layoutX="650.0" layoutY="201.0" mnemonicParsing="false" onAction="#editOnAction" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #001861; -fx-font-weight: bold; -fx-text-fill: white;" text="Edit" />
+      <Button layoutX="650.0" layoutY="161.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #E60000; -fx-font-weight: bold; -fx-text-fill: white;" text="Delete" />
+      <MenuButton id="menuBtn" fx:id="menuButton" layoutX="338.0" layoutY="259.0" mnemonicParsing="false" style="-fx-background-color: #003049;" stylesheets="@../Css/mainCss.css" text="Hours" textFill="WHITE">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#setHour" text="3" />
+          <MenuItem mnemonicParsing="false" onAction="#setHour" text="4" />
+            <MenuItem mnemonicParsing="false" onAction="#setHour" text="5" />
+            <MenuItem mnemonicParsing="false" onAction="#setHour" text="6" />
+        </items>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuButton>
+      <Label layoutX="808.0" layoutY="159.0" style="-fx-text-fill: black;" text="Current Batch" />
+      <Label fx:id="batchID" layoutX="910.0" layoutY="159.0" style="-fx-text-fill: black;" text="B001" />
+      <Label layoutX="808.0" layoutY="188.0" style="-fx-text-fill: black;" text="Current Date" />
+      <Label fx:id="date" layoutX="910.0" layoutY="188.0" style="-fx-text-fill: black;" text="Date" />
+      <Label layoutX="428.0" layoutY="264.0" style="-fx-text-fill: black;" text="Current Time - " />
+      <Label fx:id="currentTimeLabel" layoutX="524.0" layoutY="264.0" style="-fx-text-fill: black;" text="Time" />
+      <TableView fx:id="foodBatchTable" layoutX="552.0" layoutY="321.0" prefHeight="354.0" prefWidth="432.0" stylesheets="@../Css/mainCss.css">
+        <columns>
+          <TableColumn id="FBId" fx:id="FBId" prefWidth="107.20001220703125" text="FBId" />
+          <TableColumn id="amount" fx:id="amount" prefWidth="192.0" text="FoodAmount" />
+            <TableColumn id="addedDate" fx:id="addedDate" prefWidth="126.4000244140625" text="FBDate" />
+        </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </TableView>
+      <Button layoutX="662.0" layoutY="687.0" mnemonicParsing="false" onAction="#newBatchOnAction" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold;" text="New Batch">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="808.0" layoutY="687.0" mnemonicParsing="false" onAction="#deleteBatchOnAction" prefHeight="42.0" prefWidth="134.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold;" text="Delete Batch">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="335.0" layoutY="48.0" text="FOOD BATCH MANAGE">
+         <font>
+            <Font name="System Bold" size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="70.0" layoutY="699.0" prefHeight="18.0" prefWidth="583.0" style="-fx-text-fill: white;" text="PROJECT ZEIDOT - Add New Food Batch &amp; Delete -----------------------------------------------------------------&gt;" />
+      <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="113.0" layoutY="32.0" opacity="0.32" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="821.0" layoutY="41.0" opacity="0.32" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rb_10422.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="51.0" layoutX="868.0" layoutY="234.0" opacity="0.32" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rb_10422.png" />
+         </image>
+      </ImageView>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</AnchorPane>

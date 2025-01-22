@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="450.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.zeidot.controller.popups.FoodBankSelectController">
+   <children>
+      <Label layoutX="247.0" layoutY="29.0" text="Select FoodBatch">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="78.0" layoutY="71.0" prefHeight="307.0" prefWidth="482.0" stylesheets="@../../Css/mainCss.css">
+         <columns>
+            <TableColumn fx:id="FoodBankID" prefWidth="94.39999389648438" text="FoodBank ID" />
+            <TableColumn fx:id="Name" prefWidth="118.39996337890625" text="Food Bank Name" />
+            <TableColumn fx:id="Address" prefWidth="166.39996337890625" text="Food Bank Address" />
+            <TableColumn fx:id="Email" prefWidth="98.40005493164062" text="Email" />
+         </columns>
+      </TableView>
+      <Button layoutX="451.0" layoutY="398.0" mnemonicParsing="false" onAction="#selectBtnOnAction" prefHeight="36.0" prefWidth="94.0" style="-fx-background-color: blue; -fx-text-fill: white; -fx-font-weight: bold;" text="Select">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="85.0" layoutY="407.0" prefHeight="18.0" prefWidth="355.0" text="PROJECT ZEIDOT -------------------------------------------------&gt;" />
+   </children>
+</AnchorPane>

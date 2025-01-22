@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1046.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="182.0" layoutY="76.0" text="PROJECT ZEIDOT" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="85.0" />
+         </font>
+         <effect>
+            <Shadow height="8.75" radius="1.6875" width="0.0" />
+         </effect>
+      </Label>
+      <Label id="desc" fx:id="desc" layoutX="285.0" layoutY="209.0" prefHeight="151.0" prefWidth="474.0" stylesheets="@../Css/mainCss.css" text="&quot;Empowering hotels to give back by turning surplus food into sustenance for those in need. Our mission is to minimize food waste, extend hospitality beyond the walls of the hotel, and create a meaningful impact on communities. Together, we transform excess into generosity, fostering a sustainable and compassionate future.&quot;" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="348.0" fitWidth="474.0" layoutX="57.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/food.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="348.0" fitWidth="474.0" layoutX="475.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/gift.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

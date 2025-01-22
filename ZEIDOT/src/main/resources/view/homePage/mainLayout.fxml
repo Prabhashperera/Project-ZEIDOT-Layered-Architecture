@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.zeidot.controller.MainLayoutController">
+   <children>
+      <AnchorPane fx:id="middlePane" layoutX="152.0" prefHeight="750.0" prefWidth="1048.0" />
+      <Pane id="sidePain" prefHeight="750.0" prefWidth="154.0" styleClass="sidePane" stylesheets="@../Css/mainCss.css">
+         <children>
+            <Button layoutX="-7.0" layoutY="264.0" mnemonicParsing="false" onAction="#donationOnAction" prefHeight="55.0" prefWidth="161.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="Donations">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="foodManageBtn" layoutY="131.0" mnemonicParsing="false" onAction="#foodManageOnAction" prefHeight="55.0" prefWidth="154.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="Food Manage">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button layoutY="330.0" mnemonicParsing="false" onAction="#foodBankOnAction" prefHeight="55.0" prefWidth="154.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="Food Banks">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button layoutY="396.0" mnemonicParsing="false" onAction="#sendMailOnAction" prefHeight="55.0" prefWidth="154.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="Send Mails">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button layoutY="462.0" mnemonicParsing="false" onAction="#deleveryManageOnAction" prefHeight="55.0" prefWidth="154.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="Delivery Manage">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button layoutX="-7.0" layoutY="198.0" mnemonicParsing="false" onAction="#foodBatchDetailsOnAction" prefHeight="55.0" prefWidth="161.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="FoodBatch Details">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button layoutY="529.0" mnemonicParsing="false" onAction="#generateReportOnAction" prefHeight="55.0" prefWidth="154.0" styleClass="layoutBtn" stylesheets="@../Css/mainCss.css" text="Generate Report">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

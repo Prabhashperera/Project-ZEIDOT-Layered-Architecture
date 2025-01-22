@@ -1,0 +1,128 @@
+ .main-pane {
+        -fx-background-color: linear-gradient(to bottom, white, whitesmoke);
+ }
+ mainPanel {
+     -fx-background-color: linear-gradient(to bottom, white, darkred);
+ }
+
+ .menuBtn {
+     -fx-text-alignment: center;
+ }
+
+ .table-view {
+     -fx-border-radius: 10px;
+     -fx-background-color: transparent; /* Keep background transparent */
+     -fx-border-color: transparent; /* Keep border color transparent */
+     -fx-border-width: 1px; /* Ensure there's a minimal border to apply the radius */
+     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.5, 0, 0); /* Subtle glass effect */
+ }
+
+ /* Header styling */
+ .table-view .column-header {
+     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%,  #003049, #003049); /* Dark gradient for header */
+     -fx-font-size: 13px;                                     /* Modern font size */
+     -fx-text-fill: white;                                    /* Bright white header text */
+     -fx-font-weight: bold;                                   /* Bold header text */
+     -fx-alignment: CENTER;                                   /* Centered header text */
+     -fx-border-color: transparent;                          /* No header borders */
+ }
+
+ /* Cell styling */
+ .table-view .table-cell {
+     /*-fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #5980ff, #285afb); !* Dark gradient for header *!*/
+     -fx-font-size: 12px;                                     /* Modern font size */
+     -fx-background-color: transparent;
+     -fx-text-fill: black;                                    /* Bright white header text */
+     -fx-alignment: CENTER;                                   /* Centered header text */
+     /*-fx-border-color: #0CAFFF;*/
+ }
+
+ /* Hover effect for rows */
+ .table-view .table-row-cell:hover {
+     -fx-background-color: rgba(255, 255, 255, 0.3); /* Frosty highlight when hovering */
+ }
+
+ /* Selected row styling */
+ .table-view .table-row-cell:filled:selected {
+     -fx-background-color: rgba(255, 255, 255, 0.4); /* Frosted white for selection */
+     -fx-text-fill: white;                            /* Ensure text is readable */
+     -fx-border-color: transparent;                  /* Clean look with no borders */
+ }
+
+ /* Table row separator */
+ .table-view .table-row-cell {
+     -fx-background-insets: 0, 0 0 1 0; /* Spacing for rows */
+     -fx-border-color: rgba(255, 255, 255, 0.1); /* Subtle row dividers */
+ }
+
+ /* Optional: Blur effect for the glassy look (if JavaFX supports it) */
+ .table-view {
+     -fx-background: transparent;
+     -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.2), 10, 0.5, 0, 0); /* Frosted blur effect */
+ }
+ /*hhhhhhhhhhhhhhhhhhhh*/
+
+ .buttonSide {
+     padding: 10px 20px;
+     font-size: 16px;
+     border: none;
+     border-radius: 5px;
+     background-color: #2e2eff; /* Green */
+     color: white;
+     cursor: pointer;
+     transition: box-shadow 0.3s ease;
+ }
+
+ .buttonSide:hover {
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+ }
+
+ .sidePane {
+     -fx-background-color: linear-gradient(to right, #001861, #1a1ad6);
+ }
+
+ .mainPane {
+     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, white 30%, #006cd8 70%);
+ }
+
+ .layoutBtn {
+     -fx-text-fill: white;
+     -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, blue 0%, #035aff 80%);
+     -fx-font-weight: bold;
+ }
+
+ .text-area {
+     -fx-background-color: rgba(53,89,119,0.4);
+ }
+
+ .text-area .scroll-pane {
+     -fx-background-color: transparent;
+ }
+
+ .text-area .scroll-pane .viewport{
+     -fx-background-color: transparent;
+ }
+
+
+ .text-area .scroll-pane .content{
+     -fx-background-color: transparent;
+ }
+
+
+ .text-area .content {
+     -fx-background-color: transparent, white, transparent, white;
+ }
+
+ .text-area:focused .content {
+     -fx-background-color: transparent, white, transparent, white;
+ }
+
+ .text-area:focused {
+     -fx-highlight-fill: #7ecfff;
+ }
+
+ .text-area .content {
+     -fx-padding: 10px;
+     -fx-text-fill: gray;
+     -fx-highlight-fill: #7ecfff;
+ }

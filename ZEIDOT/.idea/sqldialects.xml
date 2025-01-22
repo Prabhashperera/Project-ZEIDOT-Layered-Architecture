@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/FoodBatchDetailsModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/FoodBatchModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/FoodBatchTimeCheckThreadModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/FoodManageModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/LoginModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/delivery/DeliveryModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/foodBank/FoodBankModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/popups/DonationSelectModel.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/project/zeidot/model/popups/SelectMailModel.java" dialect="GenericSQL" />
+  </component>
+</project>

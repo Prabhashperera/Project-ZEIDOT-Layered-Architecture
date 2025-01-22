@@ -1,0 +1,145 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="DonationDetailsReport" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="327f529f-6a2c-465a-a36a-aa858e2d850c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ProjectZEIDOT"/>
+	<query language="SQL"><![CDATA[SELECT don.donationID, don.donationName, fbatch.FBId, fbatch.foodAmount, fb.foodBankID, fb.FBName
+FROM foodBatch fbatch
+JOIN donation don ON fbatch.FBId = don.FBId
+JOIN foodBank fb ON  don.FoodBankID = fb.FoodBankID;]]></query>
+	<field name="donationID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DonationID"/>
+		<property name="com.jaspersoft.studio.field.label" value="donationID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donation"/>
+	</field>
+	<field name="donationName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="DonationName"/>
+		<property name="com.jaspersoft.studio.field.label" value="donationName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="donation"/>
+	</field>
+	<field name="FBId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FBId"/>
+		<property name="com.jaspersoft.studio.field.label" value="FBId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="foodbatch"/>
+	</field>
+	<field name="foodAmount" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="FoodAmount"/>
+		<property name="com.jaspersoft.studio.field.label" value="foodAmount"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="foodbatch"/>
+	</field>
+	<field name="foodBankID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FoodBankID"/>
+		<property name="com.jaspersoft.studio.field.label" value="foodBankID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="foodbank"/>
+	</field>
+	<field name="FBName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="FBName"/>
+		<property name="com.jaspersoft.studio.field.label" value="FBName"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="foodbank"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="79" splitType="Stretch">
+		<element kind="staticText" uuid="97a46909-eddd-45ce-a054-dd7733db09c1" x="0" y="0" width="560" height="79" fontSize="24.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[DONATION REPORT]]></text>
+		</element>
+	</title>
+	<pageHeader height="35" splitType="Stretch"/>
+	<columnHeader height="40" splitType="Stretch">
+		<element kind="staticText" uuid="632fd998-9c02-43af-846a-d29d86b14f54" x="0" y="0" width="95" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[donationID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4838470-86c1-4658-bcb3-28c8b9e47501"/>
+			<box>
+				<pen lineWidth="2.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="04561959-3cd0-4290-982c-810d64d592b5" x="95" y="0" width="92" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[donationName]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ffbbed05-c377-46b1-ad49-8cf3fa349c00"/>
+			<box>
+				<pen lineWidth="2.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="344887f5-a1d1-4d1e-a40e-b264efe94418" x="187" y="0" width="92" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[FBId]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af2f4d88-b448-4b17-9fb2-59d333a843b8"/>
+			<box>
+				<pen lineWidth="2.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="45217fef-6bc1-402f-abd3-17ae39fce153" x="279" y="0" width="92" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[foodAmount]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24d228d5-4a46-4b4d-ab4e-63bc2ad1c095"/>
+			<box>
+				<pen lineWidth="2.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="8f08f7a8-41f0-4146-b3bb-bf721b50baaa" x="371" y="0" width="92" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[foodBankID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b3eb186-49df-4f9e-9937-d4c0171a72ac"/>
+			<box>
+				<pen lineWidth="2.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="636978db-a5fb-44c2-8d2e-78e4e0e7d0a8" x="463" y="0" width="92" height="40" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[FBName]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="435ee938-b57c-48d0-a872-031b91450ecc"/>
+			<box>
+				<pen lineWidth="2.25"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<element kind="textField" uuid="6140186a-57af-4a3b-8a2f-e78e85c02c0f" x="0" y="0" width="95" height="35" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{donationID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4838470-86c1-4658-bcb3-28c8b9e47501"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="8b3ea776-306d-49a0-96b6-577e6913d69b" x="95" y="0" width="92" height="35" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{donationName}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ffbbed05-c377-46b1-ad49-8cf3fa349c00"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="702e4619-d74f-43ae-8d53-2daf35fb9375" x="187" y="0" width="92" height="35" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{FBId}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af2f4d88-b448-4b17-9fb2-59d333a843b8"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="767ae7e3-de2a-4cc1-add9-c71f2a085d3a" x="279" y="0" width="92" height="35" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{foodAmount}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="24d228d5-4a46-4b4d-ab4e-63bc2ad1c095"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="6d616f4c-5d3a-4770-9ab4-a17637ae8391" x="371" y="0" width="92" height="35" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{foodBankID}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b3eb186-49df-4f9e-9937-d4c0171a72ac"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="edf3172c-444c-43af-bfa6-379e99214727" x="463" y="0" width="92" height="35" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{FBName}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="435ee938-b57c-48d0-a872-031b91450ecc"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="45" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
