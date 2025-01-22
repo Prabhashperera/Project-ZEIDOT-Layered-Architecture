@@ -176,6 +176,7 @@ public class FoodManageController implements Initializable {
 
         } catch (Exception e) {
             e.getMessage();
+            new Alert(Alert.AlertType.ERROR, "An unexpected error occurred: " + e.getMessage(), ButtonType.OK).show();
         }
     }
     public void editOnAction(ActionEvent event) {

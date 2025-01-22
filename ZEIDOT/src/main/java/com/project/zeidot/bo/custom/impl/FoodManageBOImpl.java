@@ -32,24 +32,37 @@ public class FoodManageBOImpl implements FoodManageBO {
     @Override
     public boolean deleteFood(String name , String batch  ,String foodWeight) throws SQLException {
         Connection conn = null;
-        conn = DBConnection.getInstance().getConnection();
-        conn.setAutoCommit(false);
-        boolean isDeleted = foodManageDAOImpl.delete(name);
-        if (!isDeleted) {
-            conn.rollback();
-            return false;
+        try {
+            conn = DBConnection.getInstance().getConnection();
+            conn.setAutoCommit(false);
+            boolean isDeleted = foodManageDAOImpl.delete(name);
+            if (!isDeleted) {
+                conn.rollback();
+                return false;
+            }
+            //When deleting a Food / Time must change if its the Main time that Holds FoodBatch Expire time
+            LocalTime newTime = foodBatchBO.checkTimeWhenDeleting(batch);
+            foodBatchBO.updateFoodBatchTime(newTime, batch);
+            //After Deleting a Food emediately calling Decrease amount of the food batch
+            boolean isDecrease = foodManageDAOImpl.decreaseAmount(foodManageDAOImpl.getCurrentWeight(batch), Double.parseDouble(foodWeight));
+            if (!isDecrease) {
+                conn.rollback();
+                return false;
+            }
+            conn.commit();
+            return true;
+        } catch (RuntimeException e) {
+            if (conn != null) {
+                conn.rollback();
+                return false;
+            }
+            throw new RuntimeException(e);
+        }finally {
+            if (conn != null) {
+                conn.setAutoCommit(true);
+                conn.close();
+            }
         }
-        //When deleting a Food / Time must change if its the Main time that Holds FoodBatch Expire time
-        LocalTime newTime = foodBatchBO.checkTimeWhenDeleting(batch);
-        foodBatchBO.updateFoodBatchTime(newTime, batch);
-        //After Deleting a Food emediately calling Decrease amount of the food batch
-        boolean isDecrease = foodManageDAOImpl.decreaseAmount(foodManageDAOImpl.getCurrentWeight(batch), Double.parseDouble(foodWeight));
-        if (!isDecrease) {
-            conn.rollback();
-            return false;
-        }
-        conn.commit();
-        return true;
     }
 
     @Override
