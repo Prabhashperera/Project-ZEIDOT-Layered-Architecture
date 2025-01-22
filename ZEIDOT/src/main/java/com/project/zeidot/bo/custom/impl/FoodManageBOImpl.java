@@ -11,22 +11,22 @@ import java.util.ArrayList;
 public class FoodManageBOImpl implements FoodManageBO {
     FoodManageDAO foodManageDAOImpl = new FoodManageDAOImpl(); // Food Manage Model Instance //LA
     @Override
-    public boolean updateFood(FoodDto food) throws SQLException {
+    public boolean update(FoodDto food) throws SQLException {
         return foodManageDAOImpl.updateFood(food);
     }
 
     @Override
-    public boolean deleteFood(String name) throws SQLException {
+    public boolean delete(String name) throws SQLException {
         return foodManageDAOImpl.deleteFood(name);
     }
 
     @Override
-    public boolean saveFood(FoodDto dto) throws SQLException {
+    public boolean save(FoodDto dto) throws SQLException {
         return foodManageDAOImpl.saveFood(dto);
     }
 
     @Override
-    public String getNextCustomerId() throws SQLException {
+    public String getNextId() throws SQLException {
         return foodManageDAOImpl.getNextCustomerId();
     }
 
