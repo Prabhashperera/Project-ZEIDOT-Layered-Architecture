@@ -19,7 +19,7 @@ public class FoodBatchBOImpl implements FoodBatchBO {
 
     @Override
     public String getNextBatchId() throws SQLException {
-        return foodBatchDAO.getNextBatchId();
+        return foodBatchDAO.getNextId();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FoodBatchBOImpl implements FoodBatchBO {
 
     @Override
     public boolean deleteBatch(String batchID) throws SQLException {
-        return foodBatchDAO.deleteBatch(batchID);
+        return foodBatchDAO.delete(batchID);
     }
 
     @Override

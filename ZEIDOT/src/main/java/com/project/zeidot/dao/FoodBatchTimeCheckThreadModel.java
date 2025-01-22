@@ -42,7 +42,7 @@ public class FoodBatchTimeCheckThreadModel {
     }
 
     public void deleteTimeOutBatch(String FBid) throws SQLException {
-        foodBatchDAOImpl.deleteBatch(FBid);
+        foodBatchDAOImpl.delete(FBid);
         foodBatchDAOImpl.deleteFoodsOfDeletedBatch(FBid);
         System.out.println("Deleted All the 00 Batchs");
     }

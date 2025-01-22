@@ -30,7 +30,8 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     }
 
     // Generate the next batch ID based on the last batch ID in the database
-    public String getNextBatchId() throws SQLException {
+    @Override
+    public String getNextId() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT FBId FROM foodBatch ORDER BY FBId DESC LIMIT 1");
 
         if (rs.next()) {
@@ -54,7 +55,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     // Set batch values and ensure `nextBatchID` is up-to-date
     public String setBatchValues(FoodBatchDto foodBatchDto) throws SQLException {
         // Generate a new batch ID to ensure it’s unique
-        String batchId = getNextBatchId();
+        String batchId = getNextId();
         System.out.println("Generated Batch ID: " + batchId);
 
         try {
@@ -179,8 +180,14 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     //Food Batch Expire Time Methods End
 
 
+    @Override
+    public boolean update(FoodBatchDto updatedDto) throws SQLException {
+        return false;
+    }
+
     //Delete Batch Methods
-    public boolean deleteBatch(String batchID) throws SQLException {
+    @Override
+    public boolean delete(String batchID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "DELETE FROM foodBatch WHERE FBId = ?";
         PreparedStatement ps = conn.prepareStatement(query);
@@ -188,6 +195,12 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
+
+    @Override
+    public boolean save(FoodBatchDto savedDto) throws SQLException {
+        return false;
+    }
+
     public void deleteFoodsOfDeletedBatch(String batchID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "SELECT foodID FROM foodBatchDetails where FBId = ? ORDER BY FBId";

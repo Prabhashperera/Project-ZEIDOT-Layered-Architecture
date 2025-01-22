@@ -5,11 +5,11 @@ import com.project.zeidot.dto.FoodDto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface FoodManageDAO {
-     boolean updateFood(FoodDto food) throws SQLException;
-     boolean deleteFood(String name) throws SQLException;
-     boolean saveFood(FoodDto dto) throws SQLException;
-     String getNextCustomerId() throws SQLException;
+public interface FoodManageDAO extends CrudDAO<FoodDto> {
+//     boolean updateFood(FoodDto food) throws SQLException;
+//     boolean deleteFood(String name) throws SQLException;
+//     boolean saveFood(FoodDto dto) throws SQLException;
+//     String getNextCustomerId() throws SQLException;
      ArrayList<FoodDto> getAllCustomers() throws SQLException;
      double getCurrentWeight(String FBId) throws SQLException;
      boolean updateAmount(double CurrentWeight , double foodWeight) throws SQLException;

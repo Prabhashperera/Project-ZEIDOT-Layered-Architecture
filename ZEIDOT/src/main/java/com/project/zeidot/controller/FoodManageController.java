@@ -115,7 +115,7 @@ public class FoodManageController implements Initializable {
     }
 
     public void loadNextCustomerId() throws SQLException {
-        String nextFoodId = foodManageBO.getNextId(); //LA INJECTED
+        String nextFoodId = foodManageBO.getNextCustomerId(); //LA INJECTED
         System.out.println(nextFoodId);
         foodIDTF.setText(nextFoodId);
     } //Generating NextFoodID & set FoodID Text
@@ -147,7 +147,7 @@ public class FoodManageController implements Initializable {
             conn.setAutoCommit(false); // Disable auto-commit to manage transactions
 
             // Save batch details
-            boolean isSaved = foodManageBO.save(dto); //LA INJECTED
+            boolean isSaved = foodManageBO.saveFood(dto); //LA INJECTED
             if (!isSaved) {
                 conn.rollback(); //if Fails RollBack
                 new Alert(Alert.AlertType.ERROR, "Cannot Saved!!", ButtonType.OK).show();
@@ -196,7 +196,7 @@ public class FoodManageController implements Initializable {
             conn = DBConnection.getInstance().getConnection();
             conn.setAutoCommit(false);
             //Deleting FoodID
-            boolean isDeleted = foodManageBO.delete(foodID);
+            boolean isDeleted = foodManageBO.deleteFood(foodID);
             if (!isDeleted) {
                 conn.rollback();
                 new Alert(Alert.AlertType.ERROR, "Cannot Deleted!!", ButtonType.OK).show();
@@ -241,7 +241,7 @@ public class FoodManageController implements Initializable {
             String foodDuration = menuButton.getText();
             FoodDto dto = new FoodDto(foodID, foodName, foodWeight, foodDuration);
             foodManageBO.updateAmountWhenUpdate(foodWeight , foodID);
-            boolean isUpdated = foodManageBO.update(dto);
+            boolean isUpdated = foodManageBO.updateFood(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION, "Updated", ButtonType.OK).show();
                 refreshPage();

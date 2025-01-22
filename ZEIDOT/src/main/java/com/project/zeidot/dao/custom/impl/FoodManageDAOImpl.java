@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class FoodManageDAOImpl implements FoodManageDAO {
     @Override
-    public boolean updateFood(FoodDto food) throws SQLException {
+    public boolean update(FoodDto food) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement ps = connection.prepareStatement("UPDATE food SET foodWeight = ?, FoodName = ? , duration = ? WHERE foodID = ?");
         ps.setString(1 , food.getWeight());
@@ -24,14 +24,14 @@ public class FoodManageDAOImpl implements FoodManageDAO {
         return rows > 0;
     }
     @Override
-    public boolean deleteFood(String name) throws SQLException {
+    public boolean delete(String name) throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         PreparedStatement ps = con.prepareStatement("DELETE FROM food WHERE foodID = ?");
         ps.setString(1, name);
         return ps.executeUpdate() > 0;
     }
     @Override
-    public boolean saveFood(FoodDto dto) throws SQLException {
+    public boolean save(FoodDto dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         PreparedStatement ps = conn.prepareStatement("insert into food values(?,?,?,?)");
         ps.setString(1 , dto.getFoodID());
@@ -43,7 +43,7 @@ public class FoodManageDAOImpl implements FoodManageDAO {
     }
 
     @Override
-    public String getNextCustomerId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT foodID FROM food ORDER BY foodID DESC LIMIT 1");
 
         if (rs.next()) {
