@@ -161,45 +161,21 @@ public class FoodManageController implements Initializable {
         try {
             FoodDto food = tableView.getSelectionModel().getSelectedItem();
             String foodID = food.getFoodID();
+            String batch = batchID.getText();
+            String foodWeight = foodWeightTF.getText();
             //Transaction Start
-            conn = DBConnection.getInstance().getConnection();
-            conn.setAutoCommit(false);
             //Deleting FoodID
-            boolean isDeleted = foodManageBO.deleteFood(foodID);
-            if (!isDeleted) {
-                conn.rollback();
-                new Alert(Alert.AlertType.ERROR, "Cannot Deleted!!", ButtonType.OK).show();
-                return;
+            boolean isDeleted = foodManageBO.deleteFood(foodID , batch , foodWeight);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.INFORMATION, "Successfully Deleted!!", ButtonType.OK).show();
+                refreshPage();
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Not Deleted!!", ButtonType.OK).show();
+                refreshPage();
             }
-            //When deleting a Food / Time must change if its the Main time that Holds FoodBatch Expire time
-            LocalTime newTime = foodBatchBO.checkTimeWhenDeleting(batchID.getText());
-            foodBatchBO.updateFoodBatchTime(newTime, batchID.getText());
-            //After Deleting a Food emediately calling Decrease amount of the food batch
-            boolean isDecrease = foodManageBO.decreaseAmount(foodManageBO.getCurrentWeight(batchID.getText()), Double.parseDouble(foodWeightTF.getText()));
-            if (!isDecrease) {
-                conn.rollback();
-                new Alert(Alert.AlertType.ERROR, "Cannot Deleted!!", ButtonType.OK).show();
-                return;
-            }
-            conn.commit();
-            new Alert(Alert.AlertType.INFORMATION, "Successfully Deleted!!", ButtonType.OK).show();
-            refreshPage();
+
         } catch (Exception e) {
-            try {
-                if (conn != null) {
-                    conn.rollback(); // Roll back any partial operations on error
-                }
-            } catch (SQLException rollbackEx) {
-                System.out.println("Rollback Error: " + rollbackEx.getMessage());
-            }
-        }finally {
-            try {
-                if (conn != null) {
-                    conn.setAutoCommit(true); // Restore default auto-commit behavior
-                }
-            } catch (SQLException ex) {
-                System.out.println("Error resetting auto-commit: " + ex.getMessage());
-            }
+            e.getMessage();
         }
     }
     public void editOnAction(ActionEvent event) {

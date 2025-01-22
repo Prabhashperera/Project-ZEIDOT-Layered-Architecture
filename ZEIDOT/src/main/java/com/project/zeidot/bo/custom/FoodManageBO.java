@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface FoodManageBO extends SuperBO{
     boolean updateFood(FoodDto food) throws SQLException;
-    boolean deleteFood(String name) throws SQLException;
+    boolean deleteFood(String name , String batch , String foodWeight) throws SQLException;
     boolean saveFood(FoodDto dto , BatchDetailsDto dtos) throws SQLException;
     String getNextCustomerId() throws SQLException;
     ArrayList<FoodDto> getAllCustomers() throws SQLException;
