@@ -1,6 +1,7 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.FoodBatchBO;
 import com.project.zeidot.bo.custom.FoodManageBO;
 import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.dao.custom.FoodManageDAO;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 public class FoodManageBOImpl implements FoodManageBO {
     FoodManageDAO foodManageDAOImpl = (FoodManageDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOOD);
+    FoodBatchBO foodBatchBO = (FoodBatchBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH);
 
     // Food Manage Model Instance //LA
     @Override
@@ -33,31 +35,45 @@ public class FoodManageBOImpl implements FoodManageBO {
     }
 
     @Override
-    public boolean saveFood(FoodDto dto) throws SQLException {
+    public boolean saveFood(FoodDto dto , BatchDetailsDto batchDto) throws SQLException {
         Connection conn = null;
         try {
             conn = DBConnection.getInstance().getConnection();
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(false); // Disable auto-commit to manage transactions
 
+            // Save batch details
             boolean isSaved = foodManageDAOImpl.save(dto);
             if (!isSaved) {
-                conn.rollback();
-                throw new SQLException("Failed to save food details.");
+                conn.rollback(); //if Fails RollBack
+                return false;
             }
 
-            conn.commit();
-            return true;
-        } catch (SQLException e) {
-            if (conn != null) {
+            //Now this is Going to Model that Adding Values to Associate Entity in Database (FoodBatchDetails Table)
+            boolean isAdded = foodBatchBO.setBatchDetailsValues(batchDto);
+            if (!isAdded) {
                 conn.rollback();
+                return false;
             }
-            throw e; // Propagate the exception for higher-level handling
+            // Update batch time
+            LocalTime newTime = foodBatchBO.checkTime(LocalTime.parse(dto.getDuration()), batchDto.getBatchId());
+            boolean isTimeUpdated = foodBatchBO.updateFoodBatchTime(newTime, batchDto.getBatchId());
+            if (!isTimeUpdated) {
+                conn.rollback();
+                return false;
+            }
+            conn.commit();//If all are Passed , Commit
+            //Transaction END
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
         } finally {
             if (conn != null) {
                 conn.setAutoCommit(true);
             }
         }
+        return false;
     }
+
 
     @Override
     public String getNextCustomerId() throws SQLException {

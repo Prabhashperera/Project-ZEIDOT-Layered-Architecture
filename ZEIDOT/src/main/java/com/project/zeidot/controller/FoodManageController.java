@@ -125,6 +125,7 @@ public class FoodManageController implements Initializable {
     } //Generating NextFoodID & set FoodID Text
 
     public void saveBtnOnAction(ActionEvent event) throws SQLException {
+        // Input validation END--------------------------------------------------
         String foodID = foodIDTF.getText();
         String foodName = foodNameTF.getText();
         if (!foodName.matches("^[A-Za-z ]+$")) {
@@ -136,34 +137,22 @@ public class FoodManageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Invalid Food Weight! Must be a valid number.", ButtonType.OK).show();
             return;
         }
-        // Input validation END
+        //----------------------------------------------------------------------
         // Parse and calculate new time (with plus Hours)
         LocalDateTime newDateTime = currentDateTime.plusHours(Long.parseLong(menuButton.getText()));
         String foodDuration = newDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 
         // Initialize DTOs
-        FoodDto dto = new FoodDto(foodID, foodName, foodWeight, foodDuration); //F001 , Rice , 20.4 , CurrentTime + PlusHours
+        FoodDto foodDto = new FoodDto(foodID, foodName, foodWeight, foodDuration); //F001 , Rice , 20.4 , CurrentTime + PlusHours
         BatchDetailsDto detailsDto = new BatchDetailsDto(foodID , batchID.getText());
-        boolean isSaved = foodManageBO.saveFood(dto);
+        //Save Process Starts Here ------------------------------------------------------------
+        boolean isSaved = foodManageBO.saveFood(foodDto , detailsDto);
         if (isSaved) {
-            boolean isAdded = foodBatchBO.setBatchDetailsValues(detailsDto);
-            if (!isAdded) {
-                conn.rollback();
-                new Alert(Alert.AlertType.ERROR, "Cannot Added FoodBatchDetails!!", ButtonType.OK).show();
-                return;
-            }
-            // Update batch time
-            LocalTime newTime = foodBatchBO.checkTime(LocalTime.parse(foodDuration), batchID.getText());
-            boolean isTimeUpdated = foodBatchBO.updateFoodBatchTime(newTime, batchID.getText());
-            if (!isTimeUpdated) {
-                conn.rollback();
-                new Alert(Alert.AlertType.ERROR, "Cannot Updated!!", ButtonType.OK).show();
-                return;
-            }
-            amountUpdate(foodWeight);//If Food & Batch Detail Added Successfully, Must be Increase the Amount
-            conn.commit(); //If all are Passed , Commit
-            //Transaction END
+            amountUpdate(foodWeight);
             new Alert(Alert.AlertType.INFORMATION, "Successfully Saved!!", ButtonType.OK).show();
+            refreshPage();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Something went wrong!!", ButtonType.OK).show();
             refreshPage();
         }
 
