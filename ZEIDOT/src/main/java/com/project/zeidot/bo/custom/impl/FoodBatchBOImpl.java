@@ -1,6 +1,7 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.FoodBatchBO;
+import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchDAO;
 import com.project.zeidot.dao.custom.impl.FoodBatchDAOImpl;
 import com.project.zeidot.dto.BatchDetailsDto;
@@ -11,7 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class FoodBatchBOImpl implements FoodBatchBO {
-    private final FoodBatchDAO foodBatchDAO = new FoodBatchDAOImpl();
+    private final FoodBatchDAO foodBatchDAO = (FoodBatchDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBATCH);
     @Override
     public String getCurrentBatchID() throws SQLException {
         return foodBatchDAO.getCurrentBatchID();

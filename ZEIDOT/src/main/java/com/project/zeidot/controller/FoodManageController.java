@@ -1,9 +1,11 @@
 package com.project.zeidot.controller;
 
+import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBatchBO;
 import com.project.zeidot.bo.custom.FoodManageBO;
 import com.project.zeidot.bo.custom.impl.FoodBatchBOImpl;
 import com.project.zeidot.bo.custom.impl.FoodManageBOImpl;
+import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.BatchDetailsDto;
 import com.project.zeidot.dto.FoodBatchDto;
@@ -74,8 +76,10 @@ public class FoodManageController implements Initializable {
     private TableView<FoodBatchDto> foodBatchTable;
     // Batch Table End
 
-    private final FoodManageBO foodManageBO = new FoodManageBOImpl(); // LA NOT FACTORY DESIGNED YET
-    private final FoodBatchBO foodBatchBO = new FoodBatchBOImpl(); // Food Batch Model Instance LA
+    //LA Factory Design Patter Applied
+    private final FoodManageBO foodManageBO = (FoodManageBO) BOFactory.getInstance().getBO(BOFactory.BOType.FOOD);
+    private final FoodBatchBO foodBatchBO = (FoodBatchBO) BOFactory.getInstance().getBO(BOFactory.BOType.FOODBATCH);
+    // Food Batch Model Instance LA
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

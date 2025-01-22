@@ -1,6 +1,7 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.FoodManageBO;
+import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.dao.custom.FoodManageDAO;
 import com.project.zeidot.dao.custom.impl.FoodManageDAOImpl;
 import com.project.zeidot.dto.FoodDto;
@@ -9,7 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FoodManageBOImpl implements FoodManageBO {
-    FoodManageDAO foodManageDAOImpl = new FoodManageDAOImpl(); // Food Manage Model Instance //LA
+    FoodManageDAO foodManageDAOImpl = (FoodManageDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOOD);
+    // Food Manage Model Instance //LA
     @Override
     public boolean updateFood(FoodDto food) throws SQLException {
         return foodManageDAOImpl.update(food);
