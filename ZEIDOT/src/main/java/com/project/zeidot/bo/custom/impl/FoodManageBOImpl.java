@@ -60,7 +60,7 @@ public class FoodManageBOImpl implements FoodManageBO {
         }finally {
             if (conn != null) {
                 conn.setAutoCommit(true);
-                conn.close();
+
             }
         }
     }

@@ -1,7 +1,11 @@
 package com.project.zeidot.controller;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.FoodBatchDetailsBO;
+import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.FoodBatchDetailsDAO;
 import com.project.zeidot.dto.FoodBatchDetailsDto;
-import com.project.zeidot.dao.FoodBatchDetailsModel;
+import com.project.zeidot.dao.custom.impl.FoodBatchDetailsDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,19 +21,20 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class FoodBatchDetailsController implements Initializable {
+
+    private final FoodBatchDetailsBO foodBatchDetailsBO = (FoodBatchDetailsBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH_DETAILS);
+
     public TextField batchID;
     @FXML
     private TableView<FoodBatchDetailsDto> tableView;
     @FXML
-    private TableColumn<FoodBatchDetailsModel, String> foodID;
+    private TableColumn<FoodBatchDetailsDAOImpl, String> foodID;
     @FXML
-    private TableColumn<FoodBatchDetailsModel, String> foodName;
+    private TableColumn<FoodBatchDetailsDAOImpl, String> foodName;
     @FXML
-    private TableColumn<FoodBatchDetailsModel, String> foodWeight;
+    private TableColumn<FoodBatchDetailsDAOImpl, String> foodWeight;
     @FXML
-    private TableColumn<FoodBatchDetailsModel, String> duration;
-
-    FoodBatchDetailsModel FBDmodel = new FoodBatchDetailsModel();
+    private TableColumn<FoodBatchDetailsDAOImpl, String> duration;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,7 +48,7 @@ public class FoodBatchDetailsController implements Initializable {
     public void searchBtnOnAction(ActionEvent event) {
         try{
             String FBId = batchID.getText();
-            ArrayList<FoodBatchDetailsDto> foodBatchDetails = FBDmodel.getFoodBatchDetails(FBId);
+            ArrayList<FoodBatchDetailsDto> foodBatchDetails = foodBatchDetailsBO.getFoodBatchDetails(FBId);
             loadTable(foodBatchDetails);
         }catch (Exception e) {
             e.printStackTrace();

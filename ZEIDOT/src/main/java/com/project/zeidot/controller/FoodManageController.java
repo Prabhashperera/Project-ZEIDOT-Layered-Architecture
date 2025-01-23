@@ -156,7 +156,7 @@ public class FoodManageController implements Initializable {
             refreshPage();
         }
 
-    }
+    } //LA OK
     public void deleteOnAction(ActionEvent event) {
         try {
             FoodDto food = tableView.getSelectionModel().getSelectedItem();
@@ -178,7 +178,7 @@ public class FoodManageController implements Initializable {
             e.getMessage();
             new Alert(Alert.AlertType.ERROR, "An unexpected error occurred: " + e.getMessage(), ButtonType.OK).show();
         }
-    }
+    } //LA OK
     public void editOnAction(ActionEvent event) {
         try {
             String foodID = foodIDTF.getText();
@@ -195,7 +195,7 @@ public class FoodManageController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    } //LA OK
 
     public void setHour(ActionEvent event) {
         MenuItem menuItem = (MenuItem) event.getSource();
@@ -322,7 +322,7 @@ public class FoodManageController implements Initializable {
             if (isBatchDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "FoodBatch Deleted").showAndWait();
                 refreshPage();
-                System.out.println("okkoma Hari batch deeleteddddd");
+                System.out.println("okkoma Hari batch deleted");
             }
         }catch (Exception e) {
             e.getMessage();

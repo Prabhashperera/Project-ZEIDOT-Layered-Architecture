@@ -1,6 +1,7 @@
 package com.project.zeidot.bo.custom;
 
 import com.project.zeidot.bo.custom.impl.FoodBatchBOImpl;
+import com.project.zeidot.bo.custom.impl.FoodBatchDetailsBOImpl;
 import com.project.zeidot.bo.custom.impl.FoodManageBOImpl;
 
 public class BOFactory {
@@ -16,13 +17,14 @@ public class BOFactory {
     }
 
     public enum BOType {
-        FOOD, FOODBATCH;
+        FOOD, FOODBATCH , FOODBATCH_DETAILS;
     }
 
     public SuperBO getBOType(BOType type) {
         return switch (type) {
             case FOOD -> new FoodManageBOImpl();
             case FOODBATCH -> new FoodBatchBOImpl();
+            case FOODBATCH_DETAILS -> new FoodBatchDetailsBOImpl();
         };
     }
 }
