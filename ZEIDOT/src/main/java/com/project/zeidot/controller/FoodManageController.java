@@ -336,9 +336,9 @@ public class FoodManageController implements Initializable {
                     boolean isDeleted = foodBatchTimeCheckImpl.checkTime();
                     if (isDeleted) {
                         refreshPage();
-                        System.out.println("Refreshed");
+                        System.out.println("Refreshed And Deleted");
                     }else {
-                        System.out.println("checked NOt Deleted");
+                        System.out.println("checked Not Deleted");
                     }
                     Thread.sleep(60000);
                 }

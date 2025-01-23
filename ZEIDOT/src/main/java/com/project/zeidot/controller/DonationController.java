@@ -1,11 +1,14 @@
 package com.project.zeidot.controller;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.DonationBO;
+import com.project.zeidot.bo.custom.impl.DonationBOImpl;
 import com.project.zeidot.controller.popups.FoodBankSelectController;
 import com.project.zeidot.controller.popups.FoodBatchSelectController;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DonationDto;
 import com.project.zeidot.dto.FoodDto;
-import com.project.zeidot.dao.DonationModel;
+import com.project.zeidot.dao.custom.impl.DonationDAOImpl;
 import com.project.zeidot.dao.popups.FoodBatchSelectModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,8 +47,9 @@ public class DonationController implements Initializable {
     private TableColumn<FoodDto, Integer> FoodBankID;
     @FXML
     private TableView<DonationDto> tableView;
-    DonationModel donationModel = new DonationModel();
+
     FoodBatchSelectModel foodBatchSelectModel = new FoodBatchSelectModel();
+    private final DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBOType(BOFactory.BOType.DONATION);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -77,7 +81,7 @@ public class DonationController implements Initializable {
             conn.setAutoCommit(false);
             //Pass Data to Dto
             DonationDto dto = new DonationDto(donationID, donationName, foodBatchID , foodBankIDx);
-            boolean isSaved = donationModel.saveDonation(dto); //Save Donation
+            boolean isSaved = donationBO.saveDonation(dto); //Save Donation
             if (!isSaved) {
                 conn.rollback();
                 new Alert(Alert.AlertType.ERROR, "Failed to save Donation", ButtonType.OK).show();
@@ -113,7 +117,7 @@ public class DonationController implements Initializable {
         DonationDto dto = tableView.getSelectionModel().getSelectedItem();
         String donationID = dto.getDonationID();
         try {
-            boolean isDeleted = donationModel.deleteDonation(donationID);
+            boolean isDeleted = donationBO.deleteDonation(donationID);
             if (isDeleted) {
                 boolean isChangeToAvailable = foodBatchSelectModel.changeToAvailable(batchIDTF.getText());
                 if (isChangeToAvailable) {
@@ -133,7 +137,7 @@ public class DonationController implements Initializable {
             String donationName = donationNameTF.getText();
             String foodBatchID = batchIDTF.getText();
             DonationDto dto = new DonationDto(donationID, donationName, foodBatchID , foodBankID);
-            boolean isUpdated = donationModel.updateDonation(dto);
+            boolean isUpdated = donationBO.updateDonation(dto);
             if (isUpdated) {
                 //This line doing change the current selected batch into available Food Batch Again
                 boolean isChangedAvailability = foodBatchSelectModel.changeToAvailable(clickedFoodBatchID);
@@ -166,14 +170,14 @@ public class DonationController implements Initializable {
 
 
     public void loadNextDonationID() throws SQLException {
-        String donationID = donationModel.getNextDonationId();
+        String donationID = donationBO.getNextDonationId();
         System.out.println(donationID);
         donationIDTF.setText(donationID);
     } // Donation ID set to the Label
 
     public void loadDonationTable() throws SQLException {
         try {
-            ArrayList<DonationDto> donationDTOS = donationModel.getAllDonations(); // Renamed to donationDTOS
+            ArrayList<DonationDto> donationDTOS = donationBO.getAllDonations(); // Renamed to donationDTOS
 
             ObservableList<DonationDto> observableBatchDTOS = FXCollections.observableArrayList();
 

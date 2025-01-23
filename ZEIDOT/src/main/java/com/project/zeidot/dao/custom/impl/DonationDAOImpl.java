@@ -1,5 +1,6 @@
-package com.project.zeidot.dao;
+package com.project.zeidot.dao.custom.impl;
 
+import com.project.zeidot.dao.custom.DonationDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DonationDto;
 import com.project.zeidot.util.CrudUtil;
@@ -10,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DonationModel {
-    public String getNextDonationId() throws SQLException {
+public class DonationDAOImpl implements DonationDAO{
+    public String getNextId() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT DonationID FROM donation ORDER BY DonationID DESC LIMIT 1");
 
         if (rs.next()) {
@@ -33,7 +34,7 @@ public class DonationModel {
         return "D001";
     }
 
-    public boolean saveDonation(DonationDto dto) throws SQLException {
+    public boolean save(DonationDto dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "INSERT INTO donation values(? , ? , ?, ? , ?)";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -45,13 +46,13 @@ public class DonationModel {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-    public boolean deleteDonation(String id) throws SQLException {
+    public boolean delete(String id) throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         PreparedStatement ps = con.prepareStatement("DELETE FROM Donation WHERE donationID = ?");
         ps.setString(1, id);
         return ps.executeUpdate() > 0;
     }
-    public boolean updateDonation(DonationDto dto) throws SQLException {
+    public boolean update(DonationDto dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "Update donation SET donationName = ? , FBId = ? WHERE donationID = ?";
         PreparedStatement ps = conn.prepareStatement(query);

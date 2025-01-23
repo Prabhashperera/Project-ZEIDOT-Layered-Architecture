@@ -1,9 +1,6 @@
 package com.project.zeidot.dao;
 
-import com.project.zeidot.dao.custom.impl.FoodBatchDAOImpl;
-import com.project.zeidot.dao.custom.impl.FoodBatchDetailsDAOImpl;
-import com.project.zeidot.dao.custom.impl.FoodBatchTimeCheckThreadDAOImpl;
-import com.project.zeidot.dao.custom.impl.FoodManageDAOImpl;
+import com.project.zeidot.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory instance;
@@ -17,7 +14,7 @@ public class DAOFactory {
     }
 
     public enum DAOType {
-        FOOD , FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK;
+        FOOD , FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION;
     }
     public Object getDAOType(DAOType type) {
         switch (type) {
@@ -29,6 +26,8 @@ public class DAOFactory {
                         return new FoodBatchDetailsDAOImpl();
                         case FOODBATCH_TIME_CHECK:
                             return new FoodBatchTimeCheckThreadDAOImpl();
+                            case DONATION:
+                                return new DonationDAOImpl();
                     default:
                         return null;
         }
