@@ -2,6 +2,7 @@ package com.project.zeidot.bo.custom;
 
 import com.project.zeidot.bo.custom.impl.FoodBatchBOImpl;
 import com.project.zeidot.bo.custom.impl.FoodBatchDetailsBOImpl;
+import com.project.zeidot.bo.custom.impl.FoodBatchTimeCheckBOImpl;
 import com.project.zeidot.bo.custom.impl.FoodManageBOImpl;
 
 public class BOFactory {
@@ -17,7 +18,7 @@ public class BOFactory {
     }
 
     public enum BOType {
-        FOOD, FOODBATCH , FOODBATCH_DETAILS;
+        FOOD, FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK;
     }
 
     public SuperBO getBOType(BOType type) {
@@ -25,6 +26,7 @@ public class BOFactory {
             case FOOD -> new FoodManageBOImpl();
             case FOODBATCH -> new FoodBatchBOImpl();
             case FOODBATCH_DETAILS -> new FoodBatchDetailsBOImpl();
+            case FOODBATCH_TIME_CHECK -> new FoodBatchTimeCheckBOImpl();
         };
     }
 }

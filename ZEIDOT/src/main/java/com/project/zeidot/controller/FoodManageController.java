@@ -3,14 +3,13 @@ package com.project.zeidot.controller;
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBatchBO;
 import com.project.zeidot.bo.custom.FoodManageBO;
-import com.project.zeidot.bo.custom.impl.FoodBatchBOImpl;
-import com.project.zeidot.bo.custom.impl.FoodManageBOImpl;
 import com.project.zeidot.dao.DAOFactory;
-import com.project.zeidot.db.DBConnection;
+import com.project.zeidot.dao.custom.FoodBatchTimeCheckBO;
+import com.project.zeidot.dao.custom.FoodBatchTimeCheckDAO;
 import com.project.zeidot.dto.BatchDetailsDto;
 import com.project.zeidot.dto.FoodBatchDto;
 import com.project.zeidot.dto.FoodDto;
-import com.project.zeidot.dao.FoodBatchTimeCheckThreadModel;
+import com.project.zeidot.dao.custom.impl.FoodBatchTimeCheckThreadDAOImpl;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,6 +78,7 @@ public class FoodManageController implements Initializable {
     //LA Factory Design Patter Applied
     private final FoodManageBO foodManageBO = (FoodManageBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOOD);
     private final FoodBatchBO foodBatchBO = (FoodBatchBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH);
+    private final FoodBatchTimeCheckDAO foodBatchTimeCheckImpl = (FoodBatchTimeCheckDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBATCH_TIME_CHECK);
     // Food Batch Model Instance LA
 
     @Override
@@ -330,14 +330,15 @@ public class FoodManageController implements Initializable {
     } //Batch eka delete weddi wenna ona dewal methods tika
 
     public void checkEveryTime() {
-        FoodBatchTimeCheckThreadModel model = new FoodBatchTimeCheckThreadModel();
         Thread checkThread = new Thread(() -> {
             try {
                 while (true) {
-                    boolean isDeleted = model.checkTime();
+                    boolean isDeleted = foodBatchTimeCheckImpl.checkTime();
                     if (isDeleted) {
                         refreshPage();
                         System.out.println("Refreshed");
+                    }else {
+                        System.out.println("checked NOt Deleted");
                     }
                     Thread.sleep(60000);
                 }

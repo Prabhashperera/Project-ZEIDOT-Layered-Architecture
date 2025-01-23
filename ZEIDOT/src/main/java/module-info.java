@@ -23,4 +23,6 @@ module com.project.zeidot {
     exports com.project.zeidot.controller.delivery;
     opens com.project.zeidot.controller.mail to javafx.fxml;
     exports com.project.zeidot.controller.mail;
+    exports com.project.zeidot.dao.custom;
+    opens com.project.zeidot.dao.custom to javafx.fxml;
 }
