@@ -4,7 +4,7 @@ import com.project.zeidot.dto.FoodDto;
 
 import java.sql.SQLException;
 
-public interface CrudDAO <T> {
+public interface CrudDAO <T> extends SuperDAO {
     boolean update(T updatedDto) throws SQLException;
     boolean delete(String name) throws SQLException;
     boolean save(T savedDto) throws SQLException;

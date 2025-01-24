@@ -1,5 +1,6 @@
-package com.project.zeidot.dao.popups;
+package com.project.zeidot.dao.custom.impl;
 
+import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.FoodBatchDto;
 
@@ -9,7 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FoodBatchSelectModel {
+public class FoodBatchSelectDAOImpl implements FoodBatchSelectDAO{
+    @Override
     public ArrayList<FoodBatchDto> getFoodBatchDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM foodBatch WHERE isAvailable = 'Available'";
@@ -29,6 +31,7 @@ public class FoodBatchSelectModel {
         return detailList;
     }
 
+    @Override
     public boolean changeAvailability(String batchID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "UPDATE foodBatch SET isAvailable = 'UnAvailable' WHERE FBId = ?";
@@ -36,6 +39,8 @@ public class FoodBatchSelectModel {
         ps.setString(1, batchID);
         return ps.executeUpdate() > 0;
     }
+
+    @Override
     public boolean changeToAvailable(String batchID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "UPDATE foodBatch SET isAvailable = 'Available' WHERE FBId = ?";

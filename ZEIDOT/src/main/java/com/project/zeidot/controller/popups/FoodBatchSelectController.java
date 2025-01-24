@@ -1,8 +1,12 @@
 package com.project.zeidot.controller.popups;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.FoodBatchSelectBO;
+import com.project.zeidot.bo.custom.impl.FoodBatchSelectBOImpl;
 import com.project.zeidot.controller.DonationController;
+import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
 import com.project.zeidot.dto.FoodBatchDto;
-import com.project.zeidot.dao.popups.FoodBatchSelectModel;
+import com.project.zeidot.dao.custom.impl.FoodBatchSelectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -31,7 +35,8 @@ public class FoodBatchSelectController implements Initializable {
     private TableColumn<FoodBatchDto, String> isAvailable;
     @FXML
     private TableColumn<FoodBatchDto , String>  duration;
-    FoodBatchSelectModel foodBatchSelectModel = new FoodBatchSelectModel(); //Model
+//    FoodBatchSelectDAOImpl foodBatchSelectDAOImpl = new FoodBatchSelectDAOImpl(); //Model
+    FoodBatchSelectBO foodBatchSelectBO = (FoodBatchSelectBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH_SELECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,7 +54,7 @@ public class FoodBatchSelectController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBatchDto> foodBatchDetails =  foodBatchSelectModel.getFoodBatchDetails();
+        ArrayList<FoodBatchDto> foodBatchDetails =  foodBatchSelectBO.getFoodBatchDetails();
         ObservableList<FoodBatchDto> observableList = FXCollections.observableArrayList(foodBatchDetails);
 
         // Set the ObservableList to the TableView

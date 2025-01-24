@@ -1,17 +1,12 @@
 package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.bo.custom.BOFactory;
-import com.project.zeidot.bo.custom.impl.FoodBatchTimeCheckBOImpl;
-import com.project.zeidot.dao.custom.FoodBatchTimeCheckBO;
+import com.project.zeidot.bo.custom.FoodBatchTimeCheckBO;
 import com.project.zeidot.dao.custom.FoodBatchTimeCheckDAO;
-import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalTime;
 
 
 public class FoodBatchTimeCheckThreadDAOImpl implements FoodBatchTimeCheckDAO {

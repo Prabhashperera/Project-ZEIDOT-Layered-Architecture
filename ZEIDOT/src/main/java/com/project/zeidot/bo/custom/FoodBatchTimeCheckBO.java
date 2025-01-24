@@ -1,6 +1,4 @@
-package com.project.zeidot.dao.custom;
-
-import com.project.zeidot.bo.custom.SuperBO;
+package com.project.zeidot.bo.custom;
 
 import java.sql.SQLException;
 

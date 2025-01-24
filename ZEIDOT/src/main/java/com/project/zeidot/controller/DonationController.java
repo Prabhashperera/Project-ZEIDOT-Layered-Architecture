@@ -2,14 +2,15 @@ package com.project.zeidot.controller;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.DonationBO;
-import com.project.zeidot.bo.custom.impl.DonationBOImpl;
+import com.project.zeidot.bo.custom.FoodBatchSelectBO;
+import com.project.zeidot.bo.custom.impl.FoodBatchSelectBOImpl;
 import com.project.zeidot.controller.popups.FoodBankSelectController;
 import com.project.zeidot.controller.popups.FoodBatchSelectController;
+import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DonationDto;
 import com.project.zeidot.dto.FoodDto;
-import com.project.zeidot.dao.custom.impl.DonationDAOImpl;
-import com.project.zeidot.dao.popups.FoodBatchSelectModel;
+import com.project.zeidot.dao.custom.impl.FoodBatchSelectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,8 +49,8 @@ public class DonationController implements Initializable {
     @FXML
     private TableView<DonationDto> tableView;
 
-    FoodBatchSelectModel foodBatchSelectModel = new FoodBatchSelectModel();
     private final DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBOType(BOFactory.BOType.DONATION);
+    private final FoodBatchSelectBO foodBatchSelectBO = (FoodBatchSelectBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH_SELECT);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,7 +88,7 @@ public class DonationController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Failed to save Donation", ButtonType.OK).show();
                 return;
             }
-            boolean isUpdated = foodBatchSelectModel.changeAvailability(foodBatchID);
+            boolean isUpdated = foodBatchSelectBO.changeAvailability(foodBatchID); //LA
             if (!isUpdated) {
                 conn.rollback();
                 new Alert(Alert.AlertType.ERROR, "Failed to Update Availability Donation", ButtonType.OK).show();
@@ -119,7 +120,7 @@ public class DonationController implements Initializable {
         try {
             boolean isDeleted = donationBO.deleteDonation(donationID);
             if (isDeleted) {
-                boolean isChangeToAvailable = foodBatchSelectModel.changeToAvailable(batchIDTF.getText());
+                boolean isChangeToAvailable = foodBatchSelectBO.changeToAvailable(batchIDTF.getText()); //LA
                 if (isChangeToAvailable) {
                     System.out.println("Deleted BatchID Changed to Available");
                 }
@@ -140,11 +141,11 @@ public class DonationController implements Initializable {
             boolean isUpdated = donationBO.updateDonation(dto);
             if (isUpdated) {
                 //This line doing change the current selected batch into available Food Batch Again
-                boolean isChangedAvailability = foodBatchSelectModel.changeToAvailable(clickedFoodBatchID);
+                boolean isChangedAvailability = foodBatchSelectBO.changeToAvailable(clickedFoodBatchID); //LA
                 if (isChangedAvailability) {
                     System.out.println("Current Food Batch Changed to Available Again");
                     //If it's updated to Available then The new Selected batchID will be Unavailable
-                    boolean b = foodBatchSelectModel.changeAvailability(foodBatchID);
+                    boolean b = foodBatchSelectBO.changeAvailability(foodBatchID); //LA
                     if (b) {
                         System.out.println("New Food Batch Changed to Unavailable");
                     }
@@ -216,6 +217,7 @@ public class DonationController implements Initializable {
     }
 
 
+    //--------------------------------------------------------------Controlling Navigation Sections
     //POPUPS okkomaaaaaaaaaaaaaaaaaaaaaaaaa
     public void foodBankOnAcion(ActionEvent event) throws IOException {
         Stage stage = new Stage();

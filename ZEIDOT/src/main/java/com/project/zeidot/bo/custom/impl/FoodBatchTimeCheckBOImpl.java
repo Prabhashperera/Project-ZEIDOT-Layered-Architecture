@@ -2,8 +2,7 @@ package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchDAO;
-import com.project.zeidot.dao.custom.FoodBatchTimeCheckBO;
-import com.project.zeidot.dao.custom.impl.FoodBatchDAOImpl;
+import com.project.zeidot.bo.custom.FoodBatchTimeCheckBO;
 
 import java.sql.SQLException;
 import java.time.LocalTime;

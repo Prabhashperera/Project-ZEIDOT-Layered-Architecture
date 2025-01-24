@@ -1,5 +1,6 @@
 package com.project.zeidot.dao;
 
+import com.project.zeidot.dao.custom.SuperDAO;
 import com.project.zeidot.dao.custom.impl.*;
 
 public class DAOFactory {
@@ -14,9 +15,9 @@ public class DAOFactory {
     }
 
     public enum DAOType {
-        FOOD , FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION;
+        FOOD , FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION , FOODBACTH_SELECT;
     }
-    public Object getDAOType(DAOType type) {
+    public SuperDAO getDAOType(DAOType type) {
         switch (type) {
             case FOOD:
                 return new FoodManageDAOImpl();
@@ -28,6 +29,8 @@ public class DAOFactory {
                             return new FoodBatchTimeCheckThreadDAOImpl();
                             case DONATION:
                                 return new DonationDAOImpl();
+                                case FOODBACTH_SELECT:
+                                    return new FoodBatchSelectDAOImpl();
                     default:
                         return null;
         }
