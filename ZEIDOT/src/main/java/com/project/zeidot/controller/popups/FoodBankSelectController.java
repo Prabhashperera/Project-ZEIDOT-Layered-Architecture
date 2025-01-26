@@ -1,6 +1,9 @@
 package com.project.zeidot.controller.popups;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.PopusBOs.PopupBO;
 import com.project.zeidot.controller.DonationController;
+import com.project.zeidot.dto.DonationDto;
 import com.project.zeidot.dto.FoodBankDto;
 import com.project.zeidot.dao.custom.impl.foodBank.FoodBankDAOImpl;
 import javafx.collections.FXCollections;
@@ -28,7 +31,9 @@ public class FoodBankSelectController implements Initializable {
     private TableColumn<FoodBankDto, String> Address;
     @FXML
     private TableColumn<FoodBankDto, String> Email;
-    FoodBankDAOImpl FoodBankDAOImpl = new FoodBankDAOImpl();
+
+    private final PopupBO<FoodBankDto> foodBankSelectBO =
+            (PopupBO<FoodBankDto>) BOFactory.getInstance().getBOType(BOFactory.BOType.SELECT_FOODBANK); //LA OBJECT
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,7 +67,7 @@ public class FoodBankSelectController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBankDto> foodBankDetails = FoodBankDAOImpl.getFoodBankDetails();
+        ArrayList<FoodBankDto> foodBankDetails = foodBankSelectBO.getDetails();
         ObservableList<FoodBankDto> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);

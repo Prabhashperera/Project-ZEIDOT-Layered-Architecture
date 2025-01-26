@@ -1,8 +1,12 @@
 package com.project.zeidot.controller.popups;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.PopusBOs.PopupBO;
 import com.project.zeidot.controller.delivery.DeliveryController;
+import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.PopupsDAOS.PopupDAO;
 import com.project.zeidot.dto.DonationDto;
-import com.project.zeidot.dao.popups.DonationSelectModel;
+import com.project.zeidot.dao.custom.PopupsDAOS.DonationSelectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +33,9 @@ public class DonationSelectController implements Initializable {
     @FXML
     private TableColumn<DonationDto, String> foodBankID;
     private DeliveryController donationController;
-    private DonationSelectModel donationModel = new DonationSelectModel();
+//    private DonationSelectDAOImpl donationModel = new DonationSelectDAOImpl();
+    private final PopupBO<DonationDto> donationSelectBO =
+        (PopupBO<DonationDto>) BOFactory.getInstance().getBOType(BOFactory.BOType.SELECT_DONATION); //LA OBJECT
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +53,7 @@ public class DonationSelectController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<DonationDto> foodBankDetails = donationModel.getDeliveryDetails();
+        ArrayList<DonationDto> foodBankDetails = donationSelectBO.getDetails(); //LA
         ObservableList<DonationDto> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);

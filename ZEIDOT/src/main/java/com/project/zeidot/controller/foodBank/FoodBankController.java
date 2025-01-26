@@ -35,7 +35,7 @@ public class FoodBankController implements Initializable {
     private TableView<FoodBankDto> tableView;
 
     private final FoodBankBO foodBankBO = (FoodBankBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBANK); //LA
-//    FoodBankDAOImpl fBKModel = new FoodBankDAOImpl();
+    //    FoodBankDAOImpl fBKModel = new FoodBankDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

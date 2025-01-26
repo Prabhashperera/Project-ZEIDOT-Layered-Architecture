@@ -1,4 +1,4 @@
-package com.project.zeidot.dao.popups;
+package com.project.zeidot.dao.custom.PopupsDAOS;
 
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DonationDto;
@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DonationSelectModel {
-    public ArrayList<DonationDto> getDeliveryDetails() throws SQLException {
+public class DonationSelectDAOImpl implements PopupDAO<DonationDto> {
+    public ArrayList<DonationDto> getDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM donation WHERE isDelivered = 'NO'";
         PreparedStatement ps = con.prepareStatement(query);
