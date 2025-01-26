@@ -1,5 +1,6 @@
-package com.project.zeidot.dao.foodBank;
+package com.project.zeidot.dao.custom.impl.foodBank;
 
+import com.project.zeidot.dao.custom.foodBankDAOs.FoodBankDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.FoodBankDto;
 import com.project.zeidot.util.CrudUtil;
@@ -10,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FoodBankModel {
-    public boolean saveFoodBank(FoodBankDto dto) throws SQLException {
+public class FoodBankDAOImpl implements FoodBankDAO {
+    public boolean save(FoodBankDto dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "INSERT INTO foodBank  values(? , ? , ? , ?)";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -23,7 +24,7 @@ public class FoodBankModel {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-    public boolean deleteFoodBank(String FBKId) throws SQLException {
+    public boolean delete(String FBKId) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "DELETE FROM foodBank WHERE foodBankID = ?";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -31,7 +32,7 @@ public class FoodBankModel {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-    public boolean editFoodBank(FoodBankDto dto) throws SQLException {
+    public boolean update(FoodBankDto dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "UPDATE foodBank SET address = ?, FBName = ?, emailAddress = ? WHERE foodBankID = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -43,7 +44,7 @@ public class FoodBankModel {
         return rows > 0;
     }
 
-    public String getNextFoodBankId() throws SQLException {
+    public String getNextId() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT FoodBankID FROM foodBank ORDER BY FoodBankID DESC LIMIT 1");
 
         if (rs.next()) {

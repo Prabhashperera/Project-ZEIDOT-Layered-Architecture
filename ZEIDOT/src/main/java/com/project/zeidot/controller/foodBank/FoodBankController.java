@@ -1,7 +1,9 @@
 package com.project.zeidot.controller.foodBank;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.FoodBankBO;
 import com.project.zeidot.dto.FoodBankDto;
-import com.project.zeidot.dao.foodBank.FoodBankModel;
+import com.project.zeidot.dao.custom.impl.foodBank.FoodBankDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +33,9 @@ public class FoodBankController implements Initializable {
     private TableColumn<FoodBankDto ,String> FBKEmail;
     @FXML
     private TableView<FoodBankDto> tableView;
-    FoodBankModel fBKModel = new FoodBankModel();
+
+    private final FoodBankBO foodBankBO = (FoodBankBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBANK); //LA
+//    FoodBankDAOImpl fBKModel = new FoodBankDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -49,7 +53,7 @@ public class FoodBankController implements Initializable {
 
     public void refreshPage() throws SQLException {
         loadTable();
-        String nextID = fBKModel.getNextFoodBankId();
+        String nextID = foodBankBO.getNextFoodBankId();
         FBDonationID.setText(nextID);
         FBEmailTF.setText("");
         FBName.setText("");
@@ -82,7 +86,7 @@ public class FoodBankController implements Initializable {
                 return;
             }
             FoodBankDto dto = new FoodBankDto(donationId,FBAddress, FBNames,FBEmail);
-            boolean isSaved = fBKModel.saveFoodBank(dto);
+            boolean isSaved = foodBankBO.saveFoodBank(dto);
             if(isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION , "Saved!!").show();
                 refreshPage();
@@ -102,7 +106,7 @@ public class FoodBankController implements Initializable {
                 String FBName = FBKName.getText();
                 String FBEmail = FBEmailTF.getText();
                 FoodBankDto dto = new FoodBankDto(FBKId,FBAddress,FBName,FBEmail);
-                boolean isUpdated = fBKModel.editFoodBank(dto);
+                boolean isUpdated = foodBankBO.editFoodBank(dto);
                 if(isUpdated){
                     refreshPage();
                     new Alert(Alert.AlertType.CONFIRMATION , "Updated!!").show();
@@ -116,7 +120,7 @@ public class FoodBankController implements Initializable {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             try {
                 FoodBankDto selectedItem = tableView.getSelectionModel().getSelectedItem();
-                boolean isDeleted = fBKModel.deleteFoodBank(selectedItem.getFBKId());
+                boolean isDeleted = foodBankBO.deleteFoodBank(selectedItem.getFBKId());
                 if(isDeleted){
                     new Alert(Alert.AlertType.CONFIRMATION , "Deleted!!").show();
                     refreshPage();
@@ -130,7 +134,7 @@ public class FoodBankController implements Initializable {
     //Table Methods
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBankDto> foodBankDetails =  fBKModel.getFoodBankDetails();
+        ArrayList<FoodBankDto> foodBankDetails =  foodBankBO.getFoodBankDetails();
         ObservableList<FoodBankDto> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);

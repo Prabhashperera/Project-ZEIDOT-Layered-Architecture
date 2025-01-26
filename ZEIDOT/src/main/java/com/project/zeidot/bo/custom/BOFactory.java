@@ -15,7 +15,7 @@ public class BOFactory {
     }
 
     public enum BOType {
-        FOOD, FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION , FOODBATCH_SELECT;
+        FOOD, FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION , FOODBATCH_SELECT , FOODBANK;
     }
 
     public SuperBO getBOType(BOType type) {
@@ -26,6 +26,7 @@ public class BOFactory {
             case FOODBATCH_TIME_CHECK -> new FoodBatchTimeCheckBOImpl();
             case DONATION -> new DonationBOImpl();
             case FOODBATCH_SELECT -> new FoodBatchSelectBOImpl();
+            case FOODBANK -> new FoodBankBOImpl();
             default -> null;
         };
     }

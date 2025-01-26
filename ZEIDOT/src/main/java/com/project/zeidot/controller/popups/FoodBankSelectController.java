@@ -2,7 +2,7 @@ package com.project.zeidot.controller.popups;
 
 import com.project.zeidot.controller.DonationController;
 import com.project.zeidot.dto.FoodBankDto;
-import com.project.zeidot.dao.foodBank.FoodBankModel;
+import com.project.zeidot.dao.custom.impl.foodBank.FoodBankDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,7 +28,7 @@ public class FoodBankSelectController implements Initializable {
     private TableColumn<FoodBankDto, String> Address;
     @FXML
     private TableColumn<FoodBankDto, String> Email;
-    FoodBankModel FoodBankModel = new FoodBankModel();
+    FoodBankDAOImpl FoodBankDAOImpl = new FoodBankDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,7 +62,7 @@ public class FoodBankSelectController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBankDto> foodBankDetails = FoodBankModel.getFoodBankDetails();
+        ArrayList<FoodBankDto> foodBankDetails = FoodBankDAOImpl.getFoodBankDetails();
         ObservableList<FoodBankDto> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);
