@@ -1,4 +1,4 @@
-package com.project.zeidot.dao;
+package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.UserDto;
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginModel {
+public class LoginDAO {
     public boolean login(UserDto userDto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement("select * from user where username = ? and password = ?");

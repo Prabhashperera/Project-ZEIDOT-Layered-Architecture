@@ -1,7 +1,7 @@
 package com.project.zeidot.controller;
 
 import com.project.zeidot.dto.UserDto;
-import com.project.zeidot.dao.LoginModel;
+import com.project.zeidot.dao.custom.impl.LoginDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,14 +27,14 @@ public class LoginController implements Initializable {
     public AnchorPane mainPanel;
     @FXML
     private ImageView imageView;
-    LoginModel loginModel = new LoginModel();
+    LoginDAO loginDAO = new LoginDAO();
 
     public void loginOnAction(ActionEvent event) {
         try {
             String userName = userNameTF.getText();
             String password = passwordTF.getText();
             UserDto dto = new UserDto(userName, password);
-            boolean isOK = loginModel.login(dto); //Check if is correct
+            boolean isOK = loginDAO.login(dto); //Check if is correct
             if (isOK) { // if True immediately Redirect to mainLayoutFXML
                 Stage stage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("/view/homePage/mainLayout.fxml"));
@@ -66,7 +66,7 @@ public class LoginController implements Initializable {
         String userName = userNameTF.getText();
         String password = passwordTF.getText();
         UserDto dto = new UserDto(userName, password);
-        boolean register = loginModel.register(dto);
+        boolean register = loginDAO.register(dto);
         if (register) {
             new Alert(Alert.AlertType.INFORMATION, "Register successful").show();
         }
