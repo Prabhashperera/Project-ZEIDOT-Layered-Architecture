@@ -1,5 +1,6 @@
 package com.project.zeidot.dao.custom.impl;
 
+import com.project.zeidot.dao.custom.LoginDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.UserDto;
 
@@ -8,7 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDAO {
+public class LoginDAOImpl implements LoginDAO {
+    @Override
     public boolean login(UserDto userDto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement("select * from user where username = ? and password = ?");
@@ -25,6 +27,7 @@ public class LoginDAO {
         return false; //If not Returns False
     }
 
+    @Override
     public boolean register(UserDto userDto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         PreparedStatement statement = connection.prepareStatement("insert into user values(?,?)");

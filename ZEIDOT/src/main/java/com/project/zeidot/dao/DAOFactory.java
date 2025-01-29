@@ -21,7 +21,7 @@ public class DAOFactory {
 
     public enum DAOType {
         FOOD , FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION , FOODBACTH_SELECT , FOODBANK ,
-        DONATION_SELECT , FOODBANK_SELECT , MAIL_SELECT;
+        DONATION_SELECT , FOODBANK_SELECT , MAIL_SELECT, LOGIN;
     }
     public SuperDAO getDAOType(DAOType type) {
         switch (type) {
@@ -45,6 +45,8 @@ public class DAOFactory {
                                                 return new FoodBankSelectDAOImpl();
                                                 case MAIL_SELECT:
                                                     return new SelectMailDAOImpl();
+                                                    case LOGIN:
+                                                        return new LoginDAOImpl();
                                         default:
                                             return null;
         }
