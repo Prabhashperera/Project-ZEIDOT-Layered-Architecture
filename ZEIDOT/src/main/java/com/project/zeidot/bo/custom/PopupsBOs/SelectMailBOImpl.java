@@ -1,4 +1,4 @@
-package com.project.zeidot.bo.custom.PopusBOs;
+package com.project.zeidot.bo.custom.PopupsBOs;
 
 import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.dao.custom.PopupsDAOS.PopupDAO;

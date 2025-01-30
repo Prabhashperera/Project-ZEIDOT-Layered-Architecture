@@ -1,8 +1,8 @@
 package com.project.zeidot.bo.custom;
 
-import com.project.zeidot.bo.custom.PopusBOs.DonationSelectBOImpl;
-import com.project.zeidot.bo.custom.PopusBOs.FoodBankSelectBOImpl;
-import com.project.zeidot.bo.custom.PopusBOs.SelectMailBOImpl;
+import com.project.zeidot.bo.custom.PopupsBOs.DonationSelectBOImpl;
+import com.project.zeidot.bo.custom.PopupsBOs.FoodBankSelectBOImpl;
+import com.project.zeidot.bo.custom.PopupsBOs.SelectMailBOImpl;
 import com.project.zeidot.bo.custom.impl.*;
 
 public class BOFactory {
@@ -19,7 +19,7 @@ public class BOFactory {
 
     public enum BOType {
         FOOD, FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION , FOODBATCH_SELECT , FOODBANK,
-        SELECT_FOODBANK , SELECT_DONATION , SELECT_MAIL, LOGIN;
+        SELECT_FOODBANK , SELECT_DONATION , SELECT_MAIL, LOGIN, DELIVER;
     }
 
     public SuperBO getBOType(BOType type) {
@@ -35,6 +35,7 @@ public class BOFactory {
             case SELECT_DONATION -> new DonationSelectBOImpl();
             case SELECT_MAIL -> new SelectMailBOImpl();
             case LOGIN -> new LoginBOImpl();
+            case DELIVER -> new DeliveryBOImpl();
             default -> null;
         };
     }

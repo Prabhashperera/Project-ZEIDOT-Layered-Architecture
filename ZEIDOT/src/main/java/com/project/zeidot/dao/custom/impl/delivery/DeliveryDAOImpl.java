@@ -1,5 +1,6 @@
-package com.project.zeidot.dao.delivery;
+package com.project.zeidot.dao.custom.impl.delivery;
 
+import com.project.zeidot.dao.custom.deliveryDAOs.DeliveryDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DeliverDto;
 import com.project.zeidot.util.CrudUtil;
@@ -10,10 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DeliveryModel {
+public class DeliveryDAOImpl implements DeliveryDAO {
     private String nextDonationID;
     // Generate the next batch ID based on the last batch ID in the database
-    public String getNextDonationID() throws SQLException {
+    @Override
+    public String getNextId() throws SQLException {
         ResultSet rs = CrudUtil.execute("SELECT deliveryID FROM delivery ORDER BY deliveryID DESC LIMIT 1");
 
         if (rs.next()) {
@@ -34,7 +36,8 @@ public class DeliveryModel {
         return nextDonationID;
     }
 
-    public boolean saveDeliver(DeliverDto dto) throws SQLException {
+    @Override
+    public boolean save(DeliverDto dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "INSERT INTO delivery VALUES(?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -44,14 +47,18 @@ public class DeliveryModel {
         ps.setString(4 , dto.getDonationID());
         return ps.executeUpdate() > 0;
     }
-    public boolean deleteDeliver(String deliveryID) throws SQLException {
+
+    @Override
+    public boolean delete(String deliveryID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "DELETE FROM delivery WHERE deliveryID = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, deliveryID);
         return ps.executeUpdate() > 0;
     }
-    public boolean updateDeliver(DeliverDto dto) throws SQLException {
+
+    @Override
+    public boolean update(DeliverDto dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "UPDATE delivery SET donationID = ? , deliverTime = ? WHERE deliveryID = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -61,6 +68,7 @@ public class DeliveryModel {
         return ps.executeUpdate() > 0;
     }
 
+    @Override
     public ArrayList<DeliverDto> getDeliveryDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM delivery";
@@ -79,6 +87,7 @@ public class DeliveryModel {
         return detailList;
     }
 
+    @Override
     public boolean isDeliveredToYes(String donID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "UPDATE donation SET isDelivered = 'YES' WHERE donationID = ?";
@@ -86,6 +95,8 @@ public class DeliveryModel {
         ps.setString(1, donID);
         return ps.executeUpdate() > 0;
     }
+
+    @Override
     public boolean isDeliveredToNo(String donID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "UPDATE donation SET isDelivered = 'NO' WHERE donationID = ?";

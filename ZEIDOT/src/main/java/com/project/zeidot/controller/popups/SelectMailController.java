@@ -1,10 +1,9 @@
 package com.project.zeidot.controller.popups;
 
 import com.project.zeidot.bo.custom.BOFactory;
-import com.project.zeidot.bo.custom.PopusBOs.PopupBO;
+import com.project.zeidot.bo.custom.PopupsBOs.PopupBO;
 import com.project.zeidot.controller.mail.SendMailController;
 import com.project.zeidot.dto.FoodBankDto;
-import com.project.zeidot.dao.custom.PopupsDAOS.SelectMailDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Popup;
 
 import java.net.URL;
 import java.sql.SQLException;

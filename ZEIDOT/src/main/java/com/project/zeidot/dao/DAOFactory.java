@@ -6,6 +6,7 @@ import com.project.zeidot.dao.custom.PopupsDAOS.FoodBankSelectDAOImpl;
 import com.project.zeidot.dao.custom.PopupsDAOS.SelectMailDAOImpl;
 import com.project.zeidot.dao.custom.SuperDAO;
 import com.project.zeidot.dao.custom.impl.*;
+import com.project.zeidot.dao.custom.impl.delivery.DeliveryDAOImpl;
 import com.project.zeidot.dao.custom.impl.foodBank.FoodBankDAOImpl;
 
 public class DAOFactory {
@@ -21,7 +22,7 @@ public class DAOFactory {
 
     public enum DAOType {
         FOOD , FOODBATCH , FOODBATCH_DETAILS , FOODBATCH_TIME_CHECK , DONATION , FOODBACTH_SELECT , FOODBANK ,
-        DONATION_SELECT , FOODBANK_SELECT , MAIL_SELECT, LOGIN;
+        DONATION_SELECT , FOODBANK_SELECT , MAIL_SELECT, LOGIN , DELIVER;
     }
     public SuperDAO getDAOType(DAOType type) {
         switch (type) {
@@ -47,6 +48,8 @@ public class DAOFactory {
                                                     return new SelectMailDAOImpl();
                                                     case LOGIN:
                                                         return new LoginDAOImpl();
+                                                        case DELIVER:
+                                                            return new DeliveryDAOImpl();
                                         default:
                                             return null;
         }

@@ -1,8 +1,11 @@
 package com.project.zeidot.controller.delivery;
 
+import com.project.zeidot.bo.custom.BOFactory;
+import com.project.zeidot.bo.custom.DeliveryBO;
+import com.project.zeidot.bo.custom.impl.DeliveryBOImpl;
 import com.project.zeidot.controller.popups.DonationSelectController;
 import com.project.zeidot.dto.DeliverDto;
-import com.project.zeidot.dao.delivery.DeliveryModel;
+import com.project.zeidot.dao.custom.impl.delivery.DeliveryDAOImpl;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,7 +45,8 @@ public class DeliveryController implements Initializable {
     @FXML
     private TableColumn<DeliverDto, String> donationID;
 
-    DeliveryModel deliveryModel = new DeliveryModel();
+//    DeliveryDAOImpl deliveryDAOImpl = new DeliveryDAOImpl();
+    private final DeliveryBO deliveryBO = (DeliveryBO) BOFactory.getInstance().getBOType(BOFactory.BOType.DELIVER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -70,9 +74,9 @@ public class DeliveryController implements Initializable {
                 new Alert(Alert.AlertType.ERROR , "Cannot Be Empty Donation ID");
             }
             DeliverDto dto = new DeliverDto(deliveryID, date, time, donationID);
-            boolean isSaved = deliveryModel.saveDeliver(dto);
+            boolean isSaved = deliveryBO.save(dto);
             if (isSaved) {
-                deliveryModel.isDeliveredToYes(donationID);
+                deliveryBO.isDeliveredToYes(donationID);
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION , "Deliver Saved");
             }
@@ -91,9 +95,9 @@ public class DeliveryController implements Initializable {
                 String time = timeTF.getText();
                 String donationID = donationIDTF.getText();
                 DeliverDto dto = new DeliverDto(deliveryID, date, time, donationID);
-                deliveryModel.isDeliveredToNo(donID);
-                deliveryModel.isDeliveredToYes(donationID);
-                boolean isUpdated = deliveryModel.updateDeliver(dto);
+                deliveryBO.isDeliveredToNo(donID);
+                deliveryBO.isDeliveredToYes(donationID);
+                boolean isUpdated = deliveryBO.update(dto);
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION , "Deliver Updated");
                     refreshPage();
@@ -110,9 +114,9 @@ public class DeliveryController implements Initializable {
             DeliverDto selectedItem = tableView.getSelectionModel().getSelectedItem();
             String deliveryID = selectedItem.getDeliveryID();
             String donationID = selectedItem.getDonationID();
-            boolean isDeleted = deliveryModel.deleteDeliver(deliveryID);
+            boolean isDeleted = deliveryBO.delete(deliveryID);
             if (isDeleted) {
-                deliveryModel.isDeliveredToNo(donationID);
+                deliveryBO.isDeliveredToNo(donationID);
                 refreshPage();
                 new Alert(Alert.AlertType.INFORMATION , "Deliver Deleted");
             }
@@ -122,7 +126,7 @@ public class DeliveryController implements Initializable {
     }
 
     public void loadDeliveryID() throws SQLException {
-        String DeliveryId = deliveryModel.getNextDonationID();
+        String DeliveryId = deliveryBO.getNextId();
         deliveryIDTF.setText(DeliveryId);
         System.out.println( "Generated Delivery ID : " + DeliveryId);
     }
@@ -168,7 +172,7 @@ public class DeliveryController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<DeliverDto> foodBankDetails = deliveryModel.getDeliveryDetails();
+        ArrayList<DeliverDto> foodBankDetails = deliveryBO.getDeliveryDetails();
         ObservableList<DeliverDto> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);

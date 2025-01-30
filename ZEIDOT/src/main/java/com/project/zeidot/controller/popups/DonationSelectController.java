@@ -1,12 +1,9 @@
 package com.project.zeidot.controller.popups;
 
 import com.project.zeidot.bo.custom.BOFactory;
-import com.project.zeidot.bo.custom.PopusBOs.PopupBO;
+import com.project.zeidot.bo.custom.PopupsBOs.PopupBO;
 import com.project.zeidot.controller.delivery.DeliveryController;
-import com.project.zeidot.dao.DAOFactory;
-import com.project.zeidot.dao.custom.PopupsDAOS.PopupDAO;
 import com.project.zeidot.dto.DonationDto;
-import com.project.zeidot.dao.custom.PopupsDAOS.DonationSelectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
