@@ -84,21 +84,19 @@ public class FoodManageDAOImpl implements FoodManageDAO {
 
     @Override
     public boolean updateAmount(double CurrentWeight , double foodWeight) throws SQLException {
-        int rows = CrudUtil.execute("UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?" , CurrentWeight , foodWeight);
         double w = CurrentWeight + foodWeight;
         String lastWeight = String.valueOf(w);
         System.out.println(lastWeight);
-        return rows > 0;
+        return CrudUtil.execute("UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?" , lastWeight , getCurrentBatchID());
     } //When Food Saved Increase by count
 
     @Override
     public boolean decreaseAmount(double CurrentWeight , double foodWeight) throws SQLException {
         if (CurrentWeight > 0) {
-            int rows = CrudUtil.execute("UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?" , CurrentWeight , foodWeight);
             double w = CurrentWeight - foodWeight;
             String lastWeight = String.valueOf(w);
             System.out.println(lastWeight);
-            return rows > 0;
+            return CrudUtil.execute("UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?" , lastWeight , getCurrentBatchID());
         }
         return false;
     }//When Deleted a food Decreasing by count
@@ -129,11 +127,10 @@ public class FoodManageDAOImpl implements FoodManageDAO {
     @Override
     public boolean decreaseAmountWhenUpdate(double CurrentWeight , double newWight) throws SQLException {
         if (CurrentWeight > 0) {
-            int rows = CrudUtil.execute("UPDATE foodWeight SET foodWeight = ? WHERE foodID = ?" , CurrentWeight , newWight);
             double w = CurrentWeight - newWight;
             String lastWeight = String.valueOf(w);
             System.out.println(lastWeight);
-            return rows > 0;
+            return CrudUtil.execute("UPDATE foodWeight SET foodWeight = ? WHERE foodID = ?" , lastWeight , getCurrentBatchID());
         }
         return false;
     }//When Deleted a food Decreasing by count
