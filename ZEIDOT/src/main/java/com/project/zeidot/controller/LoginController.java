@@ -2,9 +2,7 @@ package com.project.zeidot.controller;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.impl.LoginBOImpl;
-import com.project.zeidot.dao.DAOFactory;
 import com.project.zeidot.dto.UserDto;
-import com.project.zeidot.dao.custom.impl.LoginDAOImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

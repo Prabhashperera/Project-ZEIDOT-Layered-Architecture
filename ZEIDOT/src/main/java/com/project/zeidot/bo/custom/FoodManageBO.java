@@ -1,6 +1,5 @@
 package com.project.zeidot.bo.custom;
 
-import com.project.zeidot.dao.custom.CrudDAO;
 import com.project.zeidot.dto.BatchDetailsDto;
 import com.project.zeidot.dto.FoodDto;
 

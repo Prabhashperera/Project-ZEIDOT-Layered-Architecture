@@ -1,10 +1,8 @@
-package com.project.zeidot.dao;
+package com.project.zeidot.dao.custom;
 
-import com.project.zeidot.bo.custom.impl.FoodBankBOImpl;
 import com.project.zeidot.dao.custom.PopupsDAOS.DonationSelectDAOImpl;
 import com.project.zeidot.dao.custom.PopupsDAOS.FoodBankSelectDAOImpl;
 import com.project.zeidot.dao.custom.PopupsDAOS.SelectMailDAOImpl;
-import com.project.zeidot.dao.custom.SuperDAO;
 import com.project.zeidot.dao.custom.impl.*;
 import com.project.zeidot.dao.custom.impl.delivery.DeliveryDAOImpl;
 import com.project.zeidot.dao.custom.impl.foodBank.FoodBankDAOImpl;

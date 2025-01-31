@@ -1,6 +1,6 @@
 package com.project.zeidot.bo.custom.impl;
 
-import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchDAO;
 import com.project.zeidot.bo.custom.FoodBatchTimeCheckBO;
 

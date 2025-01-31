@@ -1,6 +1,6 @@
 package com.project.zeidot.bo.custom.PopupsBOs;
 
-import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.PopupsDAOS.PopupDAO;
 import com.project.zeidot.dto.FoodBankDto;
 

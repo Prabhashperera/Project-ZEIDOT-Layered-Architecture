@@ -1,7 +1,7 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.FoodBatchDetailsBO;
-import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchDetailsDAO;
 import com.project.zeidot.dto.FoodBatchDetailsDto;
 

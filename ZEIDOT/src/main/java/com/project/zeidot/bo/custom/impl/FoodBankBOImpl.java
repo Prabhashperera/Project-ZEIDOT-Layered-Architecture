@@ -1,7 +1,7 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.FoodBankBO;
-import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.foodBankDAOs.FoodBankDAO;
 import com.project.zeidot.dto.FoodBankDto;
 

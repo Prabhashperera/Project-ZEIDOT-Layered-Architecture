@@ -14,32 +14,19 @@ import java.util.ArrayList;
 public class FoodManageDAOImpl implements FoodManageDAO {
     @Override
     public boolean update(FoodDto food) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        PreparedStatement ps = connection.prepareStatement("UPDATE food SET foodWeight = ?, FoodName = ? , duration = ? WHERE foodID = ?");
-        ps.setString(1 , food.getWeight());
-        ps.setString(2 , food.getFoodName());
-        ps.setString(3 , food.getDuration());
-        ps.setString(4 , food.getFoodID());
-        int rows = ps.executeUpdate();
+        String query = "UPDATE food SET foodWeight = ?, FoodName = ? , duration = ? WHERE foodID = ?";
+        int rows = CrudUtil.execute(query , food.getWeight() , food.getFoodName(), food.getDuration(), food.getFoodID());
         return rows > 0;
     }
     @Override
     public boolean delete(String name) throws SQLException {
-        Connection con = DBConnection.getInstance().getConnection();
-        PreparedStatement ps = con.prepareStatement("DELETE FROM food WHERE foodID = ?");
-        ps.setString(1, name);
-        return ps.executeUpdate() > 0;
+        String query = "DELETE FROM food WHERE foodID = ?";
+        return CrudUtil.execute(query , name);
     }
     @Override
     public boolean save(FoodDto dto) throws SQLException {
-        Connection conn = DBConnection.getInstance().getConnection();
-        PreparedStatement ps = conn.prepareStatement("insert into food values(?,?,?,?)");
-        ps.setString(1 , dto.getFoodID());
-        ps.setString(2 , dto.getWeight());
-        ps.setString(3 , dto.getFoodName());
-        ps.setString(4 , dto.getDuration());
-        int rows = ps.executeUpdate();
-        return rows > 0;
+        String query = "insert into food values(?,?,?,?)";
+        return CrudUtil.execute(query , dto.getFoodID() , dto.getWeight(), dto.getFoodName(), dto.getDuration());
     }
 
     @Override
@@ -87,12 +74,7 @@ public class FoodManageDAOImpl implements FoodManageDAO {
 
     @Override
     public double getCurrentWeight(String FBId) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        String query = "SELECT foodAmount FROM foodBatch WHERE FBId = ?";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, FBId);
-        ps.executeQuery();
-        ResultSet rst = ps.getResultSet();
+        ResultSet rst = CrudUtil.execute("SELECT foodAmount FROM foodBatch WHERE FBId = ?" , FBId);
         if (rst.next()) {
             System.out.println(rst.getString(1) + "Current weight returned");
             return Double.parseDouble(rst.getString(1));
@@ -102,30 +84,20 @@ public class FoodManageDAOImpl implements FoodManageDAO {
 
     @Override
     public boolean updateAmount(double CurrentWeight , double foodWeight) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        String query = "UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?";
-        PreparedStatement ps = connection.prepareStatement(query);
+        int rows = CrudUtil.execute("UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?" , CurrentWeight , foodWeight);
         double w = CurrentWeight + foodWeight;
         String lastWeight = String.valueOf(w);
         System.out.println(lastWeight);
-        ps.setString(1, lastWeight);
-        ps.setString(2 , getCurrentBatchID());
-        int rows = ps.executeUpdate();
         return rows > 0;
     } //When Food Saved Increase by count
 
     @Override
     public boolean decreaseAmount(double CurrentWeight , double foodWeight) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
         if (CurrentWeight > 0) {
-            String query = "UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
+            int rows = CrudUtil.execute("UPDATE foodBatch SET FoodAmount = ? WHERE FBId = ?" , CurrentWeight , foodWeight);
             double w = CurrentWeight - foodWeight;
             String lastWeight = String.valueOf(w);
             System.out.println(lastWeight);
-            ps.setString(1, lastWeight);
-            ps.setString(2, getCurrentBatchID());
-            int rows = ps.executeUpdate();
             return rows > 0;
         }
         return false;
@@ -147,12 +119,7 @@ public class FoodManageDAOImpl implements FoodManageDAO {
 
     @Override
     public double getFoodWeight(String foodID) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
-        String query = "SELECT foodWeight FROM food WHERE foodID = ?";
-        PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, foodID);
-        ps.executeQuery();
-        ResultSet rst = ps.getResultSet();
+        ResultSet rst = CrudUtil.execute("SELECT foodWeight FROM food WHERE foodID = ?");
         if (rst.next()) {
             System.out.println(rst.getString(1) + "Current food Weight returned");
             return Double.parseDouble(rst.getString(1));
@@ -161,16 +128,11 @@ public class FoodManageDAOImpl implements FoodManageDAO {
     }
     @Override
     public boolean decreaseAmountWhenUpdate(double CurrentWeight , double newWight) throws SQLException {
-        Connection connection = DBConnection.getInstance().getConnection();
         if (CurrentWeight > 0) {
-            String query = "UPDATE foodWeight SET foodWeight = ? WHERE foodID = ?";
-            PreparedStatement ps = connection.prepareStatement(query);
+            int rows = CrudUtil.execute("UPDATE foodWeight SET foodWeight = ? WHERE foodID = ?" , CurrentWeight , newWight);
             double w = CurrentWeight - newWight;
             String lastWeight = String.valueOf(w);
             System.out.println(lastWeight);
-            ps.setString(1, lastWeight);
-            ps.setString(2, getCurrentBatchID());
-            int rows = ps.executeUpdate();
             return rows > 0;
         }
         return false;

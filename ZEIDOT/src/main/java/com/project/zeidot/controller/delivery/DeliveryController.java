@@ -2,10 +2,8 @@ package com.project.zeidot.controller.delivery;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.DeliveryBO;
-import com.project.zeidot.bo.custom.impl.DeliveryBOImpl;
 import com.project.zeidot.controller.popups.DonationSelectController;
 import com.project.zeidot.dto.DeliverDto;
-import com.project.zeidot.dao.custom.impl.delivery.DeliveryDAOImpl;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

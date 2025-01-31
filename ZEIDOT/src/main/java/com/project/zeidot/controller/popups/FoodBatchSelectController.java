@@ -2,11 +2,8 @@ package com.project.zeidot.controller.popups;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBatchSelectBO;
-import com.project.zeidot.bo.custom.impl.FoodBatchSelectBOImpl;
 import com.project.zeidot.controller.DonationController;
-import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
 import com.project.zeidot.dto.FoodBatchDto;
-import com.project.zeidot.dao.custom.impl.FoodBatchSelectDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

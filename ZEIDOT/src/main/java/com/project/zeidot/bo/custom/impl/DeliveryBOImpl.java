@@ -1,9 +1,8 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.DeliveryBO;
-import com.project.zeidot.dao.DAOFactory;
+import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.deliveryDAOs.DeliveryDAO;
-import com.project.zeidot.dao.custom.impl.delivery.DeliveryDAOImpl;
 import com.project.zeidot.dto.DeliverDto;
 
 import java.sql.SQLException;

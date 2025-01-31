@@ -2,8 +2,6 @@ package com.project.zeidot.controller;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBatchDetailsBO;
-import com.project.zeidot.dao.DAOFactory;
-import com.project.zeidot.dao.custom.FoodBatchDetailsDAO;
 import com.project.zeidot.dto.FoodBatchDetailsDto;
 import com.project.zeidot.dao.custom.impl.FoodBatchDetailsDAOImpl;
 import javafx.collections.FXCollections;
