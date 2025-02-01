@@ -2,7 +2,7 @@ package com.project.zeidot.controller;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.impl.LoginBOImpl;
-import com.project.zeidot.dto.UserDto;
+import com.project.zeidot.dto.UserDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +35,7 @@ public class LoginController implements Initializable {
         try {
             String userName = userNameTF.getText();
             String password = passwordTF.getText();
-            UserDto dto = new UserDto(userName, password);
+            UserDTO dto = new UserDTO(userName, password);
             boolean isOK = loginBO.login(dto); //Check if is correct //LA
             if (isOK) { // if True immediately Redirect to mainLayoutFXML
                 Stage stage = new Stage();
@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
     public void registerOnAction(ActionEvent event) throws SQLException {
         String userName = userNameTF.getText();
         String password = passwordTF.getText();
-        UserDto dto = new UserDto(userName, password);
+        UserDTO dto = new UserDTO(userName, password);
         boolean register = loginBO.register(dto);
         if (register) {
             new Alert(Alert.AlertType.INFORMATION, "Register successful").show();

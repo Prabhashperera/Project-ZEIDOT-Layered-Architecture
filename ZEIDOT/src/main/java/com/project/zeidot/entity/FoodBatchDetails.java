@@ -1,19 +1,19 @@
-package com.project.zeidot.dto;
+package com.project.zeidot.entity;
 
-public class FoodBatchDetailsDto {
+public class FoodBatchDetails {
     private String foodId;
     private String foodName;
     private String foodWeight;
     private String duration;
 
-    public FoodBatchDetailsDto(String foodId, String foodName, String foodWeight, String duration) {
+    public FoodBatchDetails(String foodId, String foodName, String foodWeight, String duration) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodWeight = foodWeight;
         this.duration = duration;
     }
 
-    public FoodBatchDetailsDto() {
+    public FoodBatchDetails() {
 
     }
 

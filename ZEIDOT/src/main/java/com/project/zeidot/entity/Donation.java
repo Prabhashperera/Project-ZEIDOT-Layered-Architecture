@@ -1,19 +1,19 @@
-package com.project.zeidot.dto;
+package com.project.zeidot.entity;
 
-public class DonationDto {
+public class Donation {
     private String donationID;
     private String donationName;
     private String FBId;
     private String foodBankID;
 
-    public DonationDto(String donationID, String donationName, String FBId, String foodBankID) {
+    public Donation(String donationID, String donationName, String FBId, String foodBankID) {
         this.donationID = donationID;
         this.donationName = donationName;
         this.FBId = FBId;
         this.foodBankID = foodBankID;
     }
 
-    public DonationDto() {
+    public Donation() {
     }
 
 

@@ -6,8 +6,8 @@ import com.project.zeidot.bo.custom.FoodManageBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodManageDAO;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.BatchDetailsDto;
-import com.project.zeidot.dto.FoodDto;
+import com.project.zeidot.dto.BatchDetailsDTO;
+import com.project.zeidot.dto.FoodDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,7 +20,7 @@ public class FoodManageBOImpl implements FoodManageBO {
 
     // Food Manage Model Instance //LA
     @Override
-    public boolean updateFood(FoodDto food) throws SQLException {
+    public boolean updateFood(FoodDTO food) throws SQLException {
         return foodManageDAOImpl.update(food);
     }
 
@@ -61,7 +61,7 @@ public class FoodManageBOImpl implements FoodManageBO {
     }
 
     @Override
-    public boolean saveFood(FoodDto dto , BatchDetailsDto batchDto) throws SQLException {
+    public boolean saveFood(FoodDTO dto , BatchDetailsDTO batchDto) throws SQLException {
         Connection conn = null;
         try {
             conn = DBConnection.getInstance().getConnection();
@@ -107,7 +107,7 @@ public class FoodManageBOImpl implements FoodManageBO {
     }
 
     @Override
-    public ArrayList<FoodDto> getAllCustomers() throws SQLException {
+    public ArrayList<FoodDTO> getAllCustomers() throws SQLException {
         return foodManageDAOImpl.getAllCustomers();
     }
 

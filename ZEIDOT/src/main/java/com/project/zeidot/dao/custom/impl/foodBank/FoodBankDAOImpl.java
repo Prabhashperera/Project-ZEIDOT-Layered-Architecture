@@ -2,7 +2,7 @@ package com.project.zeidot.dao.custom.impl.foodBank;
 
 import com.project.zeidot.dao.custom.foodBankDAOs.FoodBankDAO;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.FoodBankDto;
+import com.project.zeidot.dto.FoodBankDTO;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FoodBankDAOImpl implements FoodBankDAO {
-    public boolean save(FoodBankDto dto) throws SQLException {
+    public boolean save(FoodBankDTO dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "INSERT INTO foodBank  values(? , ? , ? , ?)";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -32,7 +32,7 @@ public class FoodBankDAOImpl implements FoodBankDAO {
         int rows = ps.executeUpdate();
         return rows > 0;
     }
-    public boolean update(FoodBankDto dto) throws SQLException {
+    public boolean update(FoodBankDTO dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String sql = "UPDATE foodBank SET address = ?, FBName = ?, emailAddress = ? WHERE foodBankID = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -66,15 +66,15 @@ public class FoodBankDAOImpl implements FoodBankDAO {
         return "R001";
     }
 
-    public ArrayList<FoodBankDto> getFoodBankDetails() throws SQLException {
+    public ArrayList<FoodBankDTO> getFoodBankDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM foodBank";
         PreparedStatement ps = con.prepareStatement(query);
 
-        ArrayList<FoodBankDto> detailList = new ArrayList<>();
+        ArrayList<FoodBankDTO> detailList = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            FoodBankDto dto = new FoodBankDto();
+            FoodBankDTO dto = new FoodBankDTO();
             dto.setFBKId(rs.getString(1));
             dto.setFBKAddress(rs.getString(2));
             dto.setFBKName(rs.getString(3));

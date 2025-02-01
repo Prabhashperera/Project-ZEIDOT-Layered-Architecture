@@ -3,7 +3,7 @@ package com.project.zeidot.controller.popups;
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.PopupsBOs.PopupBO;
 import com.project.zeidot.controller.mail.SendMailController;
-import com.project.zeidot.dto.FoodBankDto;
+import com.project.zeidot.dto.FoodBankDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,14 +20,14 @@ import java.util.ResourceBundle;
 
 public class SelectMailController implements Initializable {
     @FXML
-    private TableView<FoodBankDto> tableView;
+    private TableView<FoodBankDTO> tableView;
     @FXML
-    private TableColumn<FoodBankDto , String> FBName;
+    private TableColumn<FoodBankDTO, String> FBName;
     @FXML
-    private TableColumn<FoodBankDto , Integer> emailAddress;
+    private TableColumn<FoodBankDTO, Integer> emailAddress;
     private SendMailController sendMailController; //Controller Instance
-    private final PopupBO<FoodBankDto> selectMailBO =
-            (PopupBO<FoodBankDto>) BOFactory.getInstance().getBOType(BOFactory.BOType.SELECT_MAIL); //LA OBJECT
+    private final PopupBO<FoodBankDTO> selectMailBO =
+            (PopupBO<FoodBankDTO>) BOFactory.getInstance().getBOType(BOFactory.BOType.SELECT_MAIL); //LA OBJECT
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,14 +47,14 @@ public class SelectMailController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBankDto> foodBankDetails = selectMailBO.getDetails(); //LA
-        ObservableList<FoodBankDto> observableList = FXCollections.observableArrayList(foodBankDetails);
+        ArrayList<FoodBankDTO> foodBankDetails = selectMailBO.getDetails(); //LA
+        ObservableList<FoodBankDTO> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);
     }
 
     public void selectEmailBtnOnAction(ActionEvent event) {
-        FoodBankDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+        FoodBankDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
         sendMailController.setMailToBtn(selectedItem.getFBKEmail());
     }
 }

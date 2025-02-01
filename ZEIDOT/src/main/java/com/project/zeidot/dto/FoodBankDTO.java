@@ -1,22 +1,22 @@
 package com.project.zeidot.dto;
 
-public class FoodBankDto {
+public class FoodBankDTO {
     private String FBKId;
     private String FBKName;
     private String FBKAddress;
     private String FBKEmail;
 
-    public FoodBankDto(String FBKId, String FBKAddress, String FBKName, String FBKEmail) {
+    public FoodBankDTO(String FBKId, String FBKAddress, String FBKName, String FBKEmail) {
         this.FBKId = FBKId;
         this.FBKName = FBKName;
         this.FBKAddress = FBKAddress;
         this.FBKEmail = FBKEmail;
     }
 
-    public FoodBankDto() {
+    public FoodBankDTO() {
 
     }
-    public FoodBankDto(String FBName,String FBKEmail) {
+    public FoodBankDTO(String FBName, String FBKEmail) {
         this.FBKName = FBKName;
         this.FBKEmail = FBKEmail;
     }

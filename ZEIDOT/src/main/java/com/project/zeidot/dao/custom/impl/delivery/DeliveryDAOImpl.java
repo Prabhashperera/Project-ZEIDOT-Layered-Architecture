@@ -2,7 +2,7 @@ package com.project.zeidot.dao.custom.impl.delivery;
 
 import com.project.zeidot.dao.custom.deliveryDAOs.DeliveryDAO;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.DeliverDto;
+import com.project.zeidot.dto.DeliverDTO;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -37,7 +37,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public boolean save(DeliverDto dto) throws SQLException {
+    public boolean save(DeliverDTO dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "INSERT INTO delivery VALUES(?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public boolean update(DeliverDto dto) throws SQLException {
+    public boolean update(DeliverDTO dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "UPDATE delivery SET donationID = ? , deliverTime = ? WHERE deliveryID = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -69,15 +69,15 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public ArrayList<DeliverDto> getDeliveryDetails() throws SQLException {
+    public ArrayList<DeliverDTO> getDeliveryDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM delivery";
         PreparedStatement ps = con.prepareStatement(query);
 
-        ArrayList<DeliverDto> detailList = new ArrayList<>();
+        ArrayList<DeliverDTO> detailList = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            DeliverDto dto = new DeliverDto();
+            DeliverDTO dto = new DeliverDTO();
             dto.setDeliveryID(rs.getString(1));
             dto.setDeliverDate(rs.getString(2));
             dto.setDeliverTime(rs.getString(3));

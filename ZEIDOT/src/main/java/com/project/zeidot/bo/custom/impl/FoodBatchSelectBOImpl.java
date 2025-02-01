@@ -3,7 +3,7 @@ package com.project.zeidot.bo.custom.impl;
 import com.project.zeidot.bo.custom.FoodBatchSelectBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
-import com.project.zeidot.dto.FoodBatchDto;
+import com.project.zeidot.dto.FoodBatchDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class FoodBatchSelectBOImpl implements FoodBatchSelectBO {
 
 
     @Override
-    public ArrayList<FoodBatchDto> getFoodBatchDetails() throws SQLException {
+    public ArrayList<FoodBatchDTO> getFoodBatchDetails() throws SQLException {
         return foodBatchSelectDAO.getFoodBatchDetails();
     }
 

@@ -1,19 +1,19 @@
 package com.project.zeidot.dto;
 
-public class DeliverDto {
+public class DeliverDTO {
     private String deliveryID;
     private String deliverDate;
     private String deliverTime;
     private String donationID;
 
-    public DeliverDto(String deliveryID, String deliverDate, String deliverTime, String donationID) {
+    public DeliverDTO(String deliveryID, String deliverDate, String deliverTime, String donationID) {
         this.deliveryID = deliveryID;
         this.deliverDate = deliverDate;
         this.deliverTime = deliverTime;
         this.donationID = donationID;
     }
 
-    public DeliverDto() {
+    public DeliverDTO() {
 
     }
 

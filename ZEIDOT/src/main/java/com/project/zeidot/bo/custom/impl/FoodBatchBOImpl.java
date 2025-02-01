@@ -3,8 +3,8 @@ package com.project.zeidot.bo.custom.impl;
 import com.project.zeidot.bo.custom.FoodBatchBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchDAO;
-import com.project.zeidot.dto.BatchDetailsDto;
-import com.project.zeidot.dto.FoodBatchDto;
+import com.project.zeidot.dto.BatchDetailsDTO;
+import com.project.zeidot.dto.FoodBatchDTO;
 
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -23,17 +23,17 @@ public class FoodBatchBOImpl implements FoodBatchBO {
     }
 
     @Override
-    public String setBatchValues(FoodBatchDto foodBatchDto) throws SQLException {
+    public String setBatchValues(FoodBatchDTO foodBatchDto) throws SQLException {
         return foodBatchDAO.setBatchValues(foodBatchDto);
     }
 
     @Override
-    public boolean setBatchDetailsValues(BatchDetailsDto dto) throws SQLException {
+    public boolean setBatchDetailsValues(BatchDetailsDTO dto) throws SQLException {
         return foodBatchDAO.setBatchDetailsValues(dto);
     }
 
     @Override
-    public ArrayList<FoodBatchDto> getAllBatchDetails() throws SQLException {
+    public ArrayList<FoodBatchDTO> getAllBatchDetails() throws SQLException {
         return foodBatchDAO.getAllBatchDetails();
     }
 

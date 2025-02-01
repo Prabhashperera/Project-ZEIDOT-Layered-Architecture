@@ -2,7 +2,7 @@ package com.project.zeidot.controller;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBatchDetailsBO;
-import com.project.zeidot.dto.FoodBatchDetailsDto;
+import com.project.zeidot.dto.FoodBatchDetailsDTO;
 import com.project.zeidot.dao.custom.impl.FoodBatchDetailsDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +24,7 @@ public class FoodBatchDetailsController implements Initializable {
 
     public TextField batchID;
     @FXML
-    private TableView<FoodBatchDetailsDto> tableView;
+    private TableView<FoodBatchDetailsDTO> tableView;
     @FXML
     private TableColumn<FoodBatchDetailsDAOImpl, String> foodID;
     @FXML
@@ -46,16 +46,16 @@ public class FoodBatchDetailsController implements Initializable {
     public void searchBtnOnAction(ActionEvent event) {
         try{
             String FBId = batchID.getText();
-            ArrayList<FoodBatchDetailsDto> foodBatchDetails = foodBatchDetailsBO.getFoodBatchDetails(FBId);
+            ArrayList<FoodBatchDetailsDTO> foodBatchDetails = foodBatchDetailsBO.getFoodBatchDetails(FBId);
             loadTable(foodBatchDetails);
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void loadTable(ArrayList<FoodBatchDetailsDto> foodBatchDetails) {
+    public void loadTable(ArrayList<FoodBatchDetailsDTO> foodBatchDetails) {
         // Convert ArrayList to ObservableList
-        ObservableList<FoodBatchDetailsDto> observableList = FXCollections.observableArrayList(foodBatchDetails);
+        ObservableList<FoodBatchDetailsDTO> observableList = FXCollections.observableArrayList(foodBatchDetails);
 
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);

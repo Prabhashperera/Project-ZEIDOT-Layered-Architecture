@@ -3,7 +3,7 @@ package com.project.zeidot.bo.custom.impl;
 import com.project.zeidot.bo.custom.DonationBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.DonationDAO;
-import com.project.zeidot.dto.DonationDto;
+import com.project.zeidot.dto.DonationDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class DonationBOImpl implements DonationBO {
     }
 
     @Override
-    public boolean saveDonation(DonationDto dto) throws SQLException {
+    public boolean saveDonation(DonationDTO dto) throws SQLException {
         return donationDAO.save(dto);
     }
 
@@ -28,12 +28,12 @@ public class DonationBOImpl implements DonationBO {
     }
 
     @Override
-    public boolean updateDonation(DonationDto dto) throws SQLException {
+    public boolean updateDonation(DonationDTO dto) throws SQLException {
         return donationDAO.update(dto);
     }
 
     @Override
-    public ArrayList<DonationDto> getAllDonations() throws SQLException {
+    public ArrayList<DonationDTO> getAllDonations() throws SQLException {
         return donationDAO.getAllDonations();
     }
 }

@@ -3,7 +3,7 @@ package com.project.zeidot.bo.custom.impl;
 import com.project.zeidot.bo.custom.DeliveryBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.deliveryDAOs.DeliveryDAO;
-import com.project.zeidot.dto.DeliverDto;
+import com.project.zeidot.dto.DeliverDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class DeliveryBOImpl implements DeliveryBO {
     private final DeliveryDAO deliveryDAO = (DeliveryDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.DELIVER);
 
     @Override
-    public ArrayList<DeliverDto> getDeliveryDetails() throws SQLException {
+    public ArrayList<DeliverDTO> getDeliveryDetails() throws SQLException {
         return deliveryDAO.getDeliveryDetails();
     }
     @Override
@@ -27,7 +27,7 @@ public class DeliveryBOImpl implements DeliveryBO {
     }
 
     @Override
-    public boolean update(DeliverDto updatedDto) throws SQLException {
+    public boolean update(DeliverDTO updatedDto) throws SQLException {
         return deliveryDAO.update(updatedDto);
     }
 
@@ -37,7 +37,7 @@ public class DeliveryBOImpl implements DeliveryBO {
     }
 
     @Override
-    public boolean save(DeliverDto savedDto) throws SQLException {
+    public boolean save(DeliverDTO savedDto) throws SQLException {
         return deliveryDAO.save(savedDto);
     }
 

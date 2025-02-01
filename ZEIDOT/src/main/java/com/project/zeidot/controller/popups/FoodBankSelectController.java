@@ -3,7 +3,7 @@ package com.project.zeidot.controller.popups;
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.PopupsBOs.PopupBO;
 import com.project.zeidot.controller.DonationController;
-import com.project.zeidot.dto.FoodBankDto;
+import com.project.zeidot.dto.FoodBankDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,18 +20,18 @@ import java.util.ResourceBundle;
 
 public class FoodBankSelectController implements Initializable {
 
-    public TableView<FoodBankDto> tableView;
+    public TableView<FoodBankDTO> tableView;
     @FXML
-    private TableColumn<FoodBankDto, String> FoodBankID;
+    private TableColumn<FoodBankDTO, String> FoodBankID;
     @FXML
-    private TableColumn<FoodBankDto, String> Name;
+    private TableColumn<FoodBankDTO, String> Name;
     @FXML
-    private TableColumn<FoodBankDto, String> Address;
+    private TableColumn<FoodBankDTO, String> Address;
     @FXML
-    private TableColumn<FoodBankDto, String> Email;
+    private TableColumn<FoodBankDTO, String> Email;
 
-    private final PopupBO<FoodBankDto> foodBankSelectBO =
-            (PopupBO<FoodBankDto>) BOFactory.getInstance().getBOType(BOFactory.BOType.SELECT_FOODBANK); //LA OBJECT
+    private final PopupBO<FoodBankDTO> foodBankSelectBO =
+            (PopupBO<FoodBankDTO>) BOFactory.getInstance().getBOType(BOFactory.BOType.SELECT_FOODBANK); //LA OBJECT
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,7 +48,7 @@ public class FoodBankSelectController implements Initializable {
 
     public void selectBtnOnAction(ActionEvent event) {
         try {
-            FoodBankDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+            FoodBankDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 donationController.bankIDInit(selectedItem.getFBKId());
             }
@@ -65,8 +65,8 @@ public class FoodBankSelectController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBankDto> foodBankDetails = foodBankSelectBO.getDetails();
-        ObservableList<FoodBankDto> observableList = FXCollections.observableArrayList(foodBankDetails);
+        ArrayList<FoodBankDTO> foodBankDetails = foodBankSelectBO.getDetails();
+        ObservableList<FoodBankDTO> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);
     }

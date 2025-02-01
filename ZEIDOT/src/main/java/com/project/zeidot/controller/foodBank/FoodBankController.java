@@ -2,7 +2,7 @@ package com.project.zeidot.controller.foodBank;
 
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBankBO;
-import com.project.zeidot.dto.FoodBankDto;
+import com.project.zeidot.dto.FoodBankDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,15 +23,15 @@ public class FoodBankController implements Initializable {
     public TextField FBAddressTF;
     public Label FBDonationID;
     @FXML
-    private TableColumn<FoodBankDto ,String> donationID;
+    private TableColumn<FoodBankDTO,String> donationID;
     @FXML
-    private TableColumn<FoodBankDto ,String> FBKName;
+    private TableColumn<FoodBankDTO,String> FBKName;
     @FXML
-    private TableColumn<FoodBankDto ,String> FBKAddress;
+    private TableColumn<FoodBankDTO,String> FBKAddress;
     @FXML
-    private TableColumn<FoodBankDto ,String> FBKEmail;
+    private TableColumn<FoodBankDTO,String> FBKEmail;
     @FXML
-    private TableView<FoodBankDto> tableView;
+    private TableView<FoodBankDTO> tableView;
 
     private final FoodBankBO foodBankBO = (FoodBankBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBANK); //LA
     //    FoodBankDAOImpl fBKModel = new FoodBankDAOImpl();
@@ -84,7 +84,7 @@ public class FoodBankController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Invalid FoodBank Email! Please enter a valid email address.", ButtonType.OK).show();
                 return;
             }
-            FoodBankDto dto = new FoodBankDto(donationId,FBAddress, FBNames,FBEmail);
+            FoodBankDTO dto = new FoodBankDTO(donationId,FBAddress, FBNames,FBEmail);
             boolean isSaved = foodBankBO.saveFoodBank(dto);
             if(isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION , "Saved!!").show();
@@ -104,7 +104,7 @@ public class FoodBankController implements Initializable {
                 String FBAddress = FBAddressTF.getText();
                 String FBName = FBKName.getText();
                 String FBEmail = FBEmailTF.getText();
-                FoodBankDto dto = new FoodBankDto(FBKId,FBAddress,FBName,FBEmail);
+                FoodBankDTO dto = new FoodBankDTO(FBKId,FBAddress,FBName,FBEmail);
                 boolean isUpdated = foodBankBO.editFoodBank(dto);
                 if(isUpdated){
                     refreshPage();
@@ -118,7 +118,7 @@ public class FoodBankController implements Initializable {
     public void deleteOnAction(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             try {
-                FoodBankDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+                FoodBankDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
                 boolean isDeleted = foodBankBO.deleteFoodBank(selectedItem.getFBKId());
                 if(isDeleted){
                     new Alert(Alert.AlertType.CONFIRMATION , "Deleted!!").show();
@@ -133,14 +133,14 @@ public class FoodBankController implements Initializable {
     //Table Methods
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBankDto> foodBankDetails =  foodBankBO.getFoodBankDetails();
-        ObservableList<FoodBankDto> observableList = FXCollections.observableArrayList(foodBankDetails);
+        ArrayList<FoodBankDTO> foodBankDetails =  foodBankBO.getFoodBankDetails();
+        ObservableList<FoodBankDTO> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);
     }
 
     public void tableOnMouseClickedAction(MouseEvent mouseEvent) {
-        FoodBankDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+        FoodBankDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             FBDonationID.setText(selectedItem.getFBKId());
             FBName.setText(selectedItem.getFBKName());

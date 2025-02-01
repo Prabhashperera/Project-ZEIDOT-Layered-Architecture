@@ -2,8 +2,8 @@ package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.dao.custom.FoodBatchDAO;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.BatchDetailsDto;
-import com.project.zeidot.dto.FoodBatchDto;
+import com.project.zeidot.dto.BatchDetailsDTO;
+import com.project.zeidot.dto.FoodBatchDTO;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -53,7 +53,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     }
 
     // Set batch values and ensure `nextBatchID` is up-to-date
-    public String setBatchValues(FoodBatchDto foodBatchDto) throws SQLException {
+    public String setBatchValues(FoodBatchDTO foodBatchDto) throws SQLException {
         // Generate a new batch ID to ensure it’s unique
         String batchId = getNextId();
         System.out.println("Generated Batch ID: " + batchId);
@@ -80,7 +80,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
         }
     }
 
-    public boolean setBatchDetailsValues(BatchDetailsDto dto) throws SQLException {
+    public boolean setBatchDetailsValues(BatchDetailsDTO dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "INSERT INTO foodBatchDetails VALUES (?, ?)"; //Food ID & Current BatchID
         PreparedStatement ps = connection.prepareStatement(query);
@@ -92,13 +92,13 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
         return rows > 0;
     } //Set values for BatchDetails Associate Table
 
-    public ArrayList<FoodBatchDto> getAllBatchDetails() throws SQLException {
+    public ArrayList<FoodBatchDTO> getAllBatchDetails() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from foodBatch");
 
-        ArrayList<FoodBatchDto> batchDtos = new ArrayList<>();
+        ArrayList<FoodBatchDTO> batchDtos = new ArrayList<>();
 
         while (rst.next()) {
-            FoodBatchDto foodBatchDto = new FoodBatchDto(
+            FoodBatchDTO foodBatchDto = new FoodBatchDTO(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -181,7 +181,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
 
 
     @Override
-    public boolean update(FoodBatchDto updatedDto) throws SQLException {
+    public boolean update(FoodBatchDTO updatedDto) throws SQLException {
         return false;
     }
 
@@ -197,7 +197,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     }
 
     @Override
-    public boolean save(FoodBatchDto savedDto) throws SQLException {
+    public boolean save(FoodBatchDTO savedDto) throws SQLException {
         return false;
     }
 

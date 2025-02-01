@@ -1,19 +1,19 @@
 package com.project.zeidot.dto;
 
-public class FoodDto {
+public class FoodDTO {
     private String foodID;
     private String foodName;
     private String weight;
     private String duration;
 
-    public FoodDto(String foodID, String foodName, String weight, String duration) {
+    public FoodDTO(String foodID, String foodName, String weight, String duration) {
         this.foodID = foodID;
         this.foodName = foodName;
         this.weight = weight;
         this.duration = duration;
     }
 
-    public FoodDto() {
+    public FoodDTO() {
 
     }
 

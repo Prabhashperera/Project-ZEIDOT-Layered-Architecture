@@ -1,12 +1,12 @@
 package com.project.zeidot.dto;
 
-public class UserDto {
+public class UserDTO {
     private String username;
     private String password;
 
-    public UserDto() {
+    public UserDTO() {
     }
-    public UserDto(String username, String password) {
+    public UserDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }

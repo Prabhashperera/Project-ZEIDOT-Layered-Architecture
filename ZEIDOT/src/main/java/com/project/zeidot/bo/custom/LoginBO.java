@@ -1,10 +1,10 @@
 package com.project.zeidot.bo.custom;
 
-import com.project.zeidot.dto.UserDto;
+import com.project.zeidot.dto.UserDTO;
 
 import java.sql.SQLException;
 
 public interface LoginBO extends SuperBO {
-    boolean login(UserDto userDto) throws SQLException;
-    boolean register(UserDto userDto) throws SQLException;
+    boolean login(UserDTO userDto) throws SQLException;
+    boolean register(UserDTO userDto) throws SQLException;
 }

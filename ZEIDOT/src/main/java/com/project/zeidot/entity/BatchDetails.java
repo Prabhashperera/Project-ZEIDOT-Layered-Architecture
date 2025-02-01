@@ -1,10 +1,10 @@
-package com.project.zeidot.dto;
+package com.project.zeidot.entity;
 
-public class BatchDetailsDto {
+public class BatchDetails {
     private String batchId;
     private String foodID;
 
-    public BatchDetailsDto(String foodID , String batchId) {
+    public BatchDetails(String foodID , String batchId) {
         this.batchId = batchId;
         this.foodID = foodID;
     }

@@ -3,7 +3,7 @@ package com.project.zeidot.controller.delivery;
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.DeliveryBO;
 import com.project.zeidot.controller.popups.DonationSelectController;
-import com.project.zeidot.dto.DeliverDto;
+import com.project.zeidot.dto.DeliverDTO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,15 +33,15 @@ public class DeliveryController implements Initializable {
     public Label timeTF;
     public Button donationIDTF;
     @FXML
-    private TableView<DeliverDto> tableView;
+    private TableView<DeliverDTO> tableView;
     @FXML
-    private TableColumn<DeliverDto, String> deliveryID;
+    private TableColumn<DeliverDTO, String> deliveryID;
     @FXML
-    private TableColumn<DeliverDto, String> deliveryDate;
+    private TableColumn<DeliverDTO, String> deliveryDate;
     @FXML
-    private TableColumn<DeliverDto, String> deliveryTime;
+    private TableColumn<DeliverDTO, String> deliveryTime;
     @FXML
-    private TableColumn<DeliverDto, String> donationID;
+    private TableColumn<DeliverDTO, String> donationID;
 
 //    DeliveryDAOImpl deliveryDAOImpl = new DeliveryDAOImpl();
     private final DeliveryBO deliveryBO = (DeliveryBO) BOFactory.getInstance().getBOType(BOFactory.BOType.DELIVER);
@@ -71,7 +71,7 @@ public class DeliveryController implements Initializable {
             if (deliveryID.isEmpty() || date.isEmpty() || time.isEmpty() || donationID.isEmpty()) {
                 new Alert(Alert.AlertType.ERROR , "Cannot Be Empty Donation ID");
             }
-            DeliverDto dto = new DeliverDto(deliveryID, date, time, donationID);
+            DeliverDTO dto = new DeliverDTO(deliveryID, date, time, donationID);
             boolean isSaved = deliveryBO.save(dto);
             if (isSaved) {
                 deliveryBO.isDeliveredToYes(donationID);
@@ -85,14 +85,14 @@ public class DeliveryController implements Initializable {
 
     public void editOnAction(ActionEvent event) {
         try {
-            DeliverDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+            DeliverDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 String deliveryID = selectedItem.getDeliveryID();
                 String date = selectedItem.getDeliverDate();
                 String donID = selectedItem.getDonationID();
                 String time = timeTF.getText();
                 String donationID = donationIDTF.getText();
-                DeliverDto dto = new DeliverDto(deliveryID, date, time, donationID);
+                DeliverDTO dto = new DeliverDTO(deliveryID, date, time, donationID);
                 deliveryBO.isDeliveredToNo(donID);
                 deliveryBO.isDeliveredToYes(donationID);
                 boolean isUpdated = deliveryBO.update(dto);
@@ -109,7 +109,7 @@ public class DeliveryController implements Initializable {
 
     public void deleteOnAction(ActionEvent event) {
         try {
-            DeliverDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+            DeliverDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
             String deliveryID = selectedItem.getDeliveryID();
             String donationID = selectedItem.getDonationID();
             boolean isDeleted = deliveryBO.delete(deliveryID);
@@ -170,8 +170,8 @@ public class DeliveryController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<DeliverDto> foodBankDetails = deliveryBO.getDeliveryDetails();
-        ObservableList<DeliverDto> observableList = FXCollections.observableArrayList(foodBankDetails);
+        ArrayList<DeliverDTO> foodBankDetails = deliveryBO.getDeliveryDetails();
+        ObservableList<DeliverDTO> observableList = FXCollections.observableArrayList(foodBankDetails);
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);
     }
@@ -183,7 +183,7 @@ public class DeliveryController implements Initializable {
     }
 
     public void onMouseClickedOnTableAction(MouseEvent mouseEvent) {
-        DeliverDto selectedItem = tableView.getSelectionModel().getSelectedItem();
+        DeliverDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
         donationIDTF.setText(selectedItem.getDonationID());
         deliveryIDTF.setText(selectedItem.getDeliveryID());
     }

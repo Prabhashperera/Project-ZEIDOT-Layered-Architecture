@@ -3,7 +3,7 @@ package com.project.zeidot.controller.popups;
 import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.FoodBatchSelectBO;
 import com.project.zeidot.controller.DonationController;
-import com.project.zeidot.dto.FoodBatchDto;
+import com.project.zeidot.dto.FoodBatchDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,17 +21,17 @@ import java.util.ResourceBundle;
 
 public class FoodBatchSelectController implements Initializable {
     @FXML
-    private TableView<FoodBatchDto> tableView;
+    private TableView<FoodBatchDTO> tableView;
     @FXML
-    private TableColumn<FoodBatchDto, String> FBID;
+    private TableColumn<FoodBatchDTO, String> FBID;
     @FXML
-    private TableColumn<FoodBatchDto, String> FoodAmount;
+    private TableColumn<FoodBatchDTO, String> FoodAmount;
     @FXML
-    private TableColumn<FoodBatchDto, String> FBDate;
+    private TableColumn<FoodBatchDTO, String> FBDate;
     @FXML
-    private TableColumn<FoodBatchDto, String> isAvailable;
+    private TableColumn<FoodBatchDTO, String> isAvailable;
     @FXML
-    private TableColumn<FoodBatchDto , String>  duration;
+    private TableColumn<FoodBatchDTO, String>  duration;
 //    FoodBatchSelectDAOImpl foodBatchSelectDAOImpl = new FoodBatchSelectDAOImpl(); //Model
     FoodBatchSelectBO foodBatchSelectBO = (FoodBatchSelectBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH_SELECT);
 
@@ -51,15 +51,15 @@ public class FoodBatchSelectController implements Initializable {
 
     public void loadTable() throws SQLException {
         // Convert ArrayList to ObservableList
-        ArrayList<FoodBatchDto> foodBatchDetails =  foodBatchSelectBO.getFoodBatchDetails();
-        ObservableList<FoodBatchDto> observableList = FXCollections.observableArrayList(foodBatchDetails);
+        ArrayList<FoodBatchDTO> foodBatchDetails =  foodBatchSelectBO.getFoodBatchDetails();
+        ObservableList<FoodBatchDTO> observableList = FXCollections.observableArrayList(foodBatchDetails);
 
         // Set the ObservableList to the TableView
         tableView.setItems(observableList);
     }
  
     public String getFoodBatchID() {
-        FoodBatchDto foodBatchDto = tableView.getSelectionModel().getSelectedItem();
+        FoodBatchDTO foodBatchDto = tableView.getSelectionModel().getSelectedItem();
         return foodBatchDto.getFoodBatchId();
     }//returns Table view selected FOODBatchID
 

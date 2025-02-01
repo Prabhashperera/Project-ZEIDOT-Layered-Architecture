@@ -2,7 +2,7 @@ package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.dao.custom.DonationDAO;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.DonationDto;
+import com.project.zeidot.dto.DonationDTO;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -34,7 +34,7 @@ public class DonationDAOImpl implements DonationDAO{
         return "D001";
     }
 
-    public boolean save(DonationDto dto) throws SQLException {
+    public boolean save(DonationDTO dto) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "INSERT INTO donation values(? , ? , ?, ? , ?)";
         PreparedStatement ps = connection.prepareStatement(query);
@@ -52,7 +52,7 @@ public class DonationDAOImpl implements DonationDAO{
         ps.setString(1, id);
         return ps.executeUpdate() > 0;
     }
-    public boolean update(DonationDto dto) throws SQLException {
+    public boolean update(DonationDTO dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "Update donation SET donationName = ? , FBId = ? WHERE donationID = ?";
         PreparedStatement ps = conn.prepareStatement(query);
@@ -63,20 +63,20 @@ public class DonationDAOImpl implements DonationDAO{
         return rows > 0;
     }
 
-    public ArrayList<DonationDto> getAllDonations() throws SQLException {
+    public ArrayList<DonationDTO> getAllDonations() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from donation");
 
-        ArrayList<DonationDto> donationDtos = new ArrayList<>();
+        ArrayList<DonationDTO> donationDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            DonationDto donationDto = new DonationDto(
+            DonationDTO donationDto = new DonationDTO(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4)
             );
-            donationDtos.add(donationDto);
+            donationDTOS.add(donationDto);
         }
-        return donationDtos;
+        return donationDTOS;
     }
 }

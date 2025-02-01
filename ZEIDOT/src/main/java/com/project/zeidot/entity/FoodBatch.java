@@ -1,16 +1,16 @@
-package com.project.zeidot.dto;
+package com.project.zeidot.entity;
 
-public class FoodBatchDto {
+public class FoodBatch {
     private String foodBatchId;
     private String foodAmount;
     private String date;
     private String isAvailable;
     private String duration;
 
-    public FoodBatchDto() {
+    public FoodBatch() {
 
     }
-    public FoodBatchDto(String foodBatchId, String foodAmount, String date, String isAvailable, String duration) {
+    public FoodBatch(String foodBatchId, String foodAmount, String date, String isAvailable, String duration) {
         this.foodBatchId = foodBatchId;
         this.foodAmount = foodAmount;
         this.date = date;
@@ -30,7 +30,7 @@ public class FoodBatchDto {
         return foodAmount;
     }
 
-    public FoodBatchDto(String foodBatchId, String foodAmount, String date , String isAvailable) {
+    public FoodBatch(String foodBatchId, String foodAmount, String date , String isAvailable) {
         this.foodBatchId = foodBatchId;
         this.foodAmount = foodAmount;
         this.date = date;

@@ -1,7 +1,5 @@
 package com.project.zeidot.dao.custom;
 
-import com.project.zeidot.dto.FoodDto;
-
 import java.sql.SQLException;
 
 public interface CrudDAO <T> extends SuperDAO {

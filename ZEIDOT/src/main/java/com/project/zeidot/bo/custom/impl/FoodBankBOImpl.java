@@ -3,7 +3,7 @@ package com.project.zeidot.bo.custom.impl;
 import com.project.zeidot.bo.custom.FoodBankBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.foodBankDAOs.FoodBankDAO;
-import com.project.zeidot.dto.FoodBankDto;
+import com.project.zeidot.dto.FoodBankDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class FoodBankBOImpl implements FoodBankBO {
     private final FoodBankDAO foodBankDAO = (FoodBankDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBANK);
 
     @Override
-    public boolean saveFoodBank(FoodBankDto dto) throws SQLException {
+    public boolean saveFoodBank(FoodBankDTO dto) throws SQLException {
         return foodBankDAO.save(dto);
     }
 
@@ -22,7 +22,7 @@ public class FoodBankBOImpl implements FoodBankBO {
     }
 
     @Override
-    public boolean editFoodBank(FoodBankDto dto) throws SQLException {
+    public boolean editFoodBank(FoodBankDTO dto) throws SQLException {
         return foodBankDAO.update(dto);
     }
 
@@ -32,7 +32,7 @@ public class FoodBankBOImpl implements FoodBankBO {
     }
 
     @Override
-    public ArrayList<FoodBankDto> getFoodBankDetails() throws SQLException {
+    public ArrayList<FoodBankDTO> getFoodBankDetails() throws SQLException {
         return foodBankDAO.getFoodBankDetails();
     }
 }

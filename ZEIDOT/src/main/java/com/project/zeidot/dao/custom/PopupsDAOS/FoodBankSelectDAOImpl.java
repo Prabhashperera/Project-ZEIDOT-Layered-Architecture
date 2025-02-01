@@ -1,7 +1,7 @@
 package com.project.zeidot.dao.custom.PopupsDAOS;
 
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.FoodBankDto;
+import com.project.zeidot.dto.FoodBankDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,16 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class FoodBankSelectDAOImpl implements PopupDAO<FoodBankDto> {
-    public ArrayList<FoodBankDto> getDetails() throws SQLException {
+public class FoodBankSelectDAOImpl implements PopupDAO<FoodBankDTO> {
+    public ArrayList<FoodBankDTO> getDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM foodBank";
         PreparedStatement ps = con.prepareStatement(query);
 
-        ArrayList<FoodBankDto> detailList = new ArrayList<>();
+        ArrayList<FoodBankDTO> detailList = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            FoodBankDto dto = new FoodBankDto();
+            FoodBankDTO dto = new FoodBankDTO();
             dto.setFBKId(rs.getString(1));
             dto.setFBKName(rs.getString(2));
             dto.setFBKAddress(rs.getString(3));

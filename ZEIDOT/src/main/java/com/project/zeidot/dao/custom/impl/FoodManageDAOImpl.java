@@ -1,19 +1,16 @@
 package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.dao.custom.FoodManageDAO;
-import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.FoodDto;
+import com.project.zeidot.dto.FoodDTO;
 import com.project.zeidot.util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FoodManageDAOImpl implements FoodManageDAO {
     @Override
-    public boolean update(FoodDto food) throws SQLException {
+    public boolean update(FoodDTO food) throws SQLException {
         String query = "UPDATE food SET foodWeight = ?, FoodName = ? , duration = ? WHERE foodID = ?";
         int rows = CrudUtil.execute(query , food.getWeight() , food.getFoodName(), food.getDuration(), food.getFoodID());
         return rows > 0;
@@ -24,7 +21,7 @@ public class FoodManageDAOImpl implements FoodManageDAO {
         return CrudUtil.execute(query , name);
     }
     @Override
-    public boolean save(FoodDto dto) throws SQLException {
+    public boolean save(FoodDTO dto) throws SQLException {
         String query = "insert into food values(?,?,?,?)";
         return CrudUtil.execute(query , dto.getFoodID() , dto.getWeight(), dto.getFoodName(), dto.getDuration());
     }
@@ -53,21 +50,21 @@ public class FoodManageDAOImpl implements FoodManageDAO {
     }
 
     @Override
-    public ArrayList<FoodDto> getAllCustomers() throws SQLException {
+    public ArrayList<FoodDTO> getAllCustomers() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from food");
 
-        ArrayList<FoodDto> foodDtos = new ArrayList<>();
+        ArrayList<FoodDTO> foodDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            FoodDto customerDTO = new FoodDto(
+            FoodDTO customerDTO = new FoodDTO(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4)
             );
-            foodDtos.add(customerDTO);
+            foodDTOS.add(customerDTO);
         }
-        return foodDtos;
+        return foodDTOS;
     }
 
     //food Batch amount change Mehthods
