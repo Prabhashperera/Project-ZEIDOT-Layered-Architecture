@@ -27,4 +27,6 @@ module com.project.zeidot {
     opens com.project.zeidot.dao.custom to javafx.fxml;
     exports com.project.zeidot.bo.custom;
     opens com.project.zeidot.bo.custom to javafx.fxml;
+    exports com.project.zeidot.entity;
+    opens com.project.zeidot.entity;
 }

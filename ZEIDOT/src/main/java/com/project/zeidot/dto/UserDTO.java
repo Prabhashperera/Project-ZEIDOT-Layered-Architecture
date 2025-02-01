@@ -1,6 +1,8 @@
 package com.project.zeidot.dto;
 
-public class UserDTO {
+import java.io.Serializable;
+
+public class UserDTO implements Serializable {
     private String username;
     private String password;
 
