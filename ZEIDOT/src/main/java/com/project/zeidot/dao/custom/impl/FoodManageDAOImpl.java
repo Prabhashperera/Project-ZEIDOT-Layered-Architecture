@@ -56,13 +56,13 @@ public class FoodManageDAOImpl implements FoodManageDAO {
         ArrayList<Food> foodDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            Food customerDTO = new Food(
+            Food foodEntity = new Food(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4)
             );
-            foodDTOS.add(customerDTO);
+            foodDTOS.add(foodEntity);
         }
         return foodDTOS;
     }
