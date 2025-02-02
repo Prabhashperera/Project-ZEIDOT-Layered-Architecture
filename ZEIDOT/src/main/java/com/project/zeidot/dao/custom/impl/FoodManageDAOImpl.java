@@ -2,6 +2,7 @@ package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.dao.custom.FoodManageDAO;
 import com.project.zeidot.dto.FoodDTO;
+import com.project.zeidot.entity.Food;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -10,10 +11,9 @@ import java.util.ArrayList;
 
 public class FoodManageDAOImpl implements FoodManageDAO {
     @Override
-    public boolean update(FoodDTO food) throws SQLException {
+    public boolean update(Food food) throws SQLException {
         String query = "UPDATE food SET foodWeight = ?, FoodName = ? , duration = ? WHERE foodID = ?";
-        int rows = CrudUtil.execute(query , food.getWeight() , food.getFoodName(), food.getDuration(), food.getFoodID());
-        return rows > 0;
+        return CrudUtil.execute(query , food.getWeight() , food.getFoodName(), food.getDuration(), food.getFoodID());
     }
     @Override
     public boolean delete(String name) throws SQLException {
@@ -21,7 +21,7 @@ public class FoodManageDAOImpl implements FoodManageDAO {
         return CrudUtil.execute(query , name);
     }
     @Override
-    public boolean save(FoodDTO dto) throws SQLException {
+    public boolean save(Food dto) throws SQLException {
         String query = "insert into food values(?,?,?,?)";
         return CrudUtil.execute(query , dto.getFoodID() , dto.getWeight(), dto.getFoodName(), dto.getDuration());
     }
@@ -50,13 +50,13 @@ public class FoodManageDAOImpl implements FoodManageDAO {
     }
 
     @Override
-    public ArrayList<FoodDTO> getAllCustomers() throws SQLException {
+    public ArrayList<Food> getAllCustomers() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from food");
 
-        ArrayList<FoodDTO> foodDTOS = new ArrayList<>();
+        ArrayList<Food> foodDTOS = new ArrayList<>();
 
         while (rst.next()) {
-            FoodDTO customerDTO = new FoodDTO(
+            Food customerDTO = new Food(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),

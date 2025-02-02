@@ -8,6 +8,7 @@ import com.project.zeidot.dao.custom.FoodManageDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.BatchDetailsDTO;
 import com.project.zeidot.dto.FoodDTO;
+import com.project.zeidot.entity.Food;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class FoodManageBOImpl implements FoodManageBO {
     // Food Manage Model Instance //LA
     @Override
     public boolean updateFood(FoodDTO food) throws SQLException {
-        return foodManageDAOImpl.update(food);
+        return foodManageDAOImpl.update(new Food(food.getFoodID(), food.getFoodName() , food.getWeight() , food.getDuration()));
     }
 
     @Override
@@ -68,7 +69,7 @@ public class FoodManageBOImpl implements FoodManageBO {
             conn.setAutoCommit(false); // Disable auto-commit to manage transactions
 
             // Save batch details
-            boolean isSaved = foodManageDAOImpl.save(dto);
+            boolean isSaved = foodManageDAOImpl.save(new Food( dto.getFoodID(), dto.getFoodName(), dto.getWeight(), dto.getDuration()));
             if (!isSaved) {
                 conn.rollback(); //if Fails RollBack
                 return false;
@@ -108,7 +109,17 @@ public class FoodManageBOImpl implements FoodManageBO {
 
     @Override
     public ArrayList<FoodDTO> getAllCustomers() throws SQLException {
-        return foodManageDAOImpl.getAllCustomers();
+        ArrayList<Food> foods = foodManageDAOImpl.getAllCustomers();
+        ArrayList<FoodDTO> foodDTOArrayList = new ArrayList<>();
+        for (Food food : foods) {
+            FoodDTO foodDTO = new FoodDTO();
+            foodDTO.setFoodID(food.getFoodID());
+            foodDTO.setFoodName(food.getFoodName());
+            foodDTO.setWeight(food.getWeight());
+            foodDTO.setDuration(food.getDuration());
+            foodDTOArrayList.add(foodDTO);
+        }
+        return foodDTOArrayList;
     }
 
     @Override

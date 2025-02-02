@@ -1,16 +1,13 @@
 package com.project.zeidot.dao.custom;
 
 import com.project.zeidot.dto.FoodDTO;
+import com.project.zeidot.entity.Food;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface FoodManageDAO extends CrudDAO<FoodDTO> {
-//     boolean updateFood(FoodDto food) throws SQLException;
-//     boolean deleteFood(String name) throws SQLException;
-//     boolean saveFood(FoodDto dto) throws SQLException;
-//     String getNextCustomerId() throws SQLException;
-     ArrayList<FoodDTO> getAllCustomers() throws SQLException;
+public interface FoodManageDAO extends CrudDAO<Food> {
+     ArrayList<Food> getAllCustomers() throws SQLException;
      double getCurrentWeight(String FBId) throws SQLException;
      boolean updateAmount(double CurrentWeight , double foodWeight) throws SQLException;
      boolean decreaseAmount(double CurrentWeight , double foodWeight) throws SQLException;
