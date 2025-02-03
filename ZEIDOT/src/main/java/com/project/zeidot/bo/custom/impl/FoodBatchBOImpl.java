@@ -5,6 +5,7 @@ import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchDAO;
 import com.project.zeidot.dto.BatchDetailsDTO;
 import com.project.zeidot.dto.FoodBatchDTO;
+import com.project.zeidot.entity.FoodBatch;
 
 import java.sql.SQLException;
 import java.time.LocalTime;
@@ -24,7 +25,9 @@ public class FoodBatchBOImpl implements FoodBatchBO {
 
     @Override
     public String setBatchValues(FoodBatchDTO foodBatchDto) throws SQLException {
-        return foodBatchDAO.setBatchValues(foodBatchDto);
+        return foodBatchDAO.setBatchValues(new FoodBatch(foodBatchDto.getFoodBatchId() , foodBatchDto.getFoodAmount(),
+                foodBatchDto.getDate(), foodBatchDto.getIsAvailable(), foodBatchDto.getDuration()
+        ));
     }
 
     @Override
@@ -34,7 +37,18 @@ public class FoodBatchBOImpl implements FoodBatchBO {
 
     @Override
     public ArrayList<FoodBatchDTO> getAllBatchDetails() throws SQLException {
-        return foodBatchDAO.getAllBatchDetails();
+        ArrayList<FoodBatchDTO> foodBatchDTOs = new ArrayList<>();
+        ArrayList<FoodBatch> foodBatches = foodBatchDAO.getAllBatchDetails();
+        for (FoodBatch foodBatch : foodBatches) {
+            FoodBatchDTO foodBatchDTO = new FoodBatchDTO();
+            foodBatchDTO.setFoodBatchId(foodBatch.getFoodBatchId());
+            foodBatchDTO.setFoodAmount(foodBatch.getFoodAmount());
+            foodBatchDTO.setDate(foodBatch.getDate());
+            foodBatchDTO.setIsAvailable(foodBatch.getIsAvailable());
+            foodBatchDTO.setDuration(foodBatch.getDuration());
+            foodBatchDTOs.add(foodBatchDTO);
+        }
+        return foodBatchDTOs;
     }
 
     @Override

@@ -18,6 +18,7 @@ public class FoodBatchDetailsBOImpl implements FoodBatchDetailsBO {
         ArrayList<FoodBatchDetails> foodBatchDetails = foodBatchDetailsDAO.getFoodBatchDetails(FBId);
 
         for (FoodBatchDetails foodBatchDetail : foodBatchDetails) {
+            //Food Batch Conversion
             FoodBatchDetailsDTO foodBatchDetailsDTO = new FoodBatchDetailsDTO();
             foodBatchDetailsDTO.setFoodName(foodBatchDetail.getFoodName());
             foodBatchDetailsDTO.setFoodId(foodBatchDetail.getFoodId());

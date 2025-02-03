@@ -4,6 +4,7 @@ import com.project.zeidot.dao.custom.FoodBatchDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.BatchDetailsDTO;
 import com.project.zeidot.dto.FoodBatchDTO;
+import com.project.zeidot.entity.FoodBatch;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -53,7 +54,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     }
 
     // Set batch values and ensure `nextBatchID` is up-to-date
-    public String setBatchValues(FoodBatchDTO foodBatchDto) throws SQLException {
+    public String setBatchValues(FoodBatch foodBatchDto) throws SQLException {
         // Generate a new batch ID to ensure it’s unique
         String batchId = getNextId();
         System.out.println("Generated Batch ID: " + batchId);
@@ -92,13 +93,13 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
         return rows > 0;
     } //Set values for BatchDetails Associate Table
 
-    public ArrayList<FoodBatchDTO> getAllBatchDetails() throws SQLException {
+    public ArrayList<FoodBatch> getAllBatchDetails() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from foodBatch");
 
-        ArrayList<FoodBatchDTO> batchDtos = new ArrayList<>();
+        ArrayList<FoodBatch> batchDtos = new ArrayList<>();
 
         while (rst.next()) {
-            FoodBatchDTO foodBatchDto = new FoodBatchDTO(
+            FoodBatch foodBatchDto = new FoodBatch(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -181,7 +182,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
 
 
     @Override
-    public boolean update(FoodBatchDTO updatedDto) throws SQLException {
+    public boolean update(FoodBatch updatedDto) throws SQLException {
         return false;
     }
 
@@ -197,7 +198,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     }
 
     @Override
-    public boolean save(FoodBatchDTO savedDto) throws SQLException {
+    public boolean save(FoodBatch savedDto) throws SQLException {
         return false;
     }
 
