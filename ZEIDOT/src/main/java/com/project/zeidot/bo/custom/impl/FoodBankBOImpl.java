@@ -4,6 +4,7 @@ import com.project.zeidot.bo.custom.FoodBankBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.foodBankDAOs.FoodBankDAO;
 import com.project.zeidot.dto.FoodBankDTO;
+import com.project.zeidot.entity.FoodBank;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class FoodBankBOImpl implements FoodBankBO {
 
     @Override
     public boolean saveFoodBank(FoodBankDTO dto) throws SQLException {
-        return foodBankDAO.save(dto);
+        return foodBankDAO.save(new FoodBank(dto.getFBKId() , dto.getFBKName() , dto.getFBKAddress() , dto.getFBKEmail()));
     }
 
     @Override
@@ -23,7 +24,7 @@ public class FoodBankBOImpl implements FoodBankBO {
 
     @Override
     public boolean editFoodBank(FoodBankDTO dto) throws SQLException {
-        return foodBankDAO.update(dto);
+        return foodBankDAO.update(new FoodBank(dto.getFBKId() , dto.getFBKName() , dto.getFBKAddress() , dto.getFBKEmail()));
     }
 
     @Override
@@ -33,6 +34,15 @@ public class FoodBankBOImpl implements FoodBankBO {
 
     @Override
     public ArrayList<FoodBankDTO> getFoodBankDetails() throws SQLException {
-        return foodBankDAO.getFoodBankDetails();
+        ArrayList<FoodBankDTO> foodBankDTOs = new ArrayList<>();
+        ArrayList<FoodBank> foodBankArrayList = foodBankDAO.getFoodBankDetails();
+        for (FoodBank foodBank : foodBankArrayList) {
+            FoodBankDTO foodBankDTO = new FoodBankDTO();
+            foodBankDTO.setFBKAddress(foodBank.getFBKAddress());
+            foodBankDTO.setFBKName(foodBank.getFBKName());
+            foodBankDTO.setFBKId(foodBank.getFBKId());
+            foodBankDTOs.add(foodBankDTO);
+        }
+        return foodBankDTOs;
     }
 }
