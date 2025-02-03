@@ -2,6 +2,7 @@ package com.project.zeidot.dao.custom.PopupsDAOS;
 
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DonationDTO;
+import com.project.zeidot.entity.Donation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,16 +10,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DonationSelectDAOImpl implements PopupDAO<DonationDTO> {
-    public ArrayList<DonationDTO> getDetails() throws SQLException {
+public class DonationSelectDAOImpl implements PopupDAO<Donation> {
+    public ArrayList<Donation> getDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM donation WHERE isDelivered = 'NO'";
         PreparedStatement ps = con.prepareStatement(query);
 
-        ArrayList<DonationDTO> detailList = new ArrayList<>();
+        ArrayList<Donation> detailList = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            DonationDTO dto = new DonationDTO();
+            Donation dto = new Donation();
             dto.setDonationID(rs.getString(1));
             dto.setDonationName(rs.getString(2));
             dto.setFBId(rs.getString(3));

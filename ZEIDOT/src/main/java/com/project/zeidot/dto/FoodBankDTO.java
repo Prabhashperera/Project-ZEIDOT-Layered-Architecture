@@ -1,6 +1,8 @@
 package com.project.zeidot.dto;
 
-public class FoodBankDTO {
+import com.project.zeidot.entity.FoodBank;
+
+public class FoodBankDTO extends FoodBank {
     private String FBKId;
     private String FBKName;
     private String FBKAddress;

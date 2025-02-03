@@ -3,6 +3,7 @@ package com.project.zeidot.bo.custom.PopupsBOs;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.PopupsDAOS.PopupDAO;
 import com.project.zeidot.dto.FoodBankDTO;
+import com.project.zeidot.entity.FoodBank;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

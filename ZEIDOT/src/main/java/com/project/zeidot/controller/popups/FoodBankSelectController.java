@@ -4,6 +4,7 @@ import com.project.zeidot.bo.custom.BOFactory;
 import com.project.zeidot.bo.custom.PopupsBOs.PopupBO;
 import com.project.zeidot.controller.DonationController;
 import com.project.zeidot.dto.FoodBankDTO;
+import com.project.zeidot.entity.FoodBank;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,7 +49,7 @@ public class FoodBankSelectController implements Initializable {
 
     public void selectBtnOnAction(ActionEvent event) {
         try {
-            FoodBankDTO selectedItem = tableView.getSelectionModel().getSelectedItem();
+            FoodBank selectedItem = tableView.getSelectionModel().getSelectedItem(); //Extended From DTO
             if (selectedItem != null) {
                 donationController.bankIDInit(selectedItem.getFBKId());
             }
