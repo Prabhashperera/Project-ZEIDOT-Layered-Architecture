@@ -3,6 +3,7 @@ package com.project.zeidot.dao.custom.impl.delivery;
 import com.project.zeidot.dao.custom.deliveryDAOs.DeliveryDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DeliverDTO;
+import com.project.zeidot.entity.Deliver;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -37,7 +38,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public boolean save(DeliverDTO dto) throws SQLException {
+    public boolean save(Deliver dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "INSERT INTO delivery VALUES(?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -58,7 +59,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public boolean update(DeliverDTO dto) throws SQLException {
+    public boolean update(Deliver dto) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String sql = "UPDATE delivery SET donationID = ? , deliverTime = ? WHERE deliveryID = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -69,15 +70,15 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     }
 
     @Override
-    public ArrayList<DeliverDTO> getDeliveryDetails() throws SQLException {
+    public ArrayList<Deliver> getDeliveryDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM delivery";
         PreparedStatement ps = con.prepareStatement(query);
 
-        ArrayList<DeliverDTO> detailList = new ArrayList<>();
+        ArrayList<Deliver> detailList = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            DeliverDTO dto = new DeliverDTO();
+            Deliver dto = new Deliver();
             dto.setDeliveryID(rs.getString(1));
             dto.setDeliverDate(rs.getString(2));
             dto.setDeliverTime(rs.getString(3));
