@@ -3,6 +3,7 @@ package com.project.zeidot.dao.custom.impl;
 import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
 import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.FoodBatchDTO;
+import com.project.zeidot.entity.FoodBatch;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,15 +13,15 @@ import java.util.ArrayList;
 
 public class FoodBatchSelectDAOImpl implements FoodBatchSelectDAO{
     @Override
-    public ArrayList<FoodBatchDTO> getFoodBatchDetails() throws SQLException {
+    public ArrayList<FoodBatch> getFoodBatchDetails() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         String query = "SELECT * FROM foodBatch WHERE isAvailable = 'Available'";
         PreparedStatement ps = con.prepareStatement(query);
 
-        ArrayList<FoodBatchDTO> detailList = new ArrayList<>();
+        ArrayList<FoodBatch> detailList = new ArrayList<>();
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            FoodBatchDTO dto = new FoodBatchDTO();
+            FoodBatch dto = new FoodBatch();
             dto.setFoodBatchId(rs.getString(1));
             dto.setFoodAmount(rs.getString(2));
             dto.setDate(rs.getString(3));

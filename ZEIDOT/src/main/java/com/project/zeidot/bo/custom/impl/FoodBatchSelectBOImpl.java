@@ -4,6 +4,7 @@ import com.project.zeidot.bo.custom.FoodBatchSelectBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
 import com.project.zeidot.dto.FoodBatchDTO;
+import com.project.zeidot.entity.FoodBatch;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,20 @@ public class FoodBatchSelectBOImpl implements FoodBatchSelectBO {
 
     @Override
     public ArrayList<FoodBatchDTO> getFoodBatchDetails() throws SQLException {
-        return foodBatchSelectDAO.getFoodBatchDetails();
+        ArrayList<FoodBatchDTO> foodBatchDTOArrayList = new ArrayList<>();
+        ArrayList<FoodBatch> foodBatchArrayList = foodBatchSelectDAO.getFoodBatchDetails();
+
+        for (FoodBatch fbDto : foodBatchArrayList) {
+            FoodBatchDTO foodBatchDTO = new FoodBatchDTO();
+            foodBatchDTO.setFoodBatchId(fbDto.getFoodBatchId());
+            foodBatchDTO.setFoodAmount(fbDto.getFoodAmount());
+            foodBatchDTO.setDate(fbDto.getDate());
+            foodBatchDTO.setIsAvailable(fbDto.getIsAvailable());
+            foodBatchDTO.setDuration(fbDto.getDuration());
+            foodBatchDTOArrayList.add(foodBatchDTO);
+        }
+
+        return foodBatchDTOArrayList;
     }
 
     @Override
