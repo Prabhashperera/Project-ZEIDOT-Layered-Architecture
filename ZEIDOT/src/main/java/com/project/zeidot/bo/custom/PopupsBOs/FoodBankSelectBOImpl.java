@@ -10,11 +10,22 @@ import java.util.ArrayList;
 
 public class FoodBankSelectBOImpl implements PopupBO<FoodBankDTO>{
 
-    private final PopupDAO<FoodBankDTO> foodBankDtoPopupDAO =
-            (PopupDAO<FoodBankDTO>) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBANK_SELECT);
+    private final PopupDAO<FoodBank> foodBankDtoPopupDAO =
+            (PopupDAO<FoodBank>) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBANK_SELECT);
 
     @Override
     public ArrayList<FoodBankDTO> getDetails() throws SQLException {
-        return foodBankDtoPopupDAO.getDetails();
+        ArrayList<FoodBankDTO> foodBankDTOArrayList = new ArrayList<>();
+        ArrayList<FoodBank> foodBanks = foodBankDtoPopupDAO.getDetails();
+
+        for (FoodBank foodBank : foodBanks) {
+            FoodBankDTO foodBankDTO = new FoodBankDTO();
+            foodBankDTO.setFBKId(foodBank.getFBKId());
+            foodBankDTO.setFBKName(foodBank.getFBKName());
+            foodBankDTO.setFBKAddress(foodBank.getFBKAddress());
+            foodBankDTO.setFBKEmail(foodBank.getFBKEmail());
+            foodBankDTOArrayList.add(foodBankDTO);
+        }
+        return foodBankDTOArrayList;
     }
 }
