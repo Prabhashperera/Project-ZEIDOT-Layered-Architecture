@@ -7,5 +7,4 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface FoodBatchDetailsDAO extends SuperDAO{
-    ArrayList<FoodBatchDetails> getFoodBatchDetails(String FBId) throws SQLException;
 }
