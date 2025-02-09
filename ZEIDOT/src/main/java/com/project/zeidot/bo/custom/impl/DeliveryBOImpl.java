@@ -22,6 +22,7 @@ public class DeliveryBOImpl implements DeliveryBO {
             deliverDto.setDeliverDate(deliver.getDeliverDate());
             deliverDto.setDeliverTime(deliver.getDeliverTime());
             deliverDto.setDeliveryID(deliver.getDeliveryID());
+            deliverDto.setDonationID(deliver.getDonationID());
             deliverDtos.add(deliverDto);
         }
         return deliverDtos;
