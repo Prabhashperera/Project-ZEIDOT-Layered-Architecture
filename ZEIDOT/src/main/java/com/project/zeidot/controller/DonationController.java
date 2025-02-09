@@ -6,7 +6,7 @@ import com.project.zeidot.bo.custom.FoodBatchSelectBO;
 import com.project.zeidot.controller.popups.FoodBankSelectController;
 import com.project.zeidot.controller.popups.FoodBatchSelectController;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.DonationDTO;
+import com.project.zeidot.dto.DonationDto;
 import com.project.zeidot.dto.FoodDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +44,7 @@ public class DonationController implements Initializable {
     @FXML
     private TableColumn<FoodDTO, Integer> FoodBankID;
     @FXML
-    private TableView<DonationDTO> tableView;
+    private TableView<DonationDto> tableView;
 
     private final DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBOType(BOFactory.BOType.DONATION);
     private final FoodBatchSelectBO foodBatchSelectBO = (FoodBatchSelectBO) BOFactory.getInstance().getBOType(BOFactory.BOType.FOODBATCH_SELECT);
@@ -78,7 +78,7 @@ public class DonationController implements Initializable {
             conn = DBConnection.getInstance().getConnection();
             conn.setAutoCommit(false);
             //Pass Data to Dto
-            DonationDTO dto = new DonationDTO(donationID, donationName, foodBatchID , foodBankIDx);
+            DonationDto dto = new DonationDto(donationID, donationName, foodBatchID , foodBankIDx);
             boolean isSaved = donationBO.saveDonation(dto); //Save Donation
             if (!isSaved) {
                 conn.rollback();
@@ -112,7 +112,7 @@ public class DonationController implements Initializable {
 
     } //Save Button
     public void deleteBtnOnAction(ActionEvent event) {
-        DonationDTO dto = tableView.getSelectionModel().getSelectedItem();
+        DonationDto dto = tableView.getSelectionModel().getSelectedItem();
         String donationID = dto.getDonationID();
         try {
             boolean isDeleted = donationBO.deleteDonation(donationID);
@@ -134,7 +134,7 @@ public class DonationController implements Initializable {
             String donationID = donationIDTF.getText();
             String donationName = donationNameTF.getText();
             String foodBatchID = batchIDTF.getText();
-            DonationDTO dto = new DonationDTO(donationID, donationName, foodBatchID , foodBankID);
+            DonationDto dto = new DonationDto(donationID, donationName, foodBatchID , foodBankID);
             boolean isUpdated = donationBO.updateDonation(dto);
             if (isUpdated) {
                 //This line doing change the current selected batch into available Food Batch Again
@@ -175,16 +175,16 @@ public class DonationController implements Initializable {
 
     public void loadDonationTable() throws SQLException {
         try {
-            ArrayList<DonationDTO> donationDTOS = donationBO.getAllDonations(); // Renamed to donationDTOS
+            ArrayList<DonationDto> donations = donationBO.getAllDonations(); // Renamed to donationDTOS
 
-            ObservableList<DonationDTO> observableBatchDTOS = FXCollections.observableArrayList();
+            ObservableList<DonationDto> observableBatchDTOS = FXCollections.observableArrayList();
 
-            for (DonationDTO donationDto : donationDTOS) {
-                DonationDTO donationTM = new DonationDTO(
-                        donationDto.getDonationID(),
-                        donationDto.getDonationName(),
-                        donationDto.getFBId(),
-                        donationDto.getFoodBankID()
+            for (DonationDto donation : donations) {
+                DonationDto donationTM = new DonationDto(
+                        donation.getDonationID(),
+                        donation.getDonationName(),
+                        donation.getFBId(),
+                        donation.getFoodBankID()
                 );
                 observableBatchDTOS.add(donationTM);
             }
@@ -203,7 +203,7 @@ public class DonationController implements Initializable {
     } //Refresh After Saving or Deleting table data
 
     public void onTableAction(MouseEvent mouseEvent) {
-        DonationDTO dto = tableView.getSelectionModel().getSelectedItem();
+        DonationDto dto = tableView.getSelectionModel().getSelectedItem();
         donationIDTF.setText(dto.getDonationID());
         donationNameTF.setText(dto.getDonationName());
         batchIDTF.setText(dto.getFBId());

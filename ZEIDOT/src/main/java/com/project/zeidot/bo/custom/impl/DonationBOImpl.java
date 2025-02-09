@@ -3,7 +3,8 @@ package com.project.zeidot.bo.custom.impl;
 import com.project.zeidot.bo.custom.DonationBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.DonationDAO;
-import com.project.zeidot.dto.DonationDTO;
+import com.project.zeidot.dto.DonationDto;
+import com.project.zeidot.entity.Donation;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ public class DonationBOImpl implements DonationBO {
     }
 
     @Override
-    public boolean saveDonation(DonationDTO dto) throws SQLException {
-        return donationDAO.save(dto);
+    public boolean saveDonation(DonationDto dto) throws SQLException {
+        return donationDAO.save(
+                new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
     }
 
     @Override
@@ -28,12 +30,24 @@ public class DonationBOImpl implements DonationBO {
     }
 
     @Override
-    public boolean updateDonation(DonationDTO dto) throws SQLException {
-        return donationDAO.update(dto);
+    public boolean updateDonation(DonationDto dto) throws SQLException {
+        return donationDAO.update(
+                new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
     }
 
     @Override
-    public ArrayList<DonationDTO> getAllDonations() throws SQLException {
-        return donationDAO.getAllDonations();
+    public ArrayList<DonationDto> getAllDonations() throws SQLException {
+        ArrayList<Donation> donations = donationDAO.getAllDonations();
+        ArrayList<DonationDto> donationDtos = new ArrayList<>();
+
+        for (Donation donation : donations) {
+            DonationDto dto = new DonationDto();
+            dto.setDonationID(donation.getDonationID());
+            dto.setDonationName(donation.getDonationName());
+            dto.setFBId(donation.getFBId());
+            dto.setFoodBankID(donation.getFoodBankID());
+            donationDtos.add(dto);
+        }
+        return donationDtos;
     }
 }

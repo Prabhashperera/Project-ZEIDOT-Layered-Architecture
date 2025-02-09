@@ -182,7 +182,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
 
 
     @Override
-    public boolean update(FoodBatch updatedDto) throws SQLException {
+    public boolean update(FoodBatch entity) throws SQLException {
         return false;
     }
 
@@ -198,7 +198,7 @@ public class FoodBatchDAOImpl implements FoodBatchDAO {
     }
 
     @Override
-    public boolean save(FoodBatch savedDto) throws SQLException {
+    public boolean save(FoodBatch entity) throws SQLException {
         return false;
     }
 

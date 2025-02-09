@@ -2,7 +2,8 @@ package com.project.zeidot.dao.custom.impl;
 
 import com.project.zeidot.dao.custom.DonationDAO;
 import com.project.zeidot.db.DBConnection;
-import com.project.zeidot.dto.DonationDTO;
+import com.project.zeidot.dto.DonationDto;
+import com.project.zeidot.entity.Donation;
 import com.project.zeidot.util.CrudUtil;
 
 import java.sql.Connection;
@@ -34,14 +35,14 @@ public class DonationDAOImpl implements DonationDAO{
         return "D001";
     }
 
-    public boolean save(DonationDTO dto) throws SQLException {
+    public boolean save(Donation entity) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
         String query = "INSERT INTO donation values(? , ? , ?, ? , ?)";
         PreparedStatement ps = connection.prepareStatement(query);
-        ps.setString(1, dto.getDonationID());
-        ps.setString(2 , dto.getDonationName());
-        ps.setString(3 , dto.getFBId());
-        ps.setString(4 , dto.getFoodBankID());
+        ps.setString(1, entity.getDonationID());
+        ps.setString(2 , entity.getDonationName());
+        ps.setString(3 , entity.getFBId());
+        ps.setString(4 , entity.getFoodBankID());
         ps.setString(5 , "NO");
         int rows = ps.executeUpdate();
         return rows > 0;
@@ -52,31 +53,31 @@ public class DonationDAOImpl implements DonationDAO{
         ps.setString(1, id);
         return ps.executeUpdate() > 0;
     }
-    public boolean update(DonationDTO dto) throws SQLException {
+    public boolean update(Donation entity) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "Update donation SET donationName = ? , FBId = ? WHERE donationID = ?";
         PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1 , dto.getDonationName());
-        ps.setString(2 , dto.getFBId());
-        ps.setString(3 , dto.getDonationID());
+        ps.setString(1 , entity.getDonationName());
+        ps.setString(2 , entity.getFBId());
+        ps.setString(3 , entity.getDonationID());
         int rows = ps.executeUpdate();
         return rows > 0;
     }
 
-    public ArrayList<DonationDTO> getAllDonations() throws SQLException {
+    public ArrayList<Donation> getAllDonations() throws SQLException {
         ResultSet rst = CrudUtil.execute("select * from donation");
 
-        ArrayList<DonationDTO> donationDTOS = new ArrayList<>();
+        ArrayList<Donation> donations = new ArrayList<>();
 
         while (rst.next()) {
-            DonationDTO donationDto = new DonationDTO(
+            Donation donation = new Donation(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4)
             );
-            donationDTOS.add(donationDto);
+            donations.add(donation);
         }
-        return donationDTOS;
+        return donations;
     }
 }
