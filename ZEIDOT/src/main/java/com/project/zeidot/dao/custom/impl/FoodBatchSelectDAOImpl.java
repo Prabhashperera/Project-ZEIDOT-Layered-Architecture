@@ -45,7 +45,7 @@ public class FoodBatchSelectDAOImpl implements FoodBatchSelectDAO{
     public boolean changeToAvailable(String batchID) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
         String query = "UPDATE foodBatch SET isAvailable = 'Available' WHERE FBId = ?";
-        if (!batchID.equals(null)) {
+        if (batchID != null) {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, batchID);
             return ps.executeUpdate() > 0;

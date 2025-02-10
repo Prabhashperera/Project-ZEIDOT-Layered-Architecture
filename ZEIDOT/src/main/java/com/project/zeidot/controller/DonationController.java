@@ -115,24 +115,18 @@ public class DonationController implements Initializable {
             String donationID = donationIDTF.getText();
             String donationName = donationNameTF.getText();
             String foodBatchID = batchIDTF.getText();
+
+            String clickedFoodBatch = clickedFoodBatchID;
+
             DonationDto dto = new DonationDto(donationID, donationName, foodBatchID , foodBankID);
-            boolean isUpdated = donationBO.updateDonation(dto);
+            boolean isUpdated = donationBO.updateDonation(dto , clickedFoodBatch); //BO to Transaction
             if (isUpdated) {
-                //This line doing change the current selected batch into available Food Batch Again
-                boolean isChangedAvailability = foodBatchSelectBO.changeToAvailable(clickedFoodBatchID); //LA
-                if (isChangedAvailability) {
-                    System.out.println("Current Food Batch Changed to Available Again");
-                    //If it's updated to Available then The new Selected batchID will be Unavailable
-                    boolean b = foodBatchSelectBO.changeAvailability(foodBatchID); //LA
-                    if (b) {
-                        System.out.println("New Food Batch Changed to Unavailable");
-                    }
-                }else {
-                    System.out.println("Not Changed");
-                }
                 new Alert(Alert.AlertType.CONFIRMATION , "Donation Update Successfully!!!").show();
-                refreshPage();
+            }else {
+                new Alert(Alert.AlertType.ERROR , "Donation Not Updated !!!").show();
             }
+            refreshPage();
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -189,10 +183,11 @@ public class DonationController implements Initializable {
         donationNameTF.setText(dto.getDonationName());
         batchIDTF.setText(dto.getFBId());
         foodBankID.setText(dto.getFoodBankID());
-        clickedFoodBatchID = dto.getFoodBankID();
+        clickedFoodBatchID = dto.getFBId();
         System.out.println(clickedFoodBatchID); // When Clicked to Table, this static var is initilaizing
         //to the table FoodBatch ID, this is for Tracking selected FoodBatchID
     }
+
 
 
     //--------------------------------------------------------------Controlling Navigation Sections

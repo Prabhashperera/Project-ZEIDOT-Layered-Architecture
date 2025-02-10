@@ -70,9 +70,35 @@ public class DonationBOImpl implements DonationBO {
     }
 
     @Override
-    public boolean updateDonation(DonationDto dto) throws SQLException {
-        return donationDAO.update(
-                new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
+    public boolean updateDonation(DonationDto dto , String clickedFoodBatch) throws SQLException {
+        Connection connection = null;
+        connection = DBConnection.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try {
+            boolean isUpdated = donationDAO.update(
+                    new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
+            if (isUpdated) {
+                System.out.println("1");
+                boolean isChangedAvailability = fbSelectDAO.changeToAvailable(clickedFoodBatch);//LA
+                System.out.println("2 " + clickedFoodBatch);
+                if (isChangedAvailability) {
+                    System.out.println("3");
+                    boolean isChangesAvailability = fbSelectDAO.changeAvailability(dto.getFBId());
+                    if (isChangesAvailability) {
+                        System.out.println("All right");
+                        connection.commit();
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            connection.rollback();
+            throw new RuntimeException(e);
+        }
+        finally {
+            connection.setAutoCommit(true);
+        }
+        return false;
     }
 
     @Override
