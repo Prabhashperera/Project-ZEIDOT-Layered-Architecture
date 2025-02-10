@@ -1,17 +1,22 @@
 package com.project.zeidot.bo.custom.impl;
 
 import com.project.zeidot.bo.custom.DonationBO;
+import com.project.zeidot.bo.custom.FoodBatchSelectBO;
 import com.project.zeidot.dao.custom.DAOFactory;
 import com.project.zeidot.dao.custom.DonationDAO;
+import com.project.zeidot.dao.custom.FoodBatchSelectDAO;
+import com.project.zeidot.db.DBConnection;
 import com.project.zeidot.dto.DonationDto;
 import com.project.zeidot.entity.Donation;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DonationBOImpl implements DonationBO {
 
     private final DonationDAO donationDAO = (DonationDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.DONATION);
+    private final FoodBatchSelectDAO fbSelectDAO = (FoodBatchSelectDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBACTH_SELECT);
 
     @Override
     public String getNextDonationId() throws SQLException {
@@ -20,8 +25,26 @@ public class DonationBOImpl implements DonationBO {
 
     @Override
     public boolean saveDonation(DonationDto dto) throws SQLException {
-        return donationDAO.save(
-                new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
+        Connection connection = null;
+        connection = DBConnection.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try {
+            boolean isSaved = donationDAO.save(
+                    new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
+            if (isSaved) {
+                boolean isUpdated = fbSelectDAO.changeAvailability(dto.getFBId()); //LA
+                if (isUpdated) {
+                    connection.commit();
+                    return true;
+                }
+            }
+        }catch (Exception e) {
+            connection.rollback();
+        }
+        finally {
+            connection.setAutoCommit(true);
+        }
+        return false;
     }
 
     @Override

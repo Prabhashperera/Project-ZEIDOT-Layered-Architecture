@@ -75,39 +75,30 @@ public class DonationController implements Initializable {
             }
             String foodBatchID = batchIDTF.getText();
             //Transaction Start
-            conn = DBConnection.getInstance().getConnection();
-            conn.setAutoCommit(false);
+//            conn = DBConnection.getInstance().getConnection();
+//            conn.setAutoCommit(false);
             //Pass Data to Dto
             DonationDto dto = new DonationDto(donationID, donationName, foodBatchID , foodBankIDx);
             boolean isSaved = donationBO.saveDonation(dto); //Save Donation
             if (!isSaved) {
-                conn.rollback();
                 new Alert(Alert.AlertType.ERROR, "Failed to save Donation", ButtonType.OK).show();
-                return;
+                refreshPage();
+            } else if (isSaved) {
+                new Alert(Alert.AlertType.INFORMATION, "Donation Saved Successfully!!", ButtonType.OK).show();
+                refreshPage();
             }
-            boolean isUpdated = foodBatchSelectBO.changeAvailability(foodBatchID); //LA
-            if (!isUpdated) {
-                conn.rollback();
-                new Alert(Alert.AlertType.ERROR, "Failed to Update Availability Donation", ButtonType.OK).show();
-                return;
-            }
-            conn.commit();
-            new Alert(Alert.AlertType.CONFIRMATION , "Donation Saved Successfully!!!").show();
-            refreshPage();
+            
+//            boolean isUpdated = foodBatchSelectBO.changeAvailability(foodBatchID); //LA
+//            if (!isUpdated) {
+//                conn.rollback();
+//                new Alert(Alert.AlertType.ERROR, "Failed to Update Availability Donation", ButtonType.OK).show();
+//                return;
+//            }
+//            conn.commit();
+//            new Alert(Alert.AlertType.CONFIRMATION , "Donation Saved Successfully!!!").show();
+
         }catch (Exception e){
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                new Alert(Alert.AlertType.ERROR, "Failed to Rollback Donation", ButtonType.OK).show();
-            }
-        }finally {
-            try {
-               if (conn != null) {
-                   conn.setAutoCommit(true);
-               }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR , "Failed to close connection", ButtonType.OK).show();
-            }
+            e.printStackTrace();
         }
 
     } //Save Button
