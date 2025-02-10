@@ -17,7 +17,6 @@ public class DonationBOImpl implements DonationBO {
 
     private final DonationDAO donationDAO = (DonationDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.DONATION);
     private final FoodBatchSelectDAO fbSelectDAO = (FoodBatchSelectDAO) DAOFactory.getInstance().getDAOType(DAOFactory.DAOType.FOODBACTH_SELECT);
-
     @Override
     public String getNextDonationId() throws SQLException {
         return donationDAO.getNextId();
@@ -48,8 +47,26 @@ public class DonationBOImpl implements DonationBO {
     }
 
     @Override
-    public boolean deleteDonation(String id) throws SQLException {
-        return donationDAO.delete(id);
+    public boolean deleteDonation(String id , String batchID) throws SQLException {
+        Connection connection = null;
+        connection = DBConnection.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try {
+            boolean isDeleted = donationDAO.delete(id);
+            if (isDeleted) {
+                boolean isChangeToAvailable = fbSelectDAO.changeToAvailable(batchID); //LA
+                if (isChangeToAvailable) {
+                    connection.commit();
+                    return true;
+                }
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            connection.setAutoCommit(true);
+        }
+        return false;
     }
 
     @Override

@@ -83,19 +83,10 @@ public class DonationController implements Initializable {
             if (!isSaved) {
                 new Alert(Alert.AlertType.ERROR, "Failed to save Donation", ButtonType.OK).show();
                 refreshPage();
-            } else if (isSaved) {
+            } else {
                 new Alert(Alert.AlertType.INFORMATION, "Donation Saved Successfully!!", ButtonType.OK).show();
                 refreshPage();
             }
-            
-//            boolean isUpdated = foodBatchSelectBO.changeAvailability(foodBatchID); //LA
-//            if (!isUpdated) {
-//                conn.rollback();
-//                new Alert(Alert.AlertType.ERROR, "Failed to Update Availability Donation", ButtonType.OK).show();
-//                return;
-//            }
-//            conn.commit();
-//            new Alert(Alert.AlertType.CONFIRMATION , "Donation Saved Successfully!!!").show();
 
         }catch (Exception e){
             e.printStackTrace();
@@ -105,18 +96,17 @@ public class DonationController implements Initializable {
     public void deleteBtnOnAction(ActionEvent event) {
         DonationDto dto = tableView.getSelectionModel().getSelectedItem();
         String donationID = dto.getDonationID();
+        String batchID = batchIDTF.getText();
         try {
-            boolean isDeleted = donationBO.deleteDonation(donationID);
+            boolean isDeleted = donationBO.deleteDonation(donationID , batchID);
             if (isDeleted) {
-                boolean isChangeToAvailable = foodBatchSelectBO.changeToAvailable(batchIDTF.getText()); //LA
-                if (isChangeToAvailable) {
-                    System.out.println("Deleted BatchID Changed to Available");
-                }
                 new Alert(Alert.AlertType.CONFIRMATION , "Donation Deleted Successfully!!!").show();
-                refreshPage();
+            }else {
+                new Alert(Alert.AlertType.ERROR , "Failed to delete Donation!!!").show();
             }
+            refreshPage();
         }catch (Exception e){
-            e.printStackTrace();
+            e.getMessage();
         }
     }
     public void updateBtnOnAction(ActionEvent event) {

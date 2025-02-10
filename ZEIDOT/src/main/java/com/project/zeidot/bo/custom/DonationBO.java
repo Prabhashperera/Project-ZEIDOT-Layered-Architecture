@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface DonationBO extends SuperBO {
     String getNextDonationId() throws SQLException;
     boolean saveDonation(DonationDto dto) throws SQLException;
-    boolean deleteDonation(String id) throws SQLException;
+    boolean deleteDonation(String id , String batchID) throws SQLException;
     boolean updateDonation(DonationDto dto) throws SQLException;
     ArrayList<DonationDto> getAllDonations() throws SQLException;
 }
