@@ -42,7 +42,7 @@ public class DonationController implements Initializable {
     @FXML
     private TableColumn<FoodDTO, String> FoodBatchID;
     @FXML
-    private TableColumn<FoodDTO, Integer> FoodBankID;
+    private TableColumn<FoodDTO, String> FoodBankID;
     @FXML
     private TableView<DonationDto> tableView;
 
@@ -109,7 +109,7 @@ public class DonationController implements Initializable {
             e.getMessage();
         }
     }
-    public void updateBtnOnAction(ActionEvent event) {
+    public void updateBtnOnAction(ActionEvent event) throws SQLException {
         try {
             String foodBankID = FoodBankID.getText();
             String donationID = donationIDTF.getText();
@@ -125,10 +125,11 @@ public class DonationController implements Initializable {
             }else {
                 new Alert(Alert.AlertType.ERROR , "Donation Not Updated !!!").show();
             }
-            refreshPage();
 
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            refreshPage();
         }
     }
 

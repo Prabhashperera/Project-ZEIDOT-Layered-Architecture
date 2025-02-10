@@ -55,11 +55,13 @@ public class DonationDAOImpl implements DonationDAO{
     }
     public boolean update(Donation entity) throws SQLException {
         Connection conn = DBConnection.getInstance().getConnection();
-        String query = "Update donation SET donationName = ? , FBId = ? WHERE donationID = ?";
+        String query = "Update donation SET donationName = ? , FBId = ? , FoodBankID = ? WHERE donationID = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1 , entity.getDonationName());
         ps.setString(2 , entity.getFBId());
-        ps.setString(3 , entity.getDonationID());
+        ps.setString(3 , entity.getFoodBankID());
+        ps.setString(4 , entity.getDonationID());
+
         int rows = ps.executeUpdate();
         return rows > 0;
     }

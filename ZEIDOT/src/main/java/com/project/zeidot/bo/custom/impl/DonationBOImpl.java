@@ -74,9 +74,11 @@ public class DonationBOImpl implements DonationBO {
         Connection connection = null;
         connection = DBConnection.getInstance().getConnection();
         connection.setAutoCommit(false);
+        System.out.println(dto.getFoodBankID() + " Food Bank ID");
         try {
             boolean isUpdated = donationDAO.update(
                     new Donation(dto.getDonationID(), dto.getDonationName(), dto.getFBId(), dto.getFoodBankID()));
+
             if (isUpdated) {
                 System.out.println("1");
                 boolean isChangedAvailability = fbSelectDAO.changeToAvailable(clickedFoodBatch);//LA
